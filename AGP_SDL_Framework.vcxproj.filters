@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Game Header Files">
+      <UniqueIdentifier>{d55f40d7-efc5-4711-ad09-28d3fb0fd592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Source Files">
+      <UniqueIdentifier>{804d53be-0eeb-4407-8fe3-a95dd65d6f75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AGP_SDL_Framework.cpp">
@@ -62,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathNode.cpp">
+      <Filter>Game Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathNode.h">
+      <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
