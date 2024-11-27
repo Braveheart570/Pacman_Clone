@@ -15,11 +15,11 @@ namespace SDLFramework {
 
 
 
-		SDL_Texture* GetTexture(std::string fileName, bool managed = false);
-		SDL_Texture* GetText(std::string text, std::string fileName, int size, SDL_Color color, bool managed = false);
+		SDL_Texture* GetTexture(std::string fileName, bool managed = true);
+		SDL_Texture* GetText(std::string text, std::string fileName, int size, SDL_Color color, bool managed = true);
 
-		Mix_Music* GetMusic(std::string fileName, bool managed = false);
-		Mix_Chunk* GetSFX(std::string fileName, bool managed = false);
+		Mix_Music* GetMusic(std::string fileName, bool managed = true);
+		Mix_Chunk* GetSFX(std::string fileName, bool managed = true);
 
 
 

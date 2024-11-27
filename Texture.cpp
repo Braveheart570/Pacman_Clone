@@ -76,8 +76,8 @@ namespace SDLFramework {
 	void Texture::Render() {
 		Vector2 pos = Position(WORLD);
 		Vector2 scale = Scale(WORLD);
-		mDestinationRect.x = (int)(pos.x - mWidth * 0.5f);
-		mDestinationRect.y = (int)(pos.y - mHeight * 0.5f);
+		mDestinationRect.x = (int)(pos.x - mWidth * scale.x * 0.5f);
+		mDestinationRect.y = (int)(pos.y - mHeight * scale.y * 0.5f);
 		mDestinationRect.w = (int)(mWidth * scale.x);
 		mDestinationRect.h = (int)(mHeight * scale.y);
 

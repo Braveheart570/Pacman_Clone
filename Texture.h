@@ -8,10 +8,10 @@ namespace SDLFramework {
 	class Texture :public GameEntity {
 
 	public:
-		Texture(std::string filename, bool managed = false);
-		Texture(std::string filename,int x, int y, int width, int height, bool managed = false);
+		Texture(std::string filename, bool managed = true);
+		Texture(std::string filename,int x, int y, int width, int height, bool managed = true);
 		// for text textures
-		Texture(std::string text, std::string fontPath, int size, SDL_Color color, bool managed = false);
+		Texture(std::string text, std::string fontPath, int size, SDL_Color color, bool managed = true);
 
 		~Texture();
 
