@@ -29,6 +29,10 @@ namespace SDLFramework {
 			SDL_RendererFlip flip = SDL_FLIP_NONE
 		);
 
+
+		void DrawLine(int x1,int y1, int x2, int y2);
+
+
 		SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Color color);
 
 		void ClearBackBuffer();

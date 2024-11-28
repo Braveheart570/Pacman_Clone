@@ -143,5 +143,24 @@ namespace SDLFramework {
 
 	}
 
+	void Graphics::DrawLine(int x1, int y1, int x2, int y2) {
+
+		SDL_Color colorHolder = SDL_Color();
+
+		SDL_GetRenderDrawColor(mRenderer,&colorHolder.r,&colorHolder.g,&colorHolder.b,&colorHolder.a);
+
+		if (SDL_SetRenderDrawColor(mRenderer, 255, 0, 255, 255) < 0) {
+			std::cerr << "DrawLine set color error! " << SDL_GetError();
+		}
+
+		if (SDL_RenderDrawLine(mRenderer,x1,y1,x2,y2) < 0) {
+			std::cerr << "DrawLine error! " << SDL_GetError();
+		}
+
+		if (SDL_SetRenderDrawColor(mRenderer, colorHolder.r, colorHolder.g, colorHolder.b, colorHolder.a) < 0) {
+			std::cerr << "DrawLine set color error! " << SDL_GetError();
+		}
+
+	}
 
 }

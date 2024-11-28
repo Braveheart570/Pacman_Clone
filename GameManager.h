@@ -5,6 +5,9 @@
 #include "AudioManager.h"
 #include "PhysicsManager.h"
 
+#include "PathNode.h"
+
+
 namespace SDLFramework {
 
 	//Singleton
@@ -41,6 +44,10 @@ namespace SDLFramework {
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
+
+
+		//testing
+		std::vector<PathNode*> nodes;
 
 
 		SDL_Event mEvents;

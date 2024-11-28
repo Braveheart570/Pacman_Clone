@@ -73,7 +73,9 @@ namespace SDLFramework {
 		mGraphics->ClearBackBuffer();
 
 		//render calls here
-		
+		for (auto node : nodes) {
+			node->Render();
+		}
 
 		//draw to screem
 		mGraphics->Render();
@@ -114,8 +116,22 @@ namespace SDLFramework {
 		);
 
 		//define objects here
+		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH*0.25f,Graphics::SCREEN_HEIGHT*0.25f)));
+		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f, Graphics::SCREEN_HEIGHT * 0.25f)));
+		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f, Graphics::SCREEN_HEIGHT * 0.75f)));
+		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.25f, Graphics::SCREEN_HEIGHT * 0.75f)));
 
+		nodes[0]->AddConnection(nodes[1]);
+		nodes[0]->AddConnection(nodes[3]);
 
+		nodes[1]->AddConnection(nodes[2]);
+		nodes[1]->AddConnection(nodes[0]);
+		
+		nodes[2]->AddConnection(nodes[1]);
+		nodes[2]->AddConnection(nodes[3]);
+
+		nodes[3]->AddConnection(nodes[0]);
+		nodes[3]->AddConnection(nodes[2]);
 	}
 
 	GameManager::~GameManager() {

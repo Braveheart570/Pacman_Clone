@@ -11,10 +11,12 @@ public:
 	PathNode(Vector2 pos);
 	~PathNode();
 
-	void addConnection(PathNode* node);
+	void Render() override;
+
+	void AddConnection(PathNode* node);
 
 private:
 
-	PathNode* mConnections[4];
+	std::vector<PathNode*> mConnections;
 
 };
