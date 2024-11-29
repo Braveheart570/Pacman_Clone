@@ -126,38 +126,26 @@ namespace SDLFramework {
 		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.5f)));
 		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f)));
 
-		nodes[0]->AddConnection(nodes[1]);
-		nodes[0]->AddConnection(nodes[7]);
-
-		nodes[1]->AddConnection(nodes[0]);
-		nodes[1]->AddConnection(nodes[2]);
-		nodes[1]->AddConnection(nodes[8]);
 		
-		nodes[2]->AddConnection(nodes[1]);
-		nodes[2]->AddConnection(nodes[3]);
+		linkNodes(nodes[0],nodes[1]);
+		linkNodes(nodes[0], nodes[7]);
 
-		nodes[3]->AddConnection(nodes[2]);
-		nodes[3]->AddConnection(nodes[4]); // TODO create link node function, find a way to render both directions of a conection, offset based on normal?
-		nodes[3]->AddConnection(nodes[8]);
+		linkNodes(nodes[1], nodes[2]);
+		linkNodes(nodes[1], nodes[8]);
 
-		nodes[4]->AddConnection(nodes[3]);
-		nodes[4]->AddConnection(nodes[5]);
+		linkNodes(nodes[2], nodes[3]);
+		
+		linkNodes(nodes[3], nodes[4]);
+		linkNodes(nodes[3], nodes[8]);
 
-		nodes[5]->AddConnection(nodes[4]);
-		nodes[5]->AddConnection(nodes[6]);
-		nodes[5]->AddConnection(nodes[8]);
+		linkNodes(nodes[4], nodes[5]);
 
-		nodes[6]->AddConnection(nodes[5]);
-		nodes[6]->AddConnection(nodes[7]);
+		linkNodes(nodes[5], nodes[6]);
+		linkNodes(nodes[5], nodes[8]);
 
-		nodes[7]->AddConnection(nodes[6]);
-		nodes[7]->AddConnection(nodes[0]);
-		nodes[7]->AddConnection(nodes[8]);
+		linkNodes(nodes[6], nodes[7]);
 
-		nodes[8]->AddConnection(nodes[1]);
-		nodes[8]->AddConnection(nodes[3]);
-		nodes[8]->AddConnection(nodes[5]);
-		nodes[8]->AddConnection(nodes[7]);
+		linkNodes(nodes[7], nodes[8]);
 	}
 
 	GameManager::~GameManager() {
