@@ -59,6 +59,7 @@ namespace SDLFramework {
 		mInputManager->Update();
 
 		//update code here
+		mGhost->Update();
 		
 	}
 
@@ -76,6 +77,7 @@ namespace SDLFramework {
 		for (auto node : nodes) {
 			node->Render();
 		}
+		mGhost->Render();
 
 		//draw to screem
 		mGraphics->Render();
@@ -146,6 +148,9 @@ namespace SDLFramework {
 		linkNodes(nodes[6], nodes[7]);
 
 		linkNodes(nodes[7], nodes[8]);
+
+		mGhost = new Ghost(nodes, nodes[2]->Position());
+
 	}
 
 	GameManager::~GameManager() {

@@ -6,6 +6,7 @@
 #include "PhysicsManager.h"
 
 #include "PathNode.h"
+#include "Ghost.h"
 
 
 namespace SDLFramework {
@@ -48,6 +49,7 @@ namespace SDLFramework {
 
 		//testing
 		std::vector<PathNode*> nodes;
+		Ghost* mGhost;
 
 
 		SDL_Event mEvents;

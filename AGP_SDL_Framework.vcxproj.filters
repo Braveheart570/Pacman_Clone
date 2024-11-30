@@ -72,6 +72,9 @@
     <ClCompile Include="PathNode.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PathNode.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>
