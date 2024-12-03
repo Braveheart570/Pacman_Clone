@@ -2,6 +2,7 @@
 
 Ghost::Ghost(Vector2 pos) {
 
+	mNodeManager = NodeManager::Instance();
 	
 	target = Vector2(0,0);
 	
@@ -12,6 +13,10 @@ Ghost::Ghost(Vector2 pos) {
 	Position(pos);
 
 	mSpeed = 100;
+
+	//TODO testing
+	CurrentNode = mNodeManager->getNode(2);
+	targetNode = mNodeManager->getNode(3);
 
 }
 
@@ -24,6 +29,8 @@ void Ghost::Render() {
 }
 
 Ghost::~Ghost() {
+
+	mNodeManager = nullptr;
 
 	delete mGhostTex;
 	mGhostTex = nullptr;
