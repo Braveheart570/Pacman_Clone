@@ -1,7 +1,7 @@
 #pragma once
 #include "PhysEntity.h"
-#include "PathNode.h"
 #include "AnimatedTexture.h"
+#include "NodeManager.h"
 
 using namespace SDLFramework;
 
@@ -9,7 +9,7 @@ class Ghost : public PhysEntity {
 
 public:
 
-	Ghost(std::vector<PathNode*> map, Vector2 pos);
+	Ghost(Vector2 pos);
 	~Ghost();
 
 	void Update() override;
@@ -17,7 +17,7 @@ public:
 
 private:
 
-	std::vector<PathNode*> mMap;
+	NodeManager* mNodeManager;
 
 	Vector2 target;
 
@@ -28,6 +28,9 @@ private:
 	AnimatedTexture* mFrightened;
 	Texture* mEyes;
 
+	float mSpeed;
+
+	Timer* mTimer;
 
 
 };

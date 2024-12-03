@@ -74,9 +74,7 @@ namespace SDLFramework {
 		mGraphics->ClearBackBuffer();
 
 		//render calls here
-		for (auto node : nodes) {
-			node->Render();
-		}
+		mNodeManager->Render();
 		mGhost->Render();
 
 		//draw to screem
@@ -97,6 +95,7 @@ namespace SDLFramework {
 		mInputManager = InputManager::Instance();
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
+		mNodeManager = NodeManager::Instance();
 
 
 		//Create Physics Layers
@@ -118,38 +117,40 @@ namespace SDLFramework {
 		);
 
 		//define objects here
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH*0.12f,Graphics::SCREEN_HEIGHT*0.12f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.12f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.12f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.5f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.88f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.88f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.88f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.5f)));
-		nodes.push_back(new PathNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f)));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.12f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.12f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.12f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.5f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.88f, Graphics::SCREEN_HEIGHT * 0.88f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.88f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.88f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.12f, Graphics::SCREEN_HEIGHT * 0.5f));
+		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f));
+
 
 		
-		linkNodes(nodes[0],nodes[1]);
-		linkNodes(nodes[0], nodes[7]);
+		mNodeManager->linkNodes(mNodeManager->getNode(0), mNodeManager->getNode(1));
+		mNodeManager->linkNodes(mNodeManager->getNode(0), mNodeManager->getNode(7));
 
-		linkNodes(nodes[1], nodes[2]);
-		linkNodes(nodes[1], nodes[8]);
+		mNodeManager->linkNodes(mNodeManager->getNode(1), mNodeManager->getNode(2));
+		mNodeManager->linkNodes(mNodeManager->getNode(1), mNodeManager->getNode(8));
 
-		linkNodes(nodes[2], nodes[3]);
-		
-		linkNodes(nodes[3], nodes[4]);
-		linkNodes(nodes[3], nodes[8]);
+		mNodeManager->linkNodes(mNodeManager->getNode(2), mNodeManager->getNode(3));
 
-		linkNodes(nodes[4], nodes[5]);
+		mNodeManager->linkNodes(mNodeManager->getNode(3), mNodeManager->getNode(4));
+		mNodeManager->linkNodes(mNodeManager->getNode(3), mNodeManager->getNode(8));
 
-		linkNodes(nodes[5], nodes[6]);
-		linkNodes(nodes[5], nodes[8]);
+		mNodeManager->linkNodes(mNodeManager->getNode(4), mNodeManager->getNode(5));
 
-		linkNodes(nodes[6], nodes[7]);
+		mNodeManager->linkNodes(mNodeManager->getNode(5), mNodeManager->getNode(6));
+		mNodeManager->linkNodes(mNodeManager->getNode(5), mNodeManager->getNode(8));
 
-		linkNodes(nodes[7], nodes[8]);
+		mNodeManager->linkNodes(mNodeManager->getNode(6), mNodeManager->getNode(7));
 
-		mGhost = new Ghost(nodes, nodes[2]->Position());
+		mNodeManager->linkNodes(mNodeManager->getNode(7), mNodeManager->getNode(8));
+
+
+		mGhost = new Ghost(mNodeManager->getNode(2)->Position());
 
 	}
 
@@ -172,6 +173,9 @@ namespace SDLFramework {
 
 		PhysicsManager::Release();
 		mPhysicsManager = nullptr;
+
+		NodeManager::Release();
+		mNodeManager = nullptr;
 
 		//quit sdl subsystems
 		SDL_Quit();

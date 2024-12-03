@@ -45,7 +45,3 @@ void PathNode::Render() {
 }
 
 
-void linkNodes(PathNode* node1, PathNode* node2) {
-	node1->AddConnection(node2);
-	node2->AddConnection(node1);
-}

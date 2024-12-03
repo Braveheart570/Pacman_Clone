@@ -1,8 +1,8 @@
 #include "Ghost.h"
 
-Ghost::Ghost(std::vector<PathNode*> map, Vector2 pos) {
+Ghost::Ghost(Vector2 pos) {
 
-	mMap = map;
+	
 	target = Vector2(0,0);
 	
 	mGhostTex = new AnimatedTexture("PacmanAtlas.png",457,65,14,14,2,0.5f,AnimatedTexture::Horizontal);
@@ -10,6 +10,8 @@ Ghost::Ghost(std::vector<PathNode*> map, Vector2 pos) {
 	mGhostTex->Scale(Vect2_One*3);
 
 	Position(pos);
+
+	mSpeed = 100;
 
 }
 
@@ -31,8 +33,11 @@ Ghost::~Ghost() {
 
 void Ghost::Update() {
 
+	float distance = (CurrentNode->Position() - targetNode->Position()).Magnitude();
 
-	if (Position() == targetNode->Position()) { //must be a better way
+	float lerpVar = mSpeed / distance; // idk what I'm doing here.
+
+	if (lerpVar >= 1) { //must be a better way
 
 	}
 

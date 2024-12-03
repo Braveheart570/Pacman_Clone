@@ -5,7 +5,7 @@
 #include "AudioManager.h"
 #include "PhysicsManager.h"
 
-#include "PathNode.h"
+#include "NodeManager.h"
 #include "Ghost.h"
 
 
@@ -46,9 +46,10 @@ namespace SDLFramework {
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
 
+		NodeManager* mNodeManager;
+
 
 		//testing
-		std::vector<PathNode*> nodes;
 		Ghost* mGhost;
 
 

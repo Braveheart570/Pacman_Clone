@@ -20,6 +20,3 @@ private:
 	std::vector<PathNode*> mConnections;
 
 };
-
-
-void linkNodes(PathNode* node1, PathNode* node2);
