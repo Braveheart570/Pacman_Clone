@@ -60,6 +60,7 @@ namespace SDLFramework {
 
 		//update code here
 		mGhost->Update();
+		mPlayer->Update();
 		
 	}
 
@@ -76,6 +77,7 @@ namespace SDLFramework {
 		//render calls here
 		mNodeManager->Render();
 		mGhost->Render();
+		mPlayer->Render();
 
 		//draw to screem
 		mGraphics->Render();
@@ -172,6 +174,8 @@ namespace SDLFramework {
 
 
 		mGhost = new Ghost(mNodeManager->getNode(2));
+		mPlayer = new Player();
+		mPlayer->Position(mNodeManager->getNode(5)->Position());
 
 	}
 

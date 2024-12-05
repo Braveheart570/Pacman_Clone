@@ -55,8 +55,8 @@ void Ghost::Update() {
 		else if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 			Position(targetNode->Position());
 			CurrentNode = targetNode;
-			//select new node
 
+			//select new node
 			targetNode = CurrentNode->ClosestConnection(target);
 
 

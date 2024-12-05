@@ -7,6 +7,7 @@
 
 #include "NodeManager.h"
 #include "Ghost.h"
+#include "Player.h"
 
 
 namespace SDLFramework {
@@ -51,7 +52,7 @@ namespace SDLFramework {
 
 		//testing
 		Ghost* mGhost;
-
+		Player* mPlayer;
 
 		SDL_Event mEvents;
 	};
