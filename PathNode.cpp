@@ -45,3 +45,25 @@ void PathNode::Render() {
 }
 
 
+PathNode* PathNode::ClosestConnection(Vector2 target) {
+
+	if (mConnections.size() < 1) {
+		return nullptr;
+	}
+
+	PathNode* closestNode = mConnections[0];
+	float shortestDist = (mConnections[0]->Position() - target).Magnitude();
+
+	for (int i = 1; i < mConnections.size(); i++) {
+
+		float dist = (mConnections[i]->Position() - target).Magnitude();
+		if (dist < shortestDist) {
+			closestNode = mConnections[i];
+			shortestDist = dist;
+		}
+
+	}
+
+	return closestNode;
+
+}

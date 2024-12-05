@@ -9,13 +9,15 @@ class Ghost : public PhysEntity {
 
 public:
 
-	Ghost(Vector2 pos);
+	Ghost(PathNode* start);
 	~Ghost();
 
 	void Update() override;
 	void Render() override;
 
 private:
+
+	const static int EPSILON = 5;
 
 	NodeManager* mNodeManager;
 

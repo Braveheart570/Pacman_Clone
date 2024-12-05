@@ -15,6 +15,8 @@ public:
 
 	void AddConnection(PathNode* node);
 
+	PathNode* ClosestConnection(Vector2 target);
+
 private:
 
 	std::vector<PathNode*> mConnections;

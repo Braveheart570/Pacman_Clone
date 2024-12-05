@@ -1,22 +1,23 @@
 #include "Ghost.h"
 
-Ghost::Ghost(Vector2 pos) {
+Ghost::Ghost(PathNode* start) {
 
+	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
 	
-	target = Vector2(0,0);
+	CurrentNode = start;
 	
 	mGhostTex = new AnimatedTexture("PacmanAtlas.png",457,65,14,14,2,0.5f,AnimatedTexture::Horizontal);
 	mGhostTex->Parent(this);
 	mGhostTex->Scale(Vect2_One*3);
 
-	Position(pos);
+	Position(start->Position());
 
 	mSpeed = 100;
 
 	//TODO testing
-	CurrentNode = mNodeManager->getNode(2);
-	targetNode = mNodeManager->getNode(3);
+	targetNode = mNodeManager->getNode(1);
+	target = Vector2(0,Graphics::SCREEN_HEIGHT);
 
 }
 
@@ -40,19 +41,29 @@ Ghost::~Ghost() {
 
 void Ghost::Update() {
 
-	float distance = (CurrentNode->Position() - targetNode->Position()).Magnitude();
+	Vector2 dir = (targetNode->Position()-Position()).Normalized();
 
-	float lerpVar = mSpeed / distance; // idk what I'm doing here.
+	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime();
 
-	if (lerpVar >= 1) { //must be a better way
+	Vector2 dist = targetNode->Position() - pos;
 
+
+	if (targetNode != nullptr) {
+		if (Position() == targetNode->Position()) {
+			std::cout << "at target" << std::endl;
+		}
+		else if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+			Position(targetNode->Position());
+			CurrentNode = targetNode;
+			//select new node
+
+			targetNode = CurrentNode->ClosestConnection(target);
+
+
+		}
+		else {
+			Position(pos);
+		}
 	}
-
-
-	//if reached target node
-		// set target node to current node
-		//select new target node
-
-	//lerp to target node.
 
 }

@@ -135,10 +135,7 @@ namespace SDLFramework {
 		mNodeManager->linkNodes(mNodeManager->getNode(1), mNodeManager->getNode(2));
 		mNodeManager->linkNodes(mNodeManager->getNode(1), mNodeManager->getNode(8));
 
-		mNodeManager->linkNodes(mNodeManager->getNode(2), mNodeManager->getNode(3));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(3), mNodeManager->getNode(4));
-		mNodeManager->linkNodes(mNodeManager->getNode(3), mNodeManager->getNode(8));
+		mNodeManager->linkNodes(mNodeManager->getNode(2), mNodeManager->getNode(4));
 
 		mNodeManager->linkNodes(mNodeManager->getNode(4), mNodeManager->getNode(5));
 
@@ -150,7 +147,7 @@ namespace SDLFramework {
 		mNodeManager->linkNodes(mNodeManager->getNode(7), mNodeManager->getNode(8));
 
 
-		mGhost = new Ghost(mNodeManager->getNode(2)->Position());
+		mGhost = new Ghost(mNodeManager->getNode(2));
 
 	}
 
