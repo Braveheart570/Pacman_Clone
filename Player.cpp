@@ -1,6 +1,23 @@
 #include "Player.h"
 
-Player::Player(PathNode* start) {
+Player* Player::sInstance = nullptr;
+
+
+Player* Player::Instance() {
+
+	if (sInstance == nullptr) {
+		sInstance = new Player();
+	}
+	return sInstance;
+
+}
+
+void Player::Release() {
+	delete sInstance;
+	sInstance = nullptr;
+}
+
+Player::Player() {
 
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
@@ -14,7 +31,7 @@ Player::Player(PathNode* start) {
 	mTex->Position(Vect2_Zero);
 	mTex->Scale(Vect2_One*3);
 
-	CurrentNode = start;
+	CurrentNode = NodeManager::Instance()->getNode(0);//TODO this is temp
 	Position(CurrentNode->Position());
 	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
 
@@ -60,9 +77,9 @@ void Player::Update() {
 			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Right);
 		}
 	}
-	else {
-		Position(pos);
-	}
+	
+	Position(pos);
+	
 
 	
 

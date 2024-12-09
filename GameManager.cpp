@@ -172,9 +172,8 @@ namespace SDLFramework {
 		mNodeManager->linkNodes(mNodeManager->getNode(14), mNodeManager->getNode(15));
 
 
-
+		mPlayer = Player::Instance();
 		mGhost = new Ghost(mNodeManager->getNode(2));
-		mPlayer = new Player(mNodeManager->getNode(5));
 
 	}
 

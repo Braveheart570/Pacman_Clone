@@ -2,6 +2,7 @@
 #include "PhysEntity.h"
 #include "AnimatedTexture.h"
 #include "NodeManager.h"
+#include "Player.h"
 
 using namespace SDLFramework;
 

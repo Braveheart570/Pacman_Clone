@@ -17,7 +17,6 @@ Ghost::Ghost(PathNode* start) {
 
 	//TODO testing
 	targetNode = mNodeManager->getNode(1);
-	target = Vector2(0,Graphics::SCREEN_HEIGHT);
 
 }
 
@@ -40,6 +39,8 @@ Ghost::~Ghost() {
 }
 
 void Ghost::Update() {
+
+	target = Player::Instance()->Position();
 
 	Vector2 dir = (targetNode->Position()-Position()).Normalized();
 

@@ -11,8 +11,10 @@ class Player : public PhysEntity {
 
 public:
 
-	Player(PathNode* start);
-	~Player();
+	
+	static Player* Instance();
+	static void Release();
+
 
 	void Update() override;
 	void Render() override;
@@ -26,6 +28,8 @@ private:
 
 	const static int EPSILON = 5;
 
+	static Player* sInstance;
+
 	float mSpeed;
 
 	PathNode* targetNode;
@@ -35,6 +39,9 @@ private:
 	Timer* mTimer;
 	InputManager* mInputManager;
 	AudioManager* mAudioManager;
+
+	Player();
+	~Player();
 
 	//temp
 	Texture* mTex;
