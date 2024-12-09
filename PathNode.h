@@ -17,6 +17,8 @@ public:
 
 	PathNode* ClosestConnection(Vector2 target);
 
+	PathNode* GetConnectionbyDir(Vector2 dir);
+
 private:
 
 	std::vector<PathNode*> mConnections;

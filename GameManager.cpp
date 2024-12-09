@@ -174,8 +174,7 @@ namespace SDLFramework {
 
 
 		mGhost = new Ghost(mNodeManager->getNode(2));
-		mPlayer = new Player();
-		mPlayer->Position(mNodeManager->getNode(5)->Position());
+		mPlayer = new Player(mNodeManager->getNode(5));
 
 	}
 

@@ -67,3 +67,55 @@ PathNode* PathNode::ClosestConnection(Vector2 target) {
 	return closestNode;
 
 }
+
+PathNode* PathNode::GetConnectionbyDir(Vector2 dir) {//TODO this is a mess
+
+	if (mConnections.size() < 1) {
+		return nullptr;
+	}
+	dir = dir.Normalized();
+
+
+
+	float dirAngle = atan2(dir.y, dir.x)*RAD_TO_DEG;
+	if (dirAngle < 0) {
+		dirAngle += 360;
+	}
+
+	Vector2 connectionDir = (mConnections[0]->Position() - Position()).Normalized();
+	float connectionAngle = atan2(connectionDir.y, connectionDir.x)*RAD_TO_DEG;
+	if (connectionAngle < 0) {
+		connectionAngle += 360;
+	}
+
+	PathNode* retVal = mConnections[0];
+	float lowestDif = abs(connectionAngle - dirAngle);
+
+	for (int i = 1; i < mConnections.size(); i++) {
+
+		connectionDir = (mConnections[i]->Position() - Position()).Normalized();
+		connectionAngle = atan2(connectionDir.y, connectionDir.x)*RAD_TO_DEG;
+		if (connectionAngle < 0) {
+			connectionAngle += 360;
+		}
+
+		float dif = abs(connectionAngle - dirAngle);
+
+		if (dif < lowestDif) {
+			lowestDif = dif;
+			retVal = mConnections[i];
+
+			if (lowestDif == 0) {
+				break;
+			}
+
+		}
+		
+
+		
+	
+	}
+
+	return retVal;
+
+}

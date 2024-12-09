@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player() {
+Player::Player(PathNode* start) {
 
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
@@ -14,6 +14,10 @@ Player::Player() {
 	mTex->Position(Vect2_Zero);
 	mTex->Scale(Vect2_One*3);
 
+	CurrentNode = start;
+	Position(CurrentNode->Position());
+	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
+
 }
 
 Player::~Player() {
@@ -25,22 +29,42 @@ Player::~Player() {
 
 void Player::Update() {
 
+	Vector2 dir = (targetNode->Position() - Position()).Normalized();
 
-	//need to lock the movment to the nodes, target node and current node system?
+	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime();
 
+	Vector2 dist = targetNode->Position() - pos;
 
-	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
-		Translate(-Vect2_Up*mSpeed*mTimer->DeltaTime());
+	
+	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+		if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
+
+			Position(targetNode->Position());
+			CurrentNode = targetNode;
+			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Up*-1.0f);
+
+		}
+		else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
+			Position(targetNode->Position());
+			CurrentNode = targetNode;
+			targetNode = CurrentNode->GetConnectionbyDir(-Vect2_Right);
+		}
+		else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
+			Position(targetNode->Position());
+			CurrentNode = targetNode;
+			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Up);
+		}
+		else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
+			Position(targetNode->Position());
+			CurrentNode = targetNode;
+			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Right);
+		}
 	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
-		Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+	else {
+		Position(pos);
 	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
-		Translate(Vect2_Up * mSpeed * mTimer->DeltaTime());
-	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
-		Translate(Vect2_Right * mSpeed * mTimer->DeltaTime());
-	}
+
+	
 
 }
 
