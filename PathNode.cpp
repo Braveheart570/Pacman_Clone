@@ -93,6 +93,7 @@ PathNode* PathNode::GetConnectionbyDir(Vector2 dir) {//TODO this is a mess
 
 	for (int i = 1; i < mConnections.size(); i++) {
 
+		
 		connectionDir = (mConnections[i]->Position() - Position()).Normalized();
 		connectionAngle = atan2(connectionDir.y, connectionDir.x)*RAD_TO_DEG;
 		if (connectionAngle < 0) {
@@ -108,14 +109,23 @@ PathNode* PathNode::GetConnectionbyDir(Vector2 dir) {//TODO this is a mess
 			if (lowestDif == 0) {
 				break;
 			}
-
 		}
-		
-
-		
-	
 	}
 
+	connectionDir = (retVal->Position() - Position()).Normalized();
+
+	if (connectionDir.x != 0 || dir.x != 0) {
+		if (connectionDir.x * dir.x <= 0) {
+			return nullptr;
+		}
+	}
+
+	if (connectionDir.y != 0 || dir.y != 0) {
+		if (connectionDir.y * dir.y <= 0) {
+			return nullptr;
+		}
+	}
+	
 	return retVal;
 
 }

@@ -25,6 +25,7 @@ Player::Player() {
 
 
 	mSpeed = 100;
+	mWallHit = false;
 
 	mTex = new Texture("PacmanAtlas.png", 473,1,12,12);
 	mTex->Parent(this);
@@ -34,6 +35,9 @@ Player::Player() {
 	CurrentNode = NodeManager::Instance()->getNode(0);//TODO this is temp
 	Position(CurrentNode->Position());
 	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
+
+	Vector2 dir = (targetNode->Position() - Position()).Normalized();
+	mNextTurn = dir;
 
 }
 
@@ -46,42 +50,49 @@ Player::~Player() {
 
 void Player::Update() {
 
-	Vector2 dir = (targetNode->Position() - Position()).Normalized();
+	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
+		mNextTurn = -Vect2_Up;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
+		mNextTurn = -Vect2_Right;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
+		mNextTurn = Vect2_Up;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
+		mNextTurn = Vect2_Right;
+	}
+
+
+	Vector2 dir;
+	if (targetNode != CurrentNode) {
+		dir = (targetNode->Position() - Position()).Normalized();
+	}
+	else {
+		dir = Vect2_Zero;
+	}
 
 	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime();
-
 	Vector2 dist = targetNode->Position() - pos;
 
+
 	
-	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
-		if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
+	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //hitting walls is busted. pac man gets his pos set to nan for some reason.
 
-			Position(targetNode->Position());
-			CurrentNode = targetNode;
-			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Up*-1.0f);
 
+		pos = targetNode->Position();
+		
+		CurrentNode = targetNode;
+		targetNode = CurrentNode->GetConnectionbyDir(mNextTurn);
+
+		if (targetNode == nullptr) {
+			targetNode = CurrentNode;
 		}
-		else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
-			Position(targetNode->Position());
-			CurrentNode = targetNode;
-			targetNode = CurrentNode->GetConnectionbyDir(-Vect2_Right);
-		}
-		else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
-			Position(targetNode->Position());
-			CurrentNode = targetNode;
-			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Up);
-		}
-		else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
-			Position(targetNode->Position());
-			CurrentNode = targetNode;
-			targetNode = CurrentNode->GetConnectionbyDir(Vect2_Right);
-		}
+
+		
 	}
 	
 	Position(pos);
-	
-
-	
 
 }
 

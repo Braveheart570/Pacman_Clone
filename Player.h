@@ -32,6 +32,8 @@ private:
 
 	float mSpeed;
 
+	bool mWallHit;
+
 	PathNode* targetNode;
 	PathNode* CurrentNode;
 
@@ -39,6 +41,9 @@ private:
 	Timer* mTimer;
 	InputManager* mInputManager;
 	AudioManager* mAudioManager;
+
+	Vector2 mNextTurn;
+
 
 	Player();
 	~Player();
