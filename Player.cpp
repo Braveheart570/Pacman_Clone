@@ -50,6 +50,7 @@ Player::~Player() {
 
 void Player::Update() {
 
+	//movement keys
 	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
 		mNextTurn = -Vect2_Up;
 	}
@@ -65,6 +66,8 @@ void Player::Update() {
 
 
 	Vector2 dir;
+	// prevent vector2.normalized from returning nan. instead do not move.
+	// this is for when we want to not move.
 	if (targetNode != CurrentNode) {
 		dir = (targetNode->Position() - Position()).Normalized();
 	}
@@ -72,21 +75,30 @@ void Player::Update() {
 		dir = Vect2_Zero;
 	}
 
-	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime();
+
+
+	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime(); // new position
 	Vector2 dist = targetNode->Position() - pos;
-
-
 	
-	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //check if reached target
 
 
-		pos = targetNode->Position();
+		pos = targetNode->Position(); // set position to target
 		
 		CurrentNode = targetNode;
-		targetNode = CurrentNode->GetConnectionbyDir(mNextTurn);
 
-		if (targetNode == nullptr) {
+		targetNode = CurrentNode->GetConnectionbyDir(mNextTurn); //attempt to find new target
+
+		
+		if (targetNode == nullptr && (dir == mNextTurn || dir == Vect2_Zero)) { //if there is no node in this direction and we are going straight then the player should stop
 			targetNode = CurrentNode;
+		}
+		else if (targetNode == nullptr) { // if we cannot go the chosen direction and we are not going straight then continue straight.
+			targetNode = CurrentNode->GetConnectionbyDir(dir);
+
+			if (targetNode == nullptr) {// if we cannot go straight then stop
+				targetNode = CurrentNode;
+			}
 		}
 
 		
