@@ -77,7 +77,7 @@ void Player::Update() {
 
 
 	
-	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //hitting walls is busted. pac man gets his pos set to nan for some reason.
+	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 
 
 		pos = targetNode->Position();
