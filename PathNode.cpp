@@ -3,6 +3,7 @@
 
 PathNode::PathNode(Vector2 pos) : Texture("CircleCollider.png") {
 
+	Scale(Vect2_One * 0.5f);
 	Position(pos);
 
 }
@@ -34,7 +35,7 @@ void PathNode::Render() {
 
 		dirVec = RotateVector(dirVec, 90);
 
-		dirVec = dirVec*25;
+		dirVec = dirVec * (25.0f*0.5f);
 
 		mGraphics->DrawLine(this->Position().x+ dirVec.x,this->Position().y+ dirVec.y,link->Position().x,link->Position().y);
 

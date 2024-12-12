@@ -11,7 +11,10 @@ Level::Level() {
 	mLevelBackground->Scale(Vect2_One * ((Graphics::SCREEN_WIDTH / 225.0f)-0.2f));
 	mLevelBackground->Position(Vect2_Zero);
 
-	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);
+	mRedGhost = new Ghost(mNodeManager->getNode(2));
+
+
+	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
 
 Level::~Level() {
@@ -44,13 +47,16 @@ Level::~Level() {
 }
 
 void Level::Update() {
-
+	mPlayer->Update();
+	mRedGhost->Update();
 }
 
 void Level::Render() {
 
 	mLevelBackground->Render();
 	mNodeManager->Render();
+	mPlayer->Render();
+	mRedGhost->Render();
 
 }
 
