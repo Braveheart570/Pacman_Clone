@@ -81,6 +81,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\AGP-Galaga-Clone\Scoreboard.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -144,6 +153,12 @@
       <Filter>Game Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>

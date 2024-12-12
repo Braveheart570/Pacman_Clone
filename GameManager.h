@@ -6,8 +6,7 @@
 #include "PhysicsManager.h"
 
 #include "NodeManager.h"
-#include "Ghost.h"
-#include "Player.h"
+#include "Level.h"
 
 
 namespace SDLFramework {
@@ -47,12 +46,7 @@ namespace SDLFramework {
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
 
-		NodeManager* mNodeManager;
-
-
-		//testing
-		Ghost* mGhost;
-		Player* mPlayer;
+		Level* mLevel;
 
 		SDL_Event mEvents;
 	};

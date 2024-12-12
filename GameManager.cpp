@@ -59,8 +59,7 @@ namespace SDLFramework {
 		mInputManager->Update();
 
 		//update code here
-		mGhost->Update();
-		mPlayer->Update();
+		mLevel->Update();
 		
 	}
 
@@ -75,9 +74,7 @@ namespace SDLFramework {
 		mGraphics->ClearBackBuffer();
 
 		//render calls here
-		mNodeManager->Render();
-		mGhost->Render();
-		mPlayer->Render();
+		mLevel->Render();
 
 		//draw to screem
 		mGraphics->Render();
@@ -97,7 +94,6 @@ namespace SDLFramework {
 		mInputManager = InputManager::Instance();
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
-		mNodeManager = NodeManager::Instance();
 
 
 		//Create Physics Layers
@@ -119,61 +115,9 @@ namespace SDLFramework {
 		);
 
 		//define objects here
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.25f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.25f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.25f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.25f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 1.0f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.25f - Graphics::SCREEN_WIDTH * 0.125f));
+		
 
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.25f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.5f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.5f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.5f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 1.0f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.5f - Graphics::SCREEN_WIDTH * 0.125f));
-
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.25f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.75f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.75f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.75f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 1.0f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 0.75f - Graphics::SCREEN_WIDTH * 0.125f));
-
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.25f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 1.0f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.5f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 1.0f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 0.75f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 1.0f - Graphics::SCREEN_WIDTH * 0.125f));
-		mNodeManager->AddNode(Vector2(Graphics::SCREEN_WIDTH * 1.0f - Graphics::SCREEN_WIDTH * 0.125f, Graphics::SCREEN_HEIGHT * 1.0f - Graphics::SCREEN_WIDTH * 0.125f));
-
-
-		mNodeManager->linkNodes(mNodeManager->getNode(0), mNodeManager->getNode(1));
-		mNodeManager->linkNodes(mNodeManager->getNode(1), mNodeManager->getNode(2));
-		mNodeManager->linkNodes(mNodeManager->getNode(2), mNodeManager->getNode(3));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(4), mNodeManager->getNode(0));
-		mNodeManager->linkNodes(mNodeManager->getNode(5), mNodeManager->getNode(1));
-		mNodeManager->linkNodes(mNodeManager->getNode(6), mNodeManager->getNode(2));
-		mNodeManager->linkNodes(mNodeManager->getNode(7), mNodeManager->getNode(3));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(4), mNodeManager->getNode(5));
-		mNodeManager->linkNodes(mNodeManager->getNode(5), mNodeManager->getNode(6));
-		mNodeManager->linkNodes(mNodeManager->getNode(6), mNodeManager->getNode(7));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(8), mNodeManager->getNode(4));
-		mNodeManager->linkNodes(mNodeManager->getNode(9), mNodeManager->getNode(5));
-		mNodeManager->linkNodes(mNodeManager->getNode(10), mNodeManager->getNode(6));
-		mNodeManager->linkNodes(mNodeManager->getNode(11), mNodeManager->getNode(7));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(8), mNodeManager->getNode(9));
-		mNodeManager->linkNodes(mNodeManager->getNode(9), mNodeManager->getNode(10));
-		mNodeManager->linkNodes(mNodeManager->getNode(10), mNodeManager->getNode(11));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(12), mNodeManager->getNode(8));
-		mNodeManager->linkNodes(mNodeManager->getNode(13), mNodeManager->getNode(9));
-		mNodeManager->linkNodes(mNodeManager->getNode(14), mNodeManager->getNode(10));
-		mNodeManager->linkNodes(mNodeManager->getNode(15), mNodeManager->getNode(11));
-
-		mNodeManager->linkNodes(mNodeManager->getNode(12), mNodeManager->getNode(13));
-		mNodeManager->linkNodes(mNodeManager->getNode(13), mNodeManager->getNode(14));
-		mNodeManager->linkNodes(mNodeManager->getNode(14), mNodeManager->getNode(15));
-
-
-		mPlayer = Player::Instance();
-		mGhost = new Ghost(mNodeManager->getNode(2));
+		mLevel = new Level();
 
 	}
 
@@ -196,9 +140,6 @@ namespace SDLFramework {
 
 		PhysicsManager::Release();
 		mPhysicsManager = nullptr;
-
-		NodeManager::Release();
-		mNodeManager = nullptr;
 
 		//quit sdl subsystems
 		SDL_Quit();
