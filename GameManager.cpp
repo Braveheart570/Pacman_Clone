@@ -60,6 +60,10 @@ namespace SDLFramework {
 
 		//update code here
 		mLevel->Update();
+
+		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {
+			NodeManager::Instance()->RenderNodes(!NodeManager::Instance()->RenderNodes());
+		}
 		
 	}
 

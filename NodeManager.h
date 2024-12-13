@@ -20,8 +20,12 @@ public:
 
 	PathNode* getNode(int index);
 
+	void RenderNodes(bool render);
+	bool RenderNodes();
 
 private:
+
+	bool mRenderNodes;
 
 	static NodeManager* sInstance;
 

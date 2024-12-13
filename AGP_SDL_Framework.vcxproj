@@ -142,7 +142,6 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\AGP-Galaga-Clone\Scoreboard.cpp" />
     <ClCompile Include="AGP_SDL_Framework.cpp" />
     <ClCompile Include="AnimatedTexture.cpp" />
     <ClCompile Include="AssetManager.cpp" />

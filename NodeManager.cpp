@@ -19,14 +19,17 @@ void NodeManager::Release() {
 
 void NodeManager::Render() {
 
-	for (auto n : mNodes) {
-		n->Render();
+	if (mRenderNodes) {
+		for (auto n : mNodes) {
+			n->Render();
+		}
 	}
+	
 }
 
 
 NodeManager::NodeManager() {
-
+	mRenderNodes = false;
 }
 
 NodeManager::~NodeManager() {
@@ -55,4 +58,12 @@ PathNode* NodeManager::getNode(int index) {
 void NodeManager::linkNodes(PathNode* node1, PathNode* node2) {
 	node1->AddConnection(node2);
 	node2->AddConnection(node1);
+}
+
+void NodeManager::RenderNodes(bool render) {
+	mRenderNodes = render;
+}
+
+bool NodeManager::RenderNodes() {
+	return mRenderNodes;
 }
