@@ -59,7 +59,8 @@ namespace SDLFramework {
 		mInputManager->Update();
 
 		//update code here
-		mLevel->Update();
+		mStartScreen->Update();
+		//mLevel->Update();
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {
 			NodeManager::Instance()->RenderNodes(!NodeManager::Instance()->RenderNodes());
@@ -78,7 +79,8 @@ namespace SDLFramework {
 		mGraphics->ClearBackBuffer();
 
 		//render calls here
-		mLevel->Render();
+		mStartScreen->Render();
+		//mLevel->Render();
 
 		//draw to screem
 		mGraphics->Render();
@@ -122,6 +124,7 @@ namespace SDLFramework {
 		
 
 		mLevel = new Level();
+		mStartScreen = new startScreen();
 
 	}
 
@@ -144,6 +147,13 @@ namespace SDLFramework {
 
 		PhysicsManager::Release();
 		mPhysicsManager = nullptr;
+
+		delete mStartScreen;
+		mStartScreen = nullptr;
+
+		delete mLevel;
+		mLevel = nullptr;
+
 
 		//quit sdl subsystems
 		SDL_Quit();
