@@ -7,12 +7,12 @@
 
 using namespace SDLFramework;
 
-class startScreen : public GameEntity {
+class StartScreen : public GameEntity {
 
 public:
 
-	startScreen();
-	~startScreen();
+	StartScreen();
+	~StartScreen();
 
 	void Update() override;
 	void Render() override;

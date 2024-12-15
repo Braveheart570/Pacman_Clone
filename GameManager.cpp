@@ -59,7 +59,7 @@ namespace SDLFramework {
 		mInputManager->Update();
 
 		//update code here
-		mStartScreen->Update();
+		mScreenManager->Update();
 		//mLevel->Update();
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {
@@ -79,7 +79,7 @@ namespace SDLFramework {
 		mGraphics->ClearBackBuffer();
 
 		//render calls here
-		mStartScreen->Render();
+		mScreenManager->Render();
 		//mLevel->Render();
 
 		//draw to screem
@@ -100,6 +100,7 @@ namespace SDLFramework {
 		mInputManager = InputManager::Instance();
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
+		mScreenManager = ScreenManager::Instance();
 
 
 		//Create Physics Layers
@@ -123,9 +124,6 @@ namespace SDLFramework {
 		//define objects here
 		
 
-		mLevel = new Level();
-		mStartScreen = new startScreen();
-
 	}
 
 	GameManager::~GameManager() {
@@ -148,11 +146,8 @@ namespace SDLFramework {
 		PhysicsManager::Release();
 		mPhysicsManager = nullptr;
 
-		delete mStartScreen;
-		mStartScreen = nullptr;
-
-		delete mLevel;
-		mLevel = nullptr;
+		ScreenManager::Release();
+		mScreenManager = nullptr;
 
 
 		//quit sdl subsystems

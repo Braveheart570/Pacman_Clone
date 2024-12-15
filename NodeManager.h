@@ -13,6 +13,7 @@ public:
 	void Update() {}
 
 	void linkNodes(PathNode* node1, PathNode* node2);
+	void linkNodes(int node1, int node2);
 
 	void AddNode(Vector2 pos);
 

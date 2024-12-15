@@ -33,6 +33,12 @@ private:
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mScoreboard;
 
+	static const int ROWS = 10;
+	float mRows[ROWS];
+
+	static const int COLS = 8;
+	float mCols[COLS];
+
 	void CreateNodes();
 
 };

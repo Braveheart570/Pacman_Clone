@@ -29,7 +29,7 @@ void NodeManager::Render() {
 
 
 NodeManager::NodeManager() {
-	mRenderNodes = false;
+	mRenderNodes = true;
 }
 
 NodeManager::~NodeManager() {
@@ -37,12 +37,13 @@ NodeManager::~NodeManager() {
 }
 
 void NodeManager::AddNode(Vector2 pos) {
-	mNodes.push_back(new PathNode(pos));
+	int index = mNodes.size();
+	mNodes.push_back(new PathNode(pos, index));
 }
 
 void NodeManager::AddNode(Vector2 pos, std::vector<PathNode*> connections) {
-
-	mNodes.push_back(new PathNode(pos));
+	int index = mNodes.size();
+	mNodes.push_back(new PathNode(pos,index));
 	for (auto c : connections) {
 		mNodes[mNodes.size() - 1]->AddConnection(c);
 	}
@@ -58,6 +59,13 @@ PathNode* NodeManager::getNode(int index) {
 void NodeManager::linkNodes(PathNode* node1, PathNode* node2) {
 	node1->AddConnection(node2);
 	node2->AddConnection(node1);
+}
+
+void NodeManager::linkNodes(int node1,int node2){
+
+	getNode(node1)->AddConnection(getNode(node2));
+	getNode(node2)->AddConnection(getNode(node1));
+
 }
 
 void NodeManager::RenderNodes(bool render) {

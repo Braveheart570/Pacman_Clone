@@ -1,10 +1,13 @@
 #include "PathNode.h"
 
 
-PathNode::PathNode(Vector2 pos) : Texture("CircleCollider.png") {
+PathNode::PathNode(Vector2 pos, int index) : Texture("CircleCollider.png") {
 
 	Scale(Vect2_One * 0.5f);
 	Position(pos);
+	mLabelTex = new Texture(std::to_string(index), "emulogic.ttf", 10, {0,255,0});
+	mLabelTex->Parent(this);
+	mLabelTex->Position(Vect2_Zero);
 
 }
 
@@ -15,6 +18,9 @@ PathNode::~PathNode() {
 		delete conection;
 		conection = nullptr;
 	}
+
+	delete mLabelTex;
+	mLabelTex = nullptr;
 
 }
 
@@ -42,6 +48,8 @@ void PathNode::Render() {
 		dirVec = -dirVec;
 		mGraphics->DrawLine(this->Position().x + dirVec.x, this->Position().y + dirVec.y, link->Position().x, link->Position().y);
 	}
+
+	mLabelTex->Render();
 
 }
 

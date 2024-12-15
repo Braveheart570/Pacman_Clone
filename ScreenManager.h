@@ -1,5 +1,6 @@
 #pragma once
 #include "StartScreen.h"
+#include "Level.h"
 #include <iostream>
 
 class ScreenManager {
@@ -22,7 +23,8 @@ private:
 	InputManager* mInputManager;
 
 	//screens
-	startScreen* mStartScreen;
+	StartScreen* mStartScreen;
+	Level* mLevel;
 
 	ScreenManager();
 	~ScreenManager();

@@ -16,8 +16,9 @@ void ScreenManager::Release() {
 
 ScreenManager::ScreenManager() {
 	mInputManager = InputManager::Instance();
-	mStartScreen = new startScreen();
-	mCurrentScreen = Start;
+	mStartScreen = new StartScreen();
+	mLevel = new Level();
+	mCurrentScreen = Play;
 }
 
 ScreenManager::~ScreenManager() {
@@ -26,6 +27,9 @@ ScreenManager::~ScreenManager() {
 
 	delete mStartScreen;
 	mStartScreen = nullptr;
+
+	delete mLevel;
+	mLevel = nullptr;
 
 }
 
@@ -42,7 +46,7 @@ void ScreenManager::Update() {
 
 		break;
 	case Play:
-
+		mLevel->Update();
 
 		break;
 	default:
@@ -58,7 +62,7 @@ void ScreenManager::Render() {
 		mStartScreen->Render();
 		break;
 	case Play:
-
+		mLevel->Render();
 		break;
 	}
 

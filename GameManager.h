@@ -6,8 +6,7 @@
 #include "PhysicsManager.h"
 
 #include "NodeManager.h"
-#include "Level.h"
-#include "StartScreen.h"
+#include "ScreenManager.h"
 
 
 namespace SDLFramework {
@@ -46,9 +45,7 @@ namespace SDLFramework {
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
-
-		startScreen* mStartScreen;
-		Level* mLevel;
+		ScreenManager* mScreenManager;
 
 		SDL_Event mEvents;
 	};

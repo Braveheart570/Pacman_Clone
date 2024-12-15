@@ -1,6 +1,6 @@
 #include "StartScreen.h"
 
-startScreen::startScreen() {
+StartScreen::StartScreen() {
 
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
@@ -82,7 +82,7 @@ startScreen::startScreen() {
 	HandleEntityInit(mNamcoLabel, {Graphics::SCREEN_WIDTH/2,900});
 }
 
-startScreen::~startScreen() {
+StartScreen::~StartScreen() {
 
 	mTimer = nullptr;
 	mInputManager = nullptr;
@@ -155,7 +155,7 @@ startScreen::~startScreen() {
 }
 
 
-void startScreen::Update() {
+void StartScreen::Update() {
 
 	mPacmanRight->Translate(-Vect2_Right*mSpeed*mTimer->DeltaTime());
 	mRedGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
@@ -173,7 +173,7 @@ void startScreen::Update() {
 
 }
 
-void startScreen::Render() {
+void StartScreen::Render() {
 
 	mOneUplabel->Render();
 	mHighScoreLabel->Render();
@@ -215,11 +215,11 @@ void startScreen::Render() {
 
 }
 
-void startScreen::ResetAnimation() {
+void StartScreen::ResetAnimation() {
 
 }
 
-void startScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {
+void StartScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {
 	
 	tex->Parent(this);
 	tex->Position(pos);

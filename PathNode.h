@@ -8,7 +8,7 @@ class PathNode : public Texture {
 
 public:
 
-	PathNode(Vector2 pos);
+	PathNode(Vector2 pos, int index);
 	~PathNode();
 
 	void Render() override;
@@ -22,5 +22,7 @@ public:
 private:
 
 	std::vector<PathNode*> mConnections;
+
+	Texture* mLabelTex;
 
 };
