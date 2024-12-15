@@ -14,6 +14,7 @@ startScreen::startScreen() {
 	blueName = blueName + std::string(12 - blueName.length(), '-') + "\"INKY\"";
 	orangeName = orangeName + std::string(11 - orangeName.length(),'-') + "\"CLYDE\"";
 
+	mSpeed = 100;
 
 	mOneUplabel = new Texture("1UP", "emulogic.ttf", 20, {255,255,255});
 	HandleEntityInit(mOneUplabel, {100,25});
@@ -34,39 +35,41 @@ startScreen::startScreen() {
 
 	mRedGhost = new Texture("PacmanAtlas.png", 457, 65, 14, 14);
 	HandleEntityInit(mRedGhost, {100,300},Vect2_One*3);
-	mRedGhostAnim = new AnimatedTexture("PacmanAtlas.png", 456, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mRedGhostAnim, { 200,600 }, Vect2_One * 3);
+	mRedGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mRedGhostAnim, { Graphics::SCREEN_WIDTH + 150,600 }, Vect2_One * 3);
 	mRedGhostLabel = new Texture(redName, "emulogic.ttf", 20, { 255,0,0 });
 	HandleEntityInit(mRedGhostLabel, { (Graphics::SCREEN_WIDTH / 2)+50,300 });
 
 	mPinkGhost = new Texture("PacmanAtlas.png", 457, 81, 14, 14);
 	HandleEntityInit(mPinkGhost, { 100,350 }, Vect2_One * 3);
-	mPinkGhostAnim = new AnimatedTexture("PacmanAtlas.png", 456, 81, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mPinkGhostAnim, { 250,600 }, Vect2_One * 3);
+	mPinkGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 81, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mPinkGhostAnim, { Graphics::SCREEN_WIDTH + 200,600 }, Vect2_One * 3);
 	mPinkGhostLabel = new Texture(pinkName, "emulogic.ttf", 20, { 255,183,255 });
 	HandleEntityInit(mPinkGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,350 });
 
 	mBlueGhost = new Texture("PacmanAtlas.png", 457, 97, 14, 14);
 	HandleEntityInit(mBlueGhost, { 100,400 }, Vect2_One * 3);
-	mBlueGhostAnim = new AnimatedTexture("PacmanAtlas.png", 456, 97, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mBlueGhostAnim, { 300,600 }, Vect2_One * 3);
+	mBlueGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 97, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mBlueGhostAnim, { Graphics::SCREEN_WIDTH + 250,600 }, Vect2_One * 3);
 	mBlueGhostLabel = new Texture(blueName, "emulogic.ttf", 20, { 0,255,255 });
 	HandleEntityInit(mBlueGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,400 });
 
 	mOrangeGhost = new Texture("PacmanAtlas.png", 457, 113, 14, 14);
 	HandleEntityInit(mOrangeGhost, { 100,450 }, Vect2_One * 3);
-	mOrangeGhostAnim = new AnimatedTexture("PacmanAtlas.png", 456, 113, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mOrangeGhostAnim, { 350,600 }, Vect2_One * 3);
+	mOrangeGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 113, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mOrangeGhostAnim, { Graphics::SCREEN_WIDTH + 300,600 }, Vect2_One * 3);
 	mOrangeGhostLabel = new Texture(orangeName, "emulogic.ttf", 20, { 255,183,81 });
 	HandleEntityInit(mOrangeGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,450 });
 
-	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 457, 1, 12, 13,2,0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mPacmanLeft, { 100,600 }, Vect2_One * 3);
-	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 474, 17, 12, 13, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mPacmanRight, { 150,600 }, Vect2_One * 3);
+	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 455, 0, 16, 16,2,0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mPacmanLeft, { 0,0 }, Vect2_One * 3);
+	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 455, 16, 16, 16, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mPacmanRight, { Graphics::SCREEN_WIDTH + 100,600 }, Vect2_One * 3);
 
 	mPowerPellet = new Texture("PacmanAtlas.png", 8, 24, 8, 8);
 	HandleEntityInit(mPowerPellet, { (Graphics::SCREEN_WIDTH / 2)-50,750 }, Vect2_One * 3);
+	mPowerPellet2 = new Texture("PacmanAtlas.png", 8, 24, 8, 8);
+	HandleEntityInit(mPowerPellet2, { 100,600 }, Vect2_One * 3);
 	mPellet = new Texture("PacmanAtlas.png", 11, 11, 2, 2);
 	HandleEntityInit(mPellet, { (Graphics::SCREEN_WIDTH / 2)-50,700 }, Vect2_One * 3);
 
@@ -136,6 +139,8 @@ startScreen::~startScreen() {
 
 	delete mPowerPellet;
 	mPowerPellet = nullptr;
+	delete mPowerPellet2;
+	mPowerPellet2 = nullptr;
 	delete mPellet;
 	mPellet = nullptr;
 
@@ -151,6 +156,12 @@ startScreen::~startScreen() {
 
 
 void startScreen::Update() {
+
+	mPacmanRight->Translate(-Vect2_Right*mSpeed*mTimer->DeltaTime());
+	mRedGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+	mPinkGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+	mBlueGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+	mOrangeGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
 
 	mRedGhostAnim->Update();
 	mPinkGhostAnim->Update();
@@ -194,6 +205,7 @@ void startScreen::Render() {
 	mPacmanRight->Render();
 
 	mPowerPellet->Render();
+	mPowerPellet2->Render();
 	mPellet->Render();
 
 	mPowerPelletPTS->Render();
@@ -203,7 +215,9 @@ void startScreen::Render() {
 
 }
 
+void startScreen::ResetAnimation() {
 
+}
 
 void startScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {
 	

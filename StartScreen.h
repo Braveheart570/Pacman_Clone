@@ -17,6 +17,8 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void ResetAnimation();
+
 private:
 
 	Timer* mTimer;
@@ -52,12 +54,15 @@ private:
 	AnimatedTexture* mPacmanRight;
 
 	Texture* mPowerPellet;
+	Texture* mPowerPellet2;
 	Texture* mPellet;
 
 	Texture* mPowerPelletPTS;
 	Texture* mPelletPTS;
 
 	Texture* mNamcoLabel;
+
+	int mSpeed;
 
 	void HandleEntityInit(GameEntity* tex, Vector2 pos = Vect2_Zero, Vector2 scale = Vect2_One);
 
