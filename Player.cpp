@@ -75,6 +75,12 @@ void Player::Update() {
 		dir = Vect2_Zero;
 	}
 
+	if (-mNextTurn == dir) {
+		PathNode* temp = targetNode;
+		targetNode = CurrentNode;
+		CurrentNode = temp;
+		dir = -dir;
+	}
 
 
 	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime(); // new position

@@ -18,7 +18,7 @@ ScreenManager::ScreenManager() {
 	mInputManager = InputManager::Instance();
 	mStartScreen = new StartScreen();
 	mLevel = new Level();
-	mCurrentScreen = Play;
+	mCurrentScreen = Start;
 }
 
 ScreenManager::~ScreenManager() {

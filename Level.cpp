@@ -223,7 +223,7 @@ void Level::CreateNodes() {
 	mNodeManager->linkNodes(53,54);
 
 	mNodeManager->linkNodes(55,56);
-	mNodeManager->linkNodes(56,57);
+
 	mNodeManager->linkNodes(57,58);
 
 	mNodeManager->linkNodes(59,60);

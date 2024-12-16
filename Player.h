@@ -26,7 +26,7 @@ public:
 
 private:
 
-	const static int EPSILON = 5;
+	const static int EPSILON = 1;
 
 	static Player* sInstance;
 
