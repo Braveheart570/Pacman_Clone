@@ -50,6 +50,11 @@ private:
 	AnimatedTexture* mOrangeGhostAnim;
 	Texture* mOrangeGhostLabel;
 
+	AnimatedTexture* mFrightenedGhost1;
+	AnimatedTexture* mFrightenedGhost2;
+	AnimatedTexture* mFrightenedGhost3;
+	AnimatedTexture* mFrightenedGhost4;
+
 	AnimatedTexture* mPacmanLeft;
 	AnimatedTexture* mPacmanRight;
 
@@ -63,6 +68,8 @@ private:
 	Texture* mNamcoLabel;
 
 	int mSpeed;
+
+	bool mPowerPelletEaten;
 
 	void HandleEntityInit(GameEntity* tex, Vector2 pos = Vect2_Zero, Vector2 scale = Vect2_One);
 

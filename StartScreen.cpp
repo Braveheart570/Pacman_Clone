@@ -15,6 +15,7 @@ StartScreen::StartScreen() {
 	orangeName = orangeName + std::string(11 - orangeName.length(),'-') + "\"CLYDE\"";
 
 	mSpeed = 100;
+	mPowerPelletEaten = false;
 
 	mOneUplabel = new Texture("1UP", "emulogic.ttf", 20, {255,255,255});
 	HandleEntityInit(mOneUplabel, {100,25});
@@ -36,30 +37,39 @@ StartScreen::StartScreen() {
 	mRedGhost = new Texture("PacmanAtlas.png", 457, 65, 14, 14);
 	HandleEntityInit(mRedGhost, {100,300},Vect2_One*3);
 	mRedGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mRedGhostAnim, { Graphics::SCREEN_WIDTH + 150,600 }, Vect2_One * 3);
+	HandleEntityInit(mRedGhostAnim, { Graphics::SCREEN_WIDTH + 200,600 }, Vect2_One * 3);
 	mRedGhostLabel = new Texture(redName, "emulogic.ttf", 20, { 255,0,0 });
 	HandleEntityInit(mRedGhostLabel, { (Graphics::SCREEN_WIDTH / 2)+50,300 });
 
 	mPinkGhost = new Texture("PacmanAtlas.png", 457, 81, 14, 14);
 	HandleEntityInit(mPinkGhost, { 100,350 }, Vect2_One * 3);
 	mPinkGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 81, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mPinkGhostAnim, { Graphics::SCREEN_WIDTH + 200,600 }, Vect2_One * 3);
+	HandleEntityInit(mPinkGhostAnim, { Graphics::SCREEN_WIDTH + 250,600 }, Vect2_One * 3);
 	mPinkGhostLabel = new Texture(pinkName, "emulogic.ttf", 20, { 255,183,255 });
 	HandleEntityInit(mPinkGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,350 });
 
 	mBlueGhost = new Texture("PacmanAtlas.png", 457, 97, 14, 14);
 	HandleEntityInit(mBlueGhost, { 100,400 }, Vect2_One * 3);
 	mBlueGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 97, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mBlueGhostAnim, { Graphics::SCREEN_WIDTH + 250,600 }, Vect2_One * 3);
+	HandleEntityInit(mBlueGhostAnim, { Graphics::SCREEN_WIDTH + 300,600 }, Vect2_One * 3);
 	mBlueGhostLabel = new Texture(blueName, "emulogic.ttf", 20, { 0,255,255 });
 	HandleEntityInit(mBlueGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,400 });
 
 	mOrangeGhost = new Texture("PacmanAtlas.png", 457, 113, 14, 14);
 	HandleEntityInit(mOrangeGhost, { 100,450 }, Vect2_One * 3);
 	mOrangeGhostAnim = new AnimatedTexture("PacmanAtlas.png", 489, 113, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	HandleEntityInit(mOrangeGhostAnim, { Graphics::SCREEN_WIDTH + 300,600 }, Vect2_One * 3);
+	HandleEntityInit(mOrangeGhostAnim, { Graphics::SCREEN_WIDTH + 350,600 }, Vect2_One * 3);
 	mOrangeGhostLabel = new Texture(orangeName, "emulogic.ttf", 20, { 255,183,81 });
 	HandleEntityInit(mOrangeGhostLabel, { (Graphics::SCREEN_WIDTH / 2) + 50,450 });
+
+	mFrightenedGhost1 = new AnimatedTexture("PacmanAtlas.png",584,65,16,14,2,0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mFrightenedGhost1, Vect2_Zero, Vect2_One * 3);
+	mFrightenedGhost2 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mFrightenedGhost2, Vect2_Zero, Vect2_One * 3);
+	mFrightenedGhost3 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mFrightenedGhost3, Vect2_Zero, Vect2_One * 3);
+	mFrightenedGhost4 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	HandleEntityInit(mFrightenedGhost4, Vect2_Zero, Vect2_One * 3);
 
 	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 455, 0, 16, 16,2,0.5f, AnimatedTexture::Horizontal);
 	HandleEntityInit(mPacmanLeft, { 0,0 }, Vect2_One * 3);
@@ -132,6 +142,15 @@ StartScreen::~StartScreen() {
 	delete mOrangeGhostLabel;
 	mOrangeGhostLabel = nullptr;
 
+	delete mFrightenedGhost1;
+	mFrightenedGhost1 = nullptr;
+	delete mFrightenedGhost2;
+	mFrightenedGhost2 = nullptr;
+	delete mFrightenedGhost3;
+	mFrightenedGhost3 = nullptr;
+	delete mFrightenedGhost4;
+	mFrightenedGhost4 = nullptr;
+
 	delete mPacmanLeft;
 	mPacmanLeft = nullptr;
 	delete mPacmanRight;
@@ -157,23 +176,73 @@ StartScreen::~StartScreen() {
 
 void StartScreen::Update() {
 
-	mPacmanRight->Translate(-Vect2_Right*mSpeed*mTimer->DeltaTime());
-	mRedGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
-	mPinkGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
-	mBlueGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
-	mOrangeGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+	if (mPowerPelletEaten) {
 
-	mRedGhostAnim->Update();
-	mPinkGhostAnim->Update();
-	mBlueGhostAnim->Update();
-	mOrangeGhostAnim->Update();
+		mFrightenedGhost1->Update();
+		mFrightenedGhost2->Update();
+		mFrightenedGhost3->Update();
+		mFrightenedGhost4->Update();
 
-	mPacmanLeft->Update();
-	mPacmanRight->Update();
+		mPacmanLeft->Update();
+
+		mPacmanLeft->Translate(Vect2_Right * mSpeed * mTimer->DeltaTime());
+		mFrightenedGhost1->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
+		mFrightenedGhost2->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
+		mFrightenedGhost3->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
+		mFrightenedGhost4->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
+
+	}
+	else {
+		if (mPacmanRight->Position().x < mPowerPellet2->Position().x + 30) {
+			mPowerPelletEaten = true;
+			mPacmanLeft->Position(mPacmanRight->Position());
+
+			mFrightenedGhost1->Position(mRedGhostAnim->Position());
+			mFrightenedGhost2->Position(mPinkGhostAnim->Position());
+			mFrightenedGhost3->Position(mBlueGhostAnim->Position());
+			mFrightenedGhost4->Position(mOrangeGhostAnim->Position());
+
+		}
+
+		mPacmanRight->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+		mRedGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+		mPinkGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+		mBlueGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+		mOrangeGhostAnim->Translate(-Vect2_Right * mSpeed * mTimer->DeltaTime());
+
+		mRedGhostAnim->Update();
+		mPinkGhostAnim->Update();
+		mBlueGhostAnim->Update();
+		mOrangeGhostAnim->Update();
+
+		mPacmanRight->Update();
+	}
+	
+
+	
+
+	
+	
 
 }
 
 void StartScreen::Render() {
+
+	if (mPowerPelletEaten) {
+		mFrightenedGhost1->Render();
+		mFrightenedGhost2->Render();
+		mFrightenedGhost3->Render();
+		mFrightenedGhost4->Render();
+		mPacmanLeft->Render();
+	}
+	else {
+		mRedGhostAnim->Render();
+		mPinkGhostAnim->Render();
+		mBlueGhostAnim->Render();
+		mOrangeGhostAnim->Render();
+		mPacmanRight->Render();
+		mPowerPellet2->Render();
+	}
 
 	mOneUplabel->Render();
 	mHighScoreLabel->Render();
@@ -186,26 +255,18 @@ void StartScreen::Render() {
 	GhostTableLabel->Render();
 
 	mRedGhost->Render();
-	mRedGhostAnim->Render();
 	mRedGhostLabel->Render();
 
 	mPinkGhost->Render();
-	mPinkGhostAnim->Render();
 	mPinkGhostLabel->Render();
 
 	mBlueGhost->Render();
-	mBlueGhostAnim->Render();
 	mBlueGhostLabel->Render();
 
 	mOrangeGhost->Render();
-	mOrangeGhostAnim->Render();
 	mOrangeGhostLabel->Render();
-
-	mPacmanLeft->Render();
-	mPacmanRight->Render();
-
+	
 	mPowerPellet->Render();
-	mPowerPellet2->Render();
 	mPellet->Render();
 
 	mPowerPelletPTS->Render();
