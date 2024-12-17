@@ -6,7 +6,7 @@ Pellet::Pellet(Vector2 pos) {
 	mTexture->Scale(Vect2_One*3);
 
 	AddCollider(new CircleCollider(10));
-	PhysicsManager::Instance()->RegisterEntity(this,PhysicsManager::CollisionLayers::HostileProjectile);
+	mId = PhysicsManager::Instance()->RegisterEntity(this,PhysicsManager::CollisionLayers::HostileProjectile);
 
 	Position(pos);
 }

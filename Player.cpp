@@ -33,7 +33,7 @@ Player::Player() {
 	mTex->Scale(Vect2_One*3);
 
 	AddCollider(new CircleCollider(20));
-	PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
+	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
 	CurrentNode = NodeManager::Instance()->getNode(0);//TODO this is temp
 	Position(CurrentNode->Position());
