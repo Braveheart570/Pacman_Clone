@@ -3,6 +3,8 @@
 #include "AnimatedTexture.h"
 #include "NodeManager.h"
 #include "Player.h"
+#include "CircleCollider.h"
+#include "PhysicsManager.h"
 
 using namespace SDLFramework;
 

@@ -17,6 +17,7 @@ Level::Level() {
 	mHighScoreboard->Parent(this);
 	mHighScoreboard->Position(0,-400.0f);
 
+	mPellets.push_back(new Pellet({Graphics::SCREEN_WIDTH/2,400}));
 
 	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
@@ -47,6 +48,10 @@ Level::~Level() {
 	delete mScoreboard;
 	mScoreboard = nullptr;
 
+	for (auto p : mPellets) {
+		delete p;
+		p = nullptr;
+	}
 	
 }
 
@@ -59,6 +64,9 @@ void Level::Render() {
 
 	mLevelBackground->Render();
 	mNodeManager->Render();
+	for (auto p : mPellets) {
+		p->Render();
+	}
 	mPlayer->Render();
 	mRedGhost->Render();
 	mHighScoreboard->Render();

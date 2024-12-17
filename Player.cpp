@@ -32,6 +32,9 @@ Player::Player() {
 	mTex->Position(Vect2_Zero);
 	mTex->Scale(Vect2_One*3);
 
+	AddCollider(new CircleCollider(20));
+	PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
+
 	CurrentNode = NodeManager::Instance()->getNode(0);//TODO this is temp
 	Position(CurrentNode->Position());
 	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
@@ -116,4 +119,5 @@ void Player::Update() {
 
 void Player::Render() {
 	mTex->Render();
+	PhysEntity::Render();
 }

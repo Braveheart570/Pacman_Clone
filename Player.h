@@ -4,6 +4,8 @@
 #include "InputManager.h"
 #include "AudioManager.h"
 #include "NodeManager.h"
+#include "PhysicsManager.h"
+#include "CircleCollider.h"
 
 using namespace SDLFramework;
 

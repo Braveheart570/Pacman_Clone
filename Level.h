@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Scoreboard.h"
 #include "NodeManager.h"
+#include "Pellet.h"
 
 using namespace SDLFramework;
 
@@ -29,6 +30,8 @@ private:
 	Ghost* mPinkGhost;
 	Ghost* mBlueGhost;
 	Ghost* mOrangeGhost;
+
+	std::vector<Pellet*> mPellets;
 
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mScoreboard;
