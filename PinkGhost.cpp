@@ -11,12 +11,9 @@ PinkGhost::PinkGhost(PathNode* start) : Ghost(start) {
 
 void PinkGhost::setNewTargetNode() {
 
-	Vector2 aheadOfPlayer = Player::Instance()->Dir() * 50 * 4;;
-	if (aheadOfPlayer.x = aheadOfPlayer.x) {
-		target = Player::Instance()->Position() + aheadOfPlayer;
-	}
-	std::cout << aheadOfPlayer.x << ", " << aheadOfPlayer.y << std::endl;
-	
+	Vector2 aheadOfPlayer = Player::Instance()->nextTurn() * 50 * 4;;
+
+	target = Player::Instance()->Position() + aheadOfPlayer;
 
 	targetNode = CurrentNode->ClosestConnection(target);
 

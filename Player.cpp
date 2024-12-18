@@ -19,8 +19,21 @@ void Player::Release() {
 
 Vector2 Player::Dir() {
 
-	return (targetNode->Position() - Position()).Normalized();
+	Vector2 retVal = (targetNode->Position() - Position()).Normalized();
 
+	if (retVal.x == retVal.x && retVal.y == retVal.y) { //nan check.
+		return retVal;
+	}
+	else {
+		return Vect2_Zero;
+	}
+
+	
+
+}
+
+Vector2 Player::nextTurn() {
+	return mNextTurn;
 }
 
 Player::Player() {
@@ -74,15 +87,7 @@ void Player::Update() {
 	}
 
 
-	Vector2 dir;
-	// prevent vector2.normalized from returning nan. instead do not move.
-	// this is for when we want to not move.
-	if (targetNode != CurrentNode) {
-		dir = Dir();
-	}
-	else {
-		dir = Vect2_Zero;
-	}
+	Vector2 dir = Dir();
 
 	if (-mNextTurn == dir) {
 		PathNode* temp = targetNode;

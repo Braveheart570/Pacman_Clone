@@ -22,6 +22,7 @@ public:
 	void Render() override;
 
 	Vector2 Dir();
+	Vector2 nextTurn();
 
 	void Hit(PhysEntity* other) override;
 
