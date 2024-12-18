@@ -11,6 +11,7 @@ Ghost::Ghost(PathNode* start) {
 	mGhostTex->Parent(this);
 	mGhostTex->Scale(Vect2_One*3);
 
+	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
 
