@@ -13,7 +13,8 @@ Level::Level() {
 	mLevelBackground->Scale(Vect2_One * ((Graphics::SCREEN_WIDTH / 225.0f)-0.2f));
 	mLevelBackground->Position(Vect2_Zero);
 
-	mRedGhost = new Ghost(mNodeManager->getNode(72));
+	mRedGhost = new RedGhost(mNodeManager->getNode(66));
+	mPinkGhost = new PinkGhost(mNodeManager->getNode(1));
 	
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
@@ -63,6 +64,7 @@ Level::~Level() {
 void Level::Update() {
 	mPlayer->Update();
 	mRedGhost->Update();
+	mPinkGhost->Update();
 }
 
 void Level::Render() {
@@ -74,6 +76,7 @@ void Level::Render() {
 	}
 	mPlayer->Render();
 	mRedGhost->Render();
+	mPinkGhost->Render();
 	mHighScoreboard->Render();
 	mScoreboard->Render();
 

@@ -5,6 +5,8 @@
 #include "Scoreboard.h"
 #include "NodeManager.h"
 #include "Pellet.h"
+#include "RedGhost.h"
+#include "PinkGhost.h"
 
 using namespace SDLFramework;
 
@@ -26,8 +28,8 @@ private:
 
 	Texture* mLevelBackground;
 
-	Ghost* mRedGhost;
-	Ghost* mPinkGhost;
+	RedGhost* mRedGhost;
+	PinkGhost* mPinkGhost;
 	Ghost* mBlueGhost;
 	Ghost* mOrangeGhost;
 

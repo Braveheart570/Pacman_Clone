@@ -17,6 +17,12 @@ void Player::Release() {
 	sInstance = nullptr;
 }
 
+Vector2 Player::Dir() {
+
+	return (targetNode->Position() - Position()).Normalized();
+
+}
+
 Player::Player() {
 
 	mTimer = Timer::Instance();
@@ -40,8 +46,7 @@ Player::Player() {
 	Position(CurrentNode->Position());
 	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
 
-	Vector2 dir = (targetNode->Position() - Position()).Normalized();
-	mNextTurn = dir;
+	mNextTurn = Dir();
 
 }
 
@@ -73,7 +78,7 @@ void Player::Update() {
 	// prevent vector2.normalized from returning nan. instead do not move.
 	// this is for when we want to not move.
 	if (targetNode != CurrentNode) {
-		dir = (targetNode->Position() - Position()).Normalized();
+		dir = Dir();
 	}
 	else {
 		dir = Vect2_Zero;

@@ -29,7 +29,7 @@ void NodeManager::Render() {
 
 
 NodeManager::NodeManager() {
-	mRenderNodes = true;
+	mRenderNodes = false;
 }
 
 NodeManager::~NodeManager() {

@@ -96,6 +96,12 @@
     <ClCompile Include="Pellet.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RedGhost.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PinkGhost.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -174,6 +180,12 @@
       <Filter>Game Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pellet.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedGhost.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PinkGhost.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>

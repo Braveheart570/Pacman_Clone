@@ -7,9 +7,7 @@ Ghost::Ghost(PathNode* start) {
 	
 	CurrentNode = start;
 	
-	mGhostTex = new AnimatedTexture("PacmanAtlas.png",457,65,14,14,2,0.5f,AnimatedTexture::Horizontal);
-	mGhostTex->Parent(this);
-	mGhostTex->Scale(Vect2_One*3);
+	
 
 	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
@@ -28,6 +26,7 @@ void Ghost::Render() {
 
 	mGhostTex->Render();
 	PhysEntity::Render();
+	Graphics::Instance()->DrawLine(Position().x,Position().y, target.x,target.y);
 
 }
 
@@ -43,7 +42,7 @@ Ghost::~Ghost() {
 
 void Ghost::Update() {
 
-	target = Player::Instance()->Position();
+	mGhostTex->Update();
 
 	Vector2 dir = (targetNode->Position()-Position()).Normalized();
 
@@ -63,7 +62,7 @@ void Ghost::Update() {
 			Position(targetNode->Position());
 			CurrentNode = targetNode;
 			
-			targetNode = CurrentNode->ClosestConnection(target);
+			setNewTargetNode();
 			
 			
 

@@ -21,6 +21,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+	Vector2 Dir();
 
 	void Hit(PhysEntity* other) override;
 

@@ -18,9 +18,11 @@ public:
 	void Update() override;
 	void Render() override;
 
+	virtual void setNewTargetNode() = 0;
+
 	void Hit(PhysEntity* entity) override;
 
-private:
+protected:
 
 	const static int EPSILON = 1;
 
