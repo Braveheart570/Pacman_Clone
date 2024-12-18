@@ -19,8 +19,8 @@ Ghost::Ghost(PathNode* start) {
 
 	mSpeed = 100;
 
-	//TODO testing
-	targetNode = mNodeManager->getNode(1);
+	target = Player::Instance()->Position();
+	targetNode = CurrentNode->ClosestConnection(target);
 
 }
 
@@ -53,15 +53,19 @@ void Ghost::Update() {
 
 
 	if (targetNode != nullptr) {
+
+		
+
 		if (Position() == targetNode->Position()) {
 			std::cout << "at target" << std::endl;
 		}
 		else if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 			Position(targetNode->Position());
 			CurrentNode = targetNode;
-
-			//select new node
+			
 			targetNode = CurrentNode->ClosestConnection(target);
+			
+			
 
 
 		}
@@ -69,5 +73,9 @@ void Ghost::Update() {
 			Position(pos);
 		}
 	}
+
+}
+
+void Ghost::Hit(PhysEntity* entity) {
 
 }

@@ -6,18 +6,23 @@ Level::Level() {
 	CreateNodes();
 	mPlayer = Player::Instance();
 
+	mScore = 0;
+
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
 	mLevelBackground->Parent(this);
 	mLevelBackground->Scale(Vect2_One * ((Graphics::SCREEN_WIDTH / 225.0f)-0.2f));
 	mLevelBackground->Position(Vect2_Zero);
 
-	mRedGhost = new Ghost(mNodeManager->getNode(2));
+	mRedGhost = new Ghost(mNodeManager->getNode(72));
 	
+	mScoreboard = new Scoreboard();
+	mScoreboard->Parent(this);
+	mScoreboard->Position(-300.0f, -400.0f);
+	mScoreboard->Score(mScore);
+
 	mHighScoreboard = new Scoreboard();
 	mHighScoreboard->Parent(this);
 	mHighScoreboard->Position(0,-400.0f);
-
-	mPellets.push_back(new Pellet({Graphics::SCREEN_WIDTH/2,400}));
 
 	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
@@ -70,6 +75,7 @@ void Level::Render() {
 	mPlayer->Render();
 	mRedGhost->Render();
 	mHighScoreboard->Render();
+	mScoreboard->Render();
 
 }
 
@@ -198,7 +204,7 @@ void Level::CreateNodes() {
 	mNodeManager->linkNodes(20,21);
 
 	mNodeManager->linkNodes(22,23);
-	mNodeManager->linkNodes(23,24);
+	//intentional gap here
 	mNodeManager->linkNodes(24,25);
 
 	mNodeManager->linkNodes(26,27);
@@ -291,5 +297,53 @@ void Level::CreateNodes() {
 	mNodeManager->linkNodes(63,56);
 	mNodeManager->linkNodes(64,57);
 	mNodeManager->linkNodes(65,61);
+
+	//ghost house
 	
+	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[3] });
+
+	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4]+5.0f });
+	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] + 30.0f });
+	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] - 25.0f });
+
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] + 5.0f });
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] + 30.0f});
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] - 25.0f });
+
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] + 5.0f });
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] + 30.0f });
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] - 25.0f });
+
+	mNodeManager->linkNodes(72,70);
+	mNodeManager->linkNodes(70, 71);
+
+	mNodeManager->linkNodes(69, 67);
+	mNodeManager->linkNodes(67, 68);
+
+	mNodeManager->linkNodes(75, 73);
+	mNodeManager->linkNodes(73, 74);
+
+	mNodeManager->getNode(70)->AddConnection(mNodeManager->getNode(67));
+	mNodeManager->getNode(73)->AddConnection(mNodeManager->getNode(67));
+	mNodeManager->getNode(69)->AddConnection(mNodeManager->getNode(66));
+
+	mNodeManager->linkNodes(23,66);
+	mNodeManager->linkNodes(66, 24);
+
+
+	//pellets
+	mPellets.push_back(new Pellet({mCols[0], mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[0] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[0]}));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[0]}));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[0] }));
 }

@@ -14,8 +14,8 @@ public:
 
 	void Render() override;
 
-	//todo
-	//void Hit(PhysEntity* entity) override;
+	void Hit(PhysEntity* entity) override;
+	bool IgnoreCollisions() override;
 
 private:
 

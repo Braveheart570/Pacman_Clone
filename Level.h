@@ -42,6 +42,8 @@ private:
 	static const int COLS = 8;
 	float mCols[COLS];
 
+	int mScore;
+
 	void CreateNodes();
 
 };

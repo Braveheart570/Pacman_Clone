@@ -18,11 +18,19 @@ Pellet::~Pellet() {
 }
 
 void Pellet::Render() {
+	if (Active()) {
+		mTexture->Render();
+		PhysEntity::Render();
+	}
+}
 
-	mTexture->Render();
-	PhysEntity::Render();
-
+void Pellet::Hit(PhysEntity* entity) {
+	Active(false);
 }
 	
+bool Pellet::IgnoreCollisions() {
 
+	return !Active();
+
+}
 

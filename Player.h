@@ -22,9 +22,7 @@ public:
 	void Render() override;
 
 
-	//inherited
-	//bool IgnoreCollisions() override;
-	//void Hit(PhysEntity* other) override;
+	void Hit(PhysEntity* other) override;
 
 private:
 

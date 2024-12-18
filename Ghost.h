@@ -18,6 +18,8 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void Hit(PhysEntity* entity) override;
+
 private:
 
 	const static int EPSILON = 1;

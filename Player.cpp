@@ -36,7 +36,7 @@ Player::Player() {
 	AddCollider(new CircleCollider(20));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
-	CurrentNode = NodeManager::Instance()->getNode(0);//TODO this is temp
+	CurrentNode = NodeManager::Instance()->getNode(61);//TODO this is temp
 	Position(CurrentNode->Position());
 	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
 
@@ -121,4 +121,12 @@ void Player::Update() {
 void Player::Render() {
 	mTex->Render();
 	PhysEntity::Render();
+}
+
+void Player::Hit(PhysEntity* other) {
+
+	if (false) {//todo
+		std::cout << "Ghost touched player" << std::endl;
+	}
+
 }
