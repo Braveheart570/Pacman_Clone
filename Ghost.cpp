@@ -31,7 +31,7 @@ void Ghost::Render() {
 	mGhostTex->Render();
 	//PhysEntity::Render();
 	//Graphics::Instance()->DrawLine(Position().x,Position().y, target.x,target.y);
-	Graphics::Instance()->DrawLine(Position().x,Position().y, mScatterTarget.x, mScatterTarget.y);
+	//Graphics::Instance()->DrawLine(Position().x,Position().y, mScatterTarget.x, mScatterTarget.y);
 
 }
 
@@ -61,8 +61,15 @@ void Ghost::Update() {
 	mGhostTex->Update();
 
 	Vector2 dir = (targetNode->Position()-Position()).Normalized();
+	Vector2 pos;
 
-	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime();
+	if (mState != Frightened) {
+		pos = Position() + dir * mSpeed * mTimer->DeltaTime();
+	}
+	else {
+		pos = Position() + dir * (mSpeed / 2) * mTimer->DeltaTime();
+	}
+	
 
 	Vector2 dist = targetNode->Position() - pos;
 
@@ -75,6 +82,15 @@ void Ghost::Update() {
 		}
 	}
 
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
+		if (mState != Frightened) {
+			mState = Frightened;
+		}
+		else {
+			mState = Scatter;
+		}
+	}
+
 	if (targetNode != nullptr) {
 
 		
@@ -82,6 +98,7 @@ void Ghost::Update() {
 			Position(targetNode->Position());
 			CurrentNode = targetNode;
 			
+			int randomIndex;
 
 			switch (mState)
 			{
@@ -92,7 +109,8 @@ void Ghost::Update() {
 				setNewTargetNode();
 				break;
 			case Ghost::Frightened:
-				//todo
+				randomIndex = Random::Instance()->RandomRange(0,CurrentNode->ConnectionsSize()-1);
+				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
 				break;
 			case Ghost::Dead:
 				//todo
@@ -116,8 +134,13 @@ void Ghost::Hit(PhysEntity* entity) {
 
 void Ghost::HandleTexture() {
 
+	if (mState == Frightened) {
+		mGhostTex = mFrightened;
+		return;
+	}
 
 	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
+
 
 	if (dir == Vect2_Up) {
 		mGhostTex = mGhostUp;

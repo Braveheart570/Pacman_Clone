@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "CircleCollider.h"
 #include "PhysicsManager.h"
+#include "Random.h"
 
 using namespace SDLFramework;
 

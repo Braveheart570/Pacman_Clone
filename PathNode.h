@@ -19,6 +19,10 @@ public:
 
 	PathNode* GetConnectionbyDir(Vector2 dir);
 
+	int ConnectionsSize();
+
+	PathNode* GetConnectionByIndex(int index);
+
 private:
 
 	std::vector<PathNode*> mConnections;

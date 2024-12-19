@@ -138,3 +138,13 @@ PathNode* PathNode::GetConnectionbyDir(Vector2 dir) {//TODO this is a mess
 	return retVal;
 
 }
+
+int PathNode::ConnectionsSize() {
+	return mConnections.size();
+}
+
+PathNode* PathNode::GetConnectionByIndex(int index) {
+
+	return mConnections[index];
+
+}
