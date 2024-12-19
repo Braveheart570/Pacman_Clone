@@ -55,10 +55,30 @@ Player::Player() {
 	mSpeed = 100;
 	mWallHit = false;
 
-	mTex = new Texture("PacmanAtlas.png", 473,1,12,12);
-	mTex->Parent(this);
-	mTex->Position(Vect2_Zero);
-	mTex->Scale(Vect2_One*3);
+	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 454,32,16,15,2,0.5f,AnimatedTexture::Horizontal);
+	mPacmanUp->Parent(this);
+	mPacmanUp->Position(Vect2_Zero);
+	mPacmanUp->Scale(Vect2_One*3);
+
+	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 454, 16, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanRight->Parent(this);
+	mPacmanRight->Position(Vect2_Zero);
+	mPacmanRight->Scale(Vect2_One * 3);
+
+	mPacmanDown = new AnimatedTexture("PacmanAtlas.png", 454, 48, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanDown->Parent(this);
+	mPacmanDown->Position(Vect2_Zero);
+	mPacmanDown->Scale(Vect2_One * 3);
+
+	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 454, 0, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanLeft->Parent(this);
+	mPacmanLeft->Position(Vect2_Zero);
+	mPacmanLeft->Scale(Vect2_One * 3);
+
+	mPacmanStopped = new Texture("PacmanAtlas.png", 486, 0, 16, 15);
+	mPacmanStopped->Parent(this);
+	mPacmanStopped->Position(Vect2_Zero);
+	mPacmanStopped->Scale(Vect2_One * 3);
 
 	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
@@ -74,12 +94,31 @@ Player::Player() {
 
 Player::~Player() {
 
-	delete mTex;
-	mTex = nullptr;
+	mPacmanTex = nullptr;
+
+	delete mPacmanUp;
+	mPacmanUp = nullptr;
+	delete mPacmanRight;
+	mPacmanRight = nullptr;
+	delete mPacmanDown;
+	mPacmanDown = nullptr;
+	delete mPacmanLeft;
+	mPacmanLeft = nullptr;
+
+	delete mPacmanDeath;
+	mPacmanDeath = nullptr;
+
+	delete mPacmanStopped;
+	mPacmanStopped = nullptr;
 
 }
 
 void Player::Update() {
+	HandleTexture();
+	if (mPacmanTex != nullptr) {
+		mPacmanTex->Update();
+	}
+	
 
 	//movement keys
 	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
@@ -138,14 +177,43 @@ void Player::Update() {
 }
 
 void Player::Render() {
-	mTex->Render();
-	PhysEntity::Render();
+	if (mPacmanTex != nullptr) {
+		mPacmanTex->Render();
+	}
+	else {
+		mPacmanStopped->Render();
+	}
+	
+	//PhysEntity::Render();
 }
 
 void Player::Hit(PhysEntity* other) {
 
 	if (false) {//todo
 		std::cout << "Ghost touched player" << std::endl;
+	}
+
+}
+
+void Player::HandleTexture() {
+
+
+	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
+
+	if (dir == Vect2_Up) {
+		mPacmanTex = mPacmanUp;
+	}
+	else if (dir == Vect2_Right) {
+		mPacmanTex = mPacmanRight;
+	}
+	else if (dir == -Vect2_Up) {
+		mPacmanTex = mPacmanDown;
+	}
+	else if (dir == -Vect2_Right) {
+		mPacmanTex = mPacmanLeft;
+	}
+	else {
+		mPacmanTex = nullptr;
 	}
 
 }

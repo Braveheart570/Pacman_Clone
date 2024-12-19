@@ -58,7 +58,18 @@ private:
 	Player();
 	~Player();
 
+	void HandleTexture();
+
 	//temp
-	Texture* mTex;
+	AnimatedTexture* mPacmanTex;
+
+	AnimatedTexture* mPacmanUp;
+	AnimatedTexture* mPacmanRight;
+	AnimatedTexture* mPacmanDown;
+	AnimatedTexture* mPacmanLeft;
+
+	AnimatedTexture* mPacmanDeath;
+
+	Texture* mPacmanStopped;
 
 };
