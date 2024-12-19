@@ -15,6 +15,8 @@ public:
 	Ghost(PathNode* start);
 	~Ghost();
 
+	virtual void setTextures() = 0;
+
 	void Update() override;
 	void Render() override;
 
@@ -23,6 +25,8 @@ public:
 	void Hit(PhysEntity* entity) override;
 
 protected:
+
+	void HandleTexture();
 
 	const static int EPSILON = 1;
 
@@ -34,6 +38,11 @@ protected:
 	PathNode* CurrentNode;
 
 	AnimatedTexture* mGhostTex;
+
+	AnimatedTexture* mGhostUp;
+	AnimatedTexture* mGhostRight;
+	AnimatedTexture* mGhostDown;
+	AnimatedTexture* mGhostLeft;
 	AnimatedTexture* mFrightened;
 	Texture* mEyes;
 

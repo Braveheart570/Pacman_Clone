@@ -10,6 +10,7 @@ public:
 	~BlueGhost();
 
 	void setNewTargetNode() override;
+	void setTextures() override;
 
 private:
 

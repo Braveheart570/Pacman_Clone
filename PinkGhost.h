@@ -10,6 +10,7 @@ public:
 	PinkGhost(PathNode* start);
 
 	void setNewTargetNode() override;
+	void setTextures() override;
 
 private:
 

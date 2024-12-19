@@ -24,6 +24,12 @@ public:
 	Vector2 Dir();
 	Vector2 nextTurn();
 
+
+	int Score();
+	void AddScore(int change);
+
+
+
 	void Hit(PhysEntity* other) override;
 
 private:
@@ -33,6 +39,8 @@ private:
 	static Player* sInstance;
 
 	float mSpeed;
+
+	int mScore;
 
 	bool mWallHit;
 

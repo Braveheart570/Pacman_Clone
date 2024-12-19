@@ -25,6 +25,7 @@ void Pellet::Render() {
 }
 
 void Pellet::Hit(PhysEntity* entity) {
+	Player::Instance()->AddScore(10);
 	Active(false);
 }
 	

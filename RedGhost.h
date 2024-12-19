@@ -9,6 +9,7 @@ public:
 
 
 	void setNewTargetNode() override;
+	void setTextures() override;
 
 private:
 

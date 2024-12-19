@@ -21,7 +21,7 @@ Vector2 Player::Dir() {
 
 	Vector2 retVal = (targetNode->Position() - Position()).Normalized();
 
-	if (retVal.x == retVal.x && retVal.y == retVal.y) { //nan check.
+	if (retVal.x == retVal.x && retVal.y == retVal.y) { //nan check. comparing a nan to itself will return false.
 		return retVal;
 	}
 	else {
@@ -35,6 +35,15 @@ Vector2 Player::Dir() {
 Vector2 Player::nextTurn() {
 	return mNextTurn;
 }
+
+int Player::Score() {
+	return mScore;
+}
+
+void Player::AddScore(int change) {
+	mScore += change;
+}
+
 
 Player::Player() {
 

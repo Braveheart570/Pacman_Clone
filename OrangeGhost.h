@@ -8,6 +8,7 @@ public:
 	OrangeGhost(PathNode* start);
 
 	void setNewTargetNode() override;
+	void setTextures() override;
 
 private:
 
