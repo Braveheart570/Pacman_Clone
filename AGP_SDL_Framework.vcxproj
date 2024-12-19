@@ -157,6 +157,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="NodeManager.cpp" />
+    <ClCompile Include="OrangeGhost.cpp" />
     <ClCompile Include="PathNode.cpp" />
     <ClCompile Include="Pellet.cpp" />
     <ClCompile Include="PhysEntity.cpp" />
@@ -187,6 +188,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="Level.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="NodeManager.h" />
+    <ClInclude Include="OrangeGhost.h" />
     <ClInclude Include="PathNode.h" />
     <ClInclude Include="Pellet.h" />
     <ClInclude Include="PhysEntity.h" />

@@ -8,6 +8,7 @@
 #include "RedGhost.h"
 #include "PinkGhost.h"
 #include "BlueGhost.h"
+#include "OrangeGhost.h"
 
 using namespace SDLFramework;
 
@@ -32,7 +33,7 @@ private:
 	RedGhost* mRedGhost;
 	PinkGhost* mPinkGhost;
 	BlueGhost* mBlueGhost;
-	Ghost* mOrangeGhost;
+	OrangeGhost* mOrangeGhost;
 
 	std::vector<Pellet*> mPellets;
 

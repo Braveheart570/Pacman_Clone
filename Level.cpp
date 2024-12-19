@@ -16,6 +16,7 @@ Level::Level() {
 	mRedGhost = new RedGhost(mNodeManager->getNode(66));
 	mPinkGhost = new PinkGhost(mNodeManager->getNode(1));
 	mBlueGhost = new BlueGhost(mNodeManager->getNode(16),mRedGhost);
+	mOrangeGhost = new OrangeGhost(mNodeManager->getNode(71));
 	
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
@@ -67,6 +68,7 @@ void Level::Update() {
 	mRedGhost->Update();
 	mPinkGhost->Update();
 	mBlueGhost->Update();
+	mOrangeGhost->Update();
 }
 
 void Level::Render() {
@@ -80,6 +82,8 @@ void Level::Render() {
 	mRedGhost->Render();
 	mPinkGhost->Render();
 	mBlueGhost->Render();
+	mOrangeGhost->Render();
+
 	mHighScoreboard->Render();
 	mScoreboard->Render();
 
