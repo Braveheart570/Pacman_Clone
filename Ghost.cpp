@@ -23,6 +23,8 @@ Ghost::Ghost(PathNode* start) {
 	target = Player::Instance()->Position();
 	targetNode = CurrentNode->ClosestConnection(target);
 
+	mState = Scatter;
+
 }
 
 void Ghost::Render() {
@@ -69,18 +71,29 @@ void Ghost::Update() {
 	if (targetNode != nullptr) {
 
 		
-
-		if (Position() == targetNode->Position()) {
-			std::cout << "at target" << std::endl;
-		}
-		else if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 			Position(targetNode->Position());
 			CurrentNode = targetNode;
 			
-			setNewTargetNode();
-			
-			
 
+			switch (mState)
+			{
+			case Ghost::Scatter:
+				targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+				break;
+			case Ghost::Hunt:
+				setNewTargetNode();
+				break;
+			case Ghost::Frightened:
+				//todo
+				break;
+			case Ghost::Dead:
+				//todo
+				break;
+			default:
+				break;
+			}
+			
 
 		}
 		else {

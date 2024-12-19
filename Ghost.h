@@ -12,6 +12,9 @@ class Ghost : public PhysEntity {
 
 public:
 
+	enum GhostState {Scatter,Hunt,Frightened,Dead};
+
+
 	Ghost(PathNode* start);
 	~Ghost();
 
@@ -33,6 +36,7 @@ protected:
 	NodeManager* mNodeManager;
 
 	Vector2 target;
+	Vector2 mScatterTarget;
 
 	PathNode* targetNode;
 	PathNode* CurrentNode;
@@ -47,6 +51,8 @@ protected:
 	Texture* mEyes;
 
 	float mSpeed;
+
+	GhostState mState;
 
 	Timer* mTimer;
 

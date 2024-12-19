@@ -3,6 +3,7 @@
 OrangeGhost::OrangeGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
+	mScatterTarget = { 0,Graphics::SCREEN_HEIGHT };
 
 }
 
@@ -38,7 +39,7 @@ void OrangeGhost::setNewTargetNode() {
 		target = Player::Instance()->Position();
 	}
 	else {
-		target = { 0,Graphics::SCREEN_HEIGHT };
+		target = mScatterTarget;
 	}
 
 	targetNode = CurrentNode->ClosestConnection(target);
