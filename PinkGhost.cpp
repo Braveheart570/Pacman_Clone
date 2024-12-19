@@ -11,7 +11,7 @@ PinkGhost::PinkGhost(PathNode* start) : Ghost(start) {
 
 void PinkGhost::setNewTargetNode() {
 
-	Vector2 aheadOfPlayer = Player::Instance()->nextTurn() * 50 * 4;;
+	Vector2 aheadOfPlayer = Player::Instance()->nextTurn() * 50 * 4;
 
 	target = Player::Instance()->Position() + aheadOfPlayer;
 

@@ -102,6 +102,9 @@
     <ClCompile Include="PinkGhost.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BlueGhost.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -186,6 +189,9 @@
       <Filter>Game Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PinkGhost.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueGhost.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>
