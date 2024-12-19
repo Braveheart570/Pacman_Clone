@@ -20,8 +20,7 @@ Ghost::Ghost(PathNode* start) {
 
 	mSpeed = 100;
 
-	target = Player::Instance()->Position();
-	targetNode = CurrentNode->ClosestConnection(target);
+	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
 
 	mState = Scatter;
 
@@ -32,6 +31,7 @@ void Ghost::Render() {
 	mGhostTex->Render();
 	//PhysEntity::Render();
 	//Graphics::Instance()->DrawLine(Position().x,Position().y, target.x,target.y);
+	Graphics::Instance()->DrawLine(Position().x,Position().y, mScatterTarget.x, mScatterTarget.y);
 
 }
 
@@ -66,7 +66,14 @@ void Ghost::Update() {
 
 	Vector2 dist = targetNode->Position() - pos;
 
-	
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
+		if (mState == Scatter) {
+			mState = Hunt;
+		}
+		else if (mState == Hunt) {
+			mState = Scatter;
+		}
+	}
 
 	if (targetNode != nullptr) {
 

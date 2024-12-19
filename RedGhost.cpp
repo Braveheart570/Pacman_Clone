@@ -3,7 +3,7 @@
 RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
-	mScatterTarget = { 0,0 };
+	mScatterTarget = {0,0};
 
 }
 
