@@ -150,24 +150,33 @@ void Player::Update() {
 	
 	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //check if reached target
 
-
-		pos = targetNode->Position(); // set position to target
-		
-		CurrentNode = targetNode;
-
-		targetNode = CurrentNode->GetConnectionbyDir(mNextTurn); //attempt to find new target
-
-		
-		if (targetNode == nullptr && (dir == mNextTurn || dir == Vect2_Zero)) { //if there is no node in this direction and we are going straight then the player should stop
-			targetNode = CurrentNode;
+		WrapNode* wrapNode;
+		if (wrapNode = dynamic_cast<WrapNode*>(targetNode)) { //handling wrap nodes
+			CurrentNode = wrapNode->WrapTo();
+			targetNode = CurrentNode->GetConnectionByIndex(0);
+			pos = CurrentNode->Position();
 		}
-		else if (targetNode == nullptr) { // if we cannot go the chosen direction and we are not going straight then continue straight.
-			targetNode = CurrentNode->GetConnectionbyDir(dir);
+		else {
+			pos = targetNode->Position(); // set position to target
 
-			if (targetNode == nullptr) {// if we cannot go straight then stop
+			CurrentNode = targetNode;
+
+			targetNode = CurrentNode->GetConnectionbyDir(mNextTurn); //attempt to find new target
+
+
+			if (targetNode == nullptr && (dir == mNextTurn || dir == Vect2_Zero)) { //if there is no node in this direction and we are going straight then the player should stop
 				targetNode = CurrentNode;
 			}
+			else if (targetNode == nullptr) { // if we cannot go the chosen direction and we are not going straight then continue straight.
+				targetNode = CurrentNode->GetConnectionbyDir(dir);
+
+				if (targetNode == nullptr) {// if we cannot go straight then stop
+					targetNode = CurrentNode;
+				}
+			}
 		}
+
+		
 
 		
 	}

@@ -341,6 +341,10 @@ void Level::CreateNodes() {
 	mNodeManager->linkNodes(23,66);
 	mNodeManager->linkNodes(66, 24);
 
+	//wrapnodes
+	mNodeManager->AddWrapNodes({0,mRows[4]}, { Graphics::SCREEN_WIDTH,mRows[4] },26,29);
+	
+
 
 	//pellets
 	mPellets.push_back(new Pellet({mCols[0], mRows[0] }));

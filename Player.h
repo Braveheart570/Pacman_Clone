@@ -6,6 +6,7 @@
 #include "NodeManager.h"
 #include "PhysicsManager.h"
 #include "CircleCollider.h"
+#include "WrapNode.h"
 
 using namespace SDLFramework;
 

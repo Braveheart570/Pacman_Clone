@@ -23,7 +23,7 @@ public:
 
 	PathNode* GetConnectionByIndex(int index);
 
-private:
+protected:
 
 	std::vector<PathNode*> mConnections;
 

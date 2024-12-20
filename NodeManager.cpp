@@ -51,6 +51,22 @@ void NodeManager::AddNode(Vector2 pos, std::vector<PathNode*> connections) {
 
 }
 
+void NodeManager::AddWrapNodes(Vector2 pos1, Vector2 pos2, int wrap1Con, int wrap2Con) {
+
+	int index = mNodes.size();
+	mNodes.push_back(new WrapNode(pos1,index));
+	index = mNodes.size();
+	mNodes.push_back(new WrapNode(pos2, index));
+
+	static_cast<WrapNode*>(mNodes[mNodes.size() - 2])->addWrapTo(static_cast<WrapNode*>(mNodes[mNodes.size() - 1]));
+	static_cast<WrapNode*>(mNodes[mNodes.size() - 1])->addWrapTo(static_cast<WrapNode*>(mNodes[mNodes.size() - 2]));
+
+	linkNodes(mNodes.size() - 2, wrap1Con);
+	linkNodes(mNodes.size() - 1, wrap2Con);
+
+}
+
+
 PathNode* NodeManager::getNode(int index) {
 	return mNodes[index];
 }
