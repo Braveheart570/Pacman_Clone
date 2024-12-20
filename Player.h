@@ -29,7 +29,7 @@ public:
 	int Score();
 	void AddScore(int change);
 
-
+	int Lives();
 
 	void Hit(PhysEntity* other) override;
 
@@ -42,6 +42,8 @@ private:
 	float mSpeed;
 
 	int mScore;
+
+	int mLives;
 
 	bool mWallHit;
 

@@ -44,6 +44,10 @@ void Player::AddScore(int change) {
 	mScore += change;
 }
 
+int Player::Lives() {
+	return mLives;
+}
+
 
 Player::Player() {
 
@@ -53,6 +57,7 @@ Player::Player() {
 
 
 	mSpeed = 100;
+	mLives = 2;
 	mWallHit = false;
 
 	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 454,32,16,15,2,0.5f,AnimatedTexture::Horizontal);
