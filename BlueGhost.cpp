@@ -5,6 +5,7 @@ BlueGhost::BlueGhost(PathNode* start, RedGhost* red) : Ghost(start){
 	setTextures();
 	mRedGhost = red;
 	mScatterTarget = {Graphics::SCREEN_WIDTH,Graphics::SCREEN_HEIGHT };
+	mGhostTex = mGhostDown; // temp? TODO
 
 }
 

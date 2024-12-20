@@ -20,7 +20,7 @@ Pellet::~Pellet() {
 void Pellet::Render() {
 	if (Active()) {
 		mTexture->Render();
-		PhysEntity::Render();
+		//PhysEntity::Render();
 	}
 }
 

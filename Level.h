@@ -40,6 +40,9 @@ private:
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mScoreboard;
 
+	Texture* mReadyLabel;
+	Texture* mGameOverLabel;
+
 	static const int ROWS = 10;
 	float mRows[ROWS];
 
@@ -48,6 +51,14 @@ private:
 
 	int mScore;
 
+	bool mStageStarted;
+	float mReadyDuration;
+	float mReadyTime;
+
 	void CreateNodes();
+
+	void handlePlayerDeath();
+
+	void StartStage();
 
 };

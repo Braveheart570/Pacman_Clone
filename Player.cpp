@@ -80,6 +80,12 @@ Player::Player() {
 	mPacmanStopped->Position(Vect2_Zero);
 	mPacmanStopped->Scale(Vect2_One * 3);
 
+	mPacmanDeath = new AnimatedTexture("PacmanAtlas.png",504,0,15,15,10,0.5f,AnimatedTexture::Horizontal);
+	mPacmanDeath->Parent(this);
+	mPacmanDeath->Position(Vect2_Zero);
+	mPacmanDeath->Scale(Vect2_One * 3);
+	mPacmanDeath->SetWrapMode(AnimatedTexture::Once);
+
 	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);

@@ -4,6 +4,7 @@ PinkGhost::PinkGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
 	mScatterTarget = { Graphics::SCREEN_WIDTH,0 };
+	mGhostTex = mGhostRight; // temp? TODO
 }
 
 void PinkGhost::setTextures() {

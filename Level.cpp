@@ -6,6 +6,10 @@ Level::Level() {
 	CreateNodes();
 	mPlayer = Player::Instance();
 
+	mStageStarted = false;
+	mReadyDuration = 3.0f;
+	mReadyTime = 0;
+
 	mScore = 0;
 
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
@@ -26,6 +30,10 @@ Level::Level() {
 	mHighScoreboard = new Scoreboard();
 	mHighScoreboard->Parent(this);
 	mHighScoreboard->Position(0,-400.0f);
+
+	mReadyLabel = new Texture("Ready!", "emulogic.ttf", 20, {255,255,0});
+	mReadyLabel->Parent(this);
+	mReadyLabel->Position(Vect2_Zero);
 
 	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
@@ -56,6 +64,12 @@ Level::~Level() {
 	delete mScoreboard;
 	mScoreboard = nullptr;
 
+	delete mReadyLabel;
+	mReadyLabel = nullptr;
+
+	delete mGameOverLabel;
+	mGameOverLabel = nullptr;
+
 	for (auto p : mPellets) {
 		delete p;
 		p = nullptr;
@@ -64,6 +78,13 @@ Level::~Level() {
 }
 
 void Level::Update() {
+	if (!mStageStarted) {
+		mReadyTime += mTimer->DeltaTime();
+		if (mReadyTime >= mReadyDuration) {
+			mStageStarted = true;
+		}
+		return;
+	}
 	mPlayer->Update();
 	mRedGhost->Update();
 	mPinkGhost->Update();
@@ -87,6 +108,11 @@ void Level::Render() {
 
 	mHighScoreboard->Render();
 	mScoreboard->Render();
+
+	if (!mStageStarted) {
+		mReadyLabel->Render();
+	}
+	
 
 }
 
