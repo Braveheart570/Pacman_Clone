@@ -73,7 +73,7 @@ void Ghost::Update() {
 	if (mState == Frightened) {
 		mFrightenedTime += mTimer->DeltaTime();
 		if (mFrightenedTime >= mFrightenedDuration) {
-			mState = Scatter;
+			State(Hunt);
 			mFrightenedTime = 0;
 			mFlashTime = 0;
 		}
@@ -98,16 +98,16 @@ void Ghost::Update() {
 
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
 		if (mState == Scatter) {
-			mState = Hunt;
+			State(Hunt);
 		}
 		else if (mState == Hunt) {
-			mState = Scatter;
+			State(Scatter);
 		}
 	}
 
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
 		if (mState != Frightened) {
-			mState = Frightened;
+			State(Frightened);
 		}
 	}
 
@@ -196,5 +196,19 @@ void Ghost::HandleTexture() {
 	else {
 		std::cout << "ghost has no texture" << std::endl;
 	}
+
+}
+
+void Ghost::State( GhostState state) {
+
+	if (state == mState) {
+		return;
+	}
+
+	PathNode* temp = CurrentNode;
+	CurrentNode = targetNode;
+	targetNode = temp;
+
+	mState = state;
 
 }

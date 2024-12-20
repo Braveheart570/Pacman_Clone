@@ -29,6 +29,9 @@ public:
 
 	void Hit(PhysEntity* entity) override;
 
+	void State(GhostState state);
+	GhostState State();
+
 protected:
 
 	void HandleTexture();
