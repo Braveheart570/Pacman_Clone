@@ -6,6 +6,7 @@
 #include "CircleCollider.h"
 #include "PhysicsManager.h"
 #include "Random.h"
+#include "Timer.h"
 
 using namespace SDLFramework;
 
@@ -35,6 +36,13 @@ protected:
 	const static int EPSILON = 1;
 
 	NodeManager* mNodeManager;
+	Timer* mTimer;
+
+	float mFlashSpeed;
+	float mFlashTime;
+
+	float mFrightenedTime;
+	float mFrightenedDuration;
 
 	Vector2 target;
 	Vector2 mScatterTarget;
@@ -48,14 +56,13 @@ protected:
 	AnimatedTexture* mGhostRight;
 	AnimatedTexture* mGhostDown;
 	AnimatedTexture* mGhostLeft;
-	AnimatedTexture* mFrightened;
+	AnimatedTexture* mFrightened1;
+	AnimatedTexture* mFrightened2;
 	Texture* mEyes;
 
 	float mSpeed;
 
 	GhostState mState;
-
-	Timer* mTimer;
 
 
 };

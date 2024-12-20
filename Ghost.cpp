@@ -5,10 +5,15 @@ Ghost::Ghost(PathNode* start) {
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
 
-	mFrightened = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
-	mFrightened->Parent(this);
-	mFrightened->Position(Vect2_Zero);
-	mFrightened->Scale(Vect2_One * 3);
+	mFrightened1 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	mFrightened1->Parent(this);
+	mFrightened1->Position(Vect2_Zero);
+	mFrightened1->Scale(Vect2_One * 3);
+
+	mFrightened2 = new AnimatedTexture("PacmanAtlas.png", 616, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
+	mFrightened2->Parent(this);
+	mFrightened2->Position(Vect2_Zero);
+	mFrightened2->Scale(Vect2_One * 3);
 
 	CurrentNode = start;
 
@@ -19,6 +24,11 @@ Ghost::Ghost(PathNode* start) {
 	Position(start->Position());
 
 	mSpeed = 100;
+
+	mFlashSpeed = 0.5f;
+	mFlashTime = 0.0f;
+	mFrightenedDuration = 5.0f;
+	mFrightenedTime = 0.0f;
 
 	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
 
@@ -39,6 +49,7 @@ Ghost::~Ghost() {
 
 	mNodeManager = nullptr;
 	mGhostTex = nullptr;
+	mTimer = nullptr;
 
 	delete mGhostUp;
 	mGhostUp = nullptr;
@@ -49,13 +60,25 @@ Ghost::~Ghost() {
 	delete mGhostLeft;
 	mGhostLeft = nullptr;
 
-	delete mFrightened;
-	mFrightened = nullptr;
+	delete mFrightened1;
+	mFrightened1 = nullptr;
+	delete mFrightened2;
+	mFrightened2 = nullptr;
 
 
 }
 
 void Ghost::Update() {
+
+	if (mState == Frightened) {
+		mFrightenedTime += mTimer->DeltaTime();
+		if (mFrightenedTime >= mFrightenedDuration) {
+			mState = Scatter;
+			mFrightenedTime = 0;
+			mFlashTime = 0;
+		}
+	}
+	
 
 	HandleTexture();
 	mGhostTex->Update();
@@ -85,9 +108,6 @@ void Ghost::Update() {
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
 		if (mState != Frightened) {
 			mState = Frightened;
-		}
-		else {
-			mState = Scatter;
 		}
 	}
 
@@ -135,8 +155,27 @@ void Ghost::Hit(PhysEntity* entity) {
 void Ghost::HandleTexture() {
 
 	if (mState == Frightened) {
-		mGhostTex = mFrightened;
+
+		
+		if (mFrightenedTime >= mFrightenedDuration/2) {
+			mFlashTime += mTimer->DeltaTime();
+
+			if (mFlashTime >= mFlashSpeed) {
+				if (mGhostTex == mFrightened1) {
+					mGhostTex = mFrightened2;
+				}
+				else {
+					mGhostTex = mFrightened1;
+				}
+				mFlashTime = 0;
+			}
+		}
+		else {
+			mGhostTex = mFrightened1;
+		}
+
 		return;
+
 	}
 
 	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
