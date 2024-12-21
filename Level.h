@@ -43,6 +43,8 @@ private:
 	Texture* mReadyLabel;
 	Texture* mGameOverLabel;
 
+	std::vector<Texture*> mPlayerLives;
+
 	static const int ROWS = 10;
 	float mRows[ROWS];
 
@@ -57,8 +59,7 @@ private:
 
 	void CreateNodes();
 
-	void handlePlayerDeath();
+	void resetLevel(bool newGame = false);
 
-	void StartStage();
-
+	void setLifeIcons();
 };

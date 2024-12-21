@@ -32,6 +32,8 @@ public:
 	void State(GhostState state);
 	GhostState State();
 
+	void Reset();
+
 protected:
 
 	void HandleTexture();
@@ -49,6 +51,8 @@ protected:
 
 	Vector2 target;
 	Vector2 mScatterTarget;
+
+	PathNode* mStartNode;
 
 	PathNode* targetNode;
 	PathNode* CurrentNode;

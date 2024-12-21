@@ -15,13 +15,13 @@ Ghost::Ghost(PathNode* start) {
 	mFrightened2->Position(Vect2_Zero);
 	mFrightened2->Scale(Vect2_One * 3);
 
-	CurrentNode = start;
+	
 
 	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
 
-	Position(start->Position());
+	
 
 	mSpeed = 100;
 
@@ -30,9 +30,8 @@ Ghost::Ghost(PathNode* start) {
 	mFrightenedDuration = 5.0f;
 	mFrightenedTime = 0.0f;
 
-	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
-
-	mState = Scatter;
+	mStartNode = start;
+	Reset();
 
 }
 
@@ -64,6 +63,10 @@ Ghost::~Ghost() {
 	mFrightened1 = nullptr;
 	delete mFrightened2;
 	mFrightened2 = nullptr;
+
+	mStartNode = nullptr;
+	CurrentNode = nullptr;
+	targetNode = nullptr;
 
 
 }
@@ -210,5 +213,14 @@ void Ghost::State( GhostState state) {
 	targetNode = temp;
 
 	mState = state;
+
+}
+
+void Ghost::Reset() {
+
+	CurrentNode = mStartNode;
+	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+	Position(CurrentNode->Position());
+	mState = Scatter;
 
 }

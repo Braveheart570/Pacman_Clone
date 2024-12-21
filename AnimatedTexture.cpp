@@ -46,7 +46,7 @@ namespace SDLFramework {
 	void AnimatedTexture::ResetAnimation() {
 
 		mAnimationTimer = 0.0f;
-		mAnimationDone = true;
+		mAnimationDone = false;
 
 	}
 

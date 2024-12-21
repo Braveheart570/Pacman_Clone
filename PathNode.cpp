@@ -15,7 +15,6 @@ PathNode::~PathNode() {
 
 	for (auto conection : mConnections) {
 		
-		delete conection;
 		conection = nullptr;
 	}
 

@@ -33,6 +33,14 @@ public:
 
 	void Hit(PhysEntity* other) override;
 
+	void Die();
+
+	bool IsDying();
+	bool isDead();
+
+	void Respawn();
+
+
 private:
 
 	const static int EPSILON = 1;
@@ -43,12 +51,16 @@ private:
 
 	int mScore;
 
+	bool mIsDieing;
+	bool mIsDead;
+
 	int mLives;
 
 	bool mWallHit;
 
 	PathNode* targetNode;
 	PathNode* CurrentNode;
+	PathNode* mStartNode;
 
 
 	Timer* mTimer;

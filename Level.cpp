@@ -35,6 +35,8 @@ Level::Level() {
 	mReadyLabel->Parent(this);
 	mReadyLabel->Position(Vect2_Zero);
 
+	setLifeIcons();
+
 	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
 
@@ -70,6 +72,11 @@ Level::~Level() {
 	delete mGameOverLabel;
 	mGameOverLabel = nullptr;
 
+	for (auto l : mPlayerLives) {
+		delete l;
+		l = nullptr;
+	}
+
 	for (auto p : mPellets) {
 		delete p;
 		p = nullptr;
@@ -78,6 +85,12 @@ Level::~Level() {
 }
 
 void Level::Update() {
+
+	if (mPlayer->isDead()) {
+		resetLevel();
+	}
+
+
 	if (!mStageStarted) {
 		mReadyTime += mTimer->DeltaTime();
 		if (mReadyTime >= mReadyDuration) {
@@ -86,11 +99,15 @@ void Level::Update() {
 		return;
 	}
 	mPlayer->Update();
-	mRedGhost->Update();
-	mPinkGhost->Update();
-	mBlueGhost->Update();
-	mOrangeGhost->Update();
+	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
+		mRedGhost->Update();
+		mPinkGhost->Update();
+		mBlueGhost->Update();
+		mOrangeGhost->Update();
+	}
+	
 	mScoreboard->Score(mPlayer->Score());
+
 }
 
 void Level::Render() {
@@ -101,10 +118,18 @@ void Level::Render() {
 		p->Render();
 	}
 	mPlayer->Render();
-	mRedGhost->Render();
-	mPinkGhost->Render();
-	mBlueGhost->Render();
-	mOrangeGhost->Render();
+	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
+		mRedGhost->Render();
+		mPinkGhost->Render();
+		mBlueGhost->Render();
+		mOrangeGhost->Render();
+	}
+	
+
+	for (auto l : mPlayerLives) {
+		l->Render();
+	}
+
 
 	mHighScoreboard->Render();
 	mScoreboard->Render();
@@ -131,10 +156,10 @@ void Level::CreateNodes() {
 
 	mCols[0] = Graphics::SCREEN_WIDTH * 0.1f;
 	mCols[1] = Graphics::SCREEN_WIDTH * 0.255f;
-	mCols[2] = Graphics::SCREEN_WIDTH * 0.35f;//
+	mCols[2] = Graphics::SCREEN_WIDTH * 0.35f;
 	mCols[3] = Graphics::SCREEN_WIDTH * 0.45f;
 	mCols[4] = Graphics::SCREEN_WIDTH * 0.555f;
-	mCols[5] = Graphics::SCREEN_WIDTH * 0.65f;//
+	mCols[5] = Graphics::SCREEN_WIDTH * 0.65f;
 	mCols[6] = Graphics::SCREEN_WIDTH * 0.75f;
 	mCols[7] = Graphics::SCREEN_WIDTH * 0.915f;
 	
@@ -217,7 +242,7 @@ void Level::CreateNodes() {
 
 
 
-	//horixontal links
+	//horizontal links
 	mNodeManager->linkNodes(0,1);
 	mNodeManager->linkNodes(1,2);
 
@@ -387,4 +412,38 @@ void Level::CreateNodes() {
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[3], mRows[0] }));
+}
+
+void Level::setLifeIcons() {
+
+	for (int i = 1; i <= mPlayer->Lives(); i++) {
+		mPlayerLives.push_back(new Texture("PacmanAtlas.png", 472, 0, 14, 14));
+		mPlayerLives[mPlayerLives.size() - 1]->Parent(this);
+		mPlayerLives[mPlayerLives.size() - 1]->Scale(Vect2_One * 3);
+		mPlayerLives[mPlayerLives.size() - 1]->Position(-275, 410);
+		mPlayerLives[mPlayerLives.size() - 1]->Translate({ 42.0f * (mPlayerLives.size() - 1.0f) ,0 });
+	}
+}
+
+void Level::resetLevel(bool newGame) {
+
+	if (newGame) {
+
+	}
+	else {
+		
+	}
+	mPlayer->Position({ 0,-400.0f });
+	mRedGhost->Position(mNodeManager->getNode(66)->Position());
+	mRedGhost->Reset();
+	mPinkGhost->Reset();
+	mBlueGhost->Reset();
+	mOrangeGhost->Reset();
+	mPlayer->Respawn();
+	for (auto l : mPlayerLives) {
+		delete l;
+		l = nullptr;
+	}
+	mPlayerLives.clear();
+	setLifeIcons();
 }

@@ -57,8 +57,12 @@ Player::Player() {
 
 
 	mSpeed = 100;
-	mLives = 2;
+	mLives = 5;
 	mWallHit = false;
+
+	mStartNode = NodeManager::Instance()->getNode(61);//TODO this is temp
+	
+	Respawn();
 
 	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 454,32,16,15,2,0.5f,AnimatedTexture::Horizontal);
 	mPacmanUp->Parent(this);
@@ -85,7 +89,7 @@ Player::Player() {
 	mPacmanStopped->Position(Vect2_Zero);
 	mPacmanStopped->Scale(Vect2_One * 3);
 
-	mPacmanDeath = new AnimatedTexture("PacmanAtlas.png",504,0,15,15,10,0.5f,AnimatedTexture::Horizontal);
+	mPacmanDeath = new AnimatedTexture("PacmanAtlas.png",503,0,16,16,12,0.5f,AnimatedTexture::Horizontal);
 	mPacmanDeath->Parent(this);
 	mPacmanDeath->Position(Vect2_Zero);
 	mPacmanDeath->Scale(Vect2_One * 3);
@@ -95,11 +99,9 @@ Player::Player() {
 	AddCollider(new CircleCollider(20));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
-	CurrentNode = NodeManager::Instance()->getNode(61);//TODO this is temp
-	Position(CurrentNode->Position());
-	targetNode = CurrentNode->ClosestConnection(Vect2_Up*Graphics::SCREEN_HEIGHT);
+	
 
-	mNextTurn = Dir();
+	
 
 }
 
@@ -122,10 +124,23 @@ Player::~Player() {
 	delete mPacmanStopped;
 	mPacmanStopped = nullptr;
 
+	mStartNode = nullptr;
+	CurrentNode = nullptr;
+	targetNode = nullptr;
+
 }
 
 void Player::Update() {
 	HandleTexture();
+	if (mIsDieing) {
+		mPacmanDeath->Update();
+		if (!mPacmanDeath->IsAnimating()) {
+			mIsDieing = false;
+			mIsDead = true;
+		}
+		return;
+	}
+
 	if (mPacmanTex != nullptr) {
 		mPacmanTex->Update();
 	}
@@ -143,6 +158,13 @@ void Player::Update() {
 	}
 	else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
 		mNextTurn = Vect2_Right;
+	}
+
+	//todo debug
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
+		//pause game update
+		Die();
+		//reset level
 	}
 
 
@@ -197,6 +219,11 @@ void Player::Update() {
 }
 
 void Player::Render() {
+
+	if (mIsDead) {
+		return;
+	}
+
 	if (mPacmanTex != nullptr) {
 		mPacmanTex->Render();
 	}
@@ -215,8 +242,21 @@ void Player::Hit(PhysEntity* other) {
 
 }
 
+void Player::Die() {
+
+	mIsDieing = true;
+	mPacmanDeath->ResetAnimation();
+
+}
+
+
+
 void Player::HandleTexture() {
 
+	if (mIsDieing) {
+		mPacmanTex = mPacmanDeath;
+		return;
+	}
 
 	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
 
@@ -235,5 +275,29 @@ void Player::HandleTexture() {
 	else {
 		mPacmanTex = nullptr;
 	}
+
+}
+
+bool Player::IsDying() {
+
+	return mIsDieing;
+
+}
+
+bool Player::isDead() {
+
+	return mIsDead;
+
+}
+
+void Player::Respawn() {
+
+	mLives -= 1;
+	CurrentNode = mStartNode;
+	targetNode = CurrentNode->GetConnectionbyDir(-Vect2_Right);
+	Position(CurrentNode->Position());
+	mIsDead = false;
+	mIsDieing = false;
+	mNextTurn = Dir();
 
 }
