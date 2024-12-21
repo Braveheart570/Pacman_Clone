@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "ghost.h"
 
 Player* Player::sInstance = nullptr;
 
@@ -234,9 +235,7 @@ void Player::Render() {
 
 void Player::Hit(PhysEntity* other) {
 
-	if (false) {//todo
-		std::cout << "Ghost touched player" << std::endl;
-	}
+	
 
 }
 

@@ -177,6 +177,19 @@ void Ghost::Update() {
 
 void Ghost::Hit(PhysEntity* entity) {
 
+	if (mState == Dead) {
+		return;
+	}
+
+	if ((!Player::Instance()->IsDying() && !Player::Instance()->isDead()) && dynamic_cast<Player*>(entity)) {//todo
+		if (mState != Frightened) {
+			Player::Instance()->Die();
+		}
+		else {
+			mState = Dead;
+		}
+		
+	}
 }
 
 void Ghost::HandleTexture() {
