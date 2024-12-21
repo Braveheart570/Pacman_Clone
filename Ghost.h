@@ -46,8 +46,7 @@ protected:
 	float mFlashSpeed;
 	float mFlashTime;
 
-	float mFrightenedTime;
-	float mFrightenedDuration;
+	
 
 	Vector2 target;
 	Vector2 mScatterTarget;

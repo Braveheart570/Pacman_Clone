@@ -42,8 +42,6 @@ Ghost::Ghost(PathNode* start) {
 
 	mFlashSpeed = 0.5f;
 	mFlashTime = 0.0f;
-	mFrightenedDuration = 5.0f;
-	mFrightenedTime = 0.0f;
 
 	mStartNode = start;
 	Reset();
@@ -88,15 +86,6 @@ Ghost::~Ghost() {
 
 void Ghost::Update() {
 
-	if (mState == Frightened) {
-		mFrightenedTime += mTimer->DeltaTime();
-		if (mFrightenedTime >= mFrightenedDuration) {
-			State(Hunt);
-			mFrightenedTime = 0;
-			mFlashTime = 0;
-		}
-	}
-	
 
 	HandleTexture();
 	mGhostTex->Update();
@@ -125,7 +114,7 @@ void Ghost::Update() {
 
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
 		if (mState != Frightened) {
-			State(Frightened);
+			Player::Instance()->Energize();
 		}
 	}
 
@@ -173,6 +162,17 @@ void Ghost::Update() {
 		}
 	}
 
+	if (mState != Dead) {
+		if (mState == Frightened && !Player::Instance()->Energized()) {
+			State(Scatter);
+		}
+		else if (mState != Frightened && Player::Instance()->Energized()) {
+			State(Frightened);
+		}
+	}
+
+	
+
 }
 
 void Ghost::Hit(PhysEntity* entity) {
@@ -198,7 +198,7 @@ void Ghost::HandleTexture() {
 	if (mState == Frightened) {
 
 		
-		if (mFrightenedTime >= mFrightenedDuration/2) {
+		if (Player::Instance()->EnergizedTimeLeftPercent() >= 0.3f) {
 			mFlashTime += mTimer->DeltaTime();
 
 			if (mFlashTime >= mFlashSpeed) {

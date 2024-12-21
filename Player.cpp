@@ -101,7 +101,9 @@ Player::Player() {
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
 	
-
+	mEnergized = false;
+	mFrightenedDuration = 5.0f;
+	mFrightenedTime = 0.0f;
 	
 
 }
@@ -146,6 +148,14 @@ void Player::Update() {
 		mPacmanTex->Update();
 	}
 	
+
+	if (mEnergized) {
+		mFrightenedTime += mTimer->DeltaTime();
+		if (mFrightenedTime >= mFrightenedDuration) {
+			mEnergized = false;
+		}
+	}
+
 
 	//movement keys
 	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
@@ -297,4 +307,19 @@ void Player::Respawn() {
 	mIsDieing = false;
 	mNextTurn = Dir();
 
+}
+
+void Player::Energize() {
+
+	mEnergized = true;
+	mFrightenedTime = 0;
+
+}
+
+bool Player::Energized() {
+	return mEnergized;
+}
+
+float Player::EnergizedTimeLeftPercent() {
+	return mFrightenedTime / mFrightenedDuration;
 }

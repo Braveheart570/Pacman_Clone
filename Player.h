@@ -31,6 +31,10 @@ public:
 
 	int Lives();
 
+	bool Energized();
+	void Energize();
+	float EnergizedTimeLeftPercent();
+
 	void Hit(PhysEntity* other) override;
 
 	void Die();
@@ -57,6 +61,10 @@ private:
 	int mLives;
 
 	bool mWallHit;
+
+	bool mEnergized;
+	float mFrightenedTime;
+	float mFrightenedDuration;
 
 	PathNode* targetNode;
 	PathNode* CurrentNode;

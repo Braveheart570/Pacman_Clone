@@ -12,10 +12,9 @@ PowerPellet::PowerPellet(Vector2 pos) : Pellet(pos) {
 }
 
 
-void Pellet::Hit(PhysEntity* entity) {
+void PowerPellet::Hit(PhysEntity* entity) {
 
-	//todo
-
+	Player::Instance()->Energize();
 	Player::Instance()->AddScore(mScoreVal);
 	Active(false);
 }
