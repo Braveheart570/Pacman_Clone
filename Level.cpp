@@ -398,7 +398,7 @@ void Level::CreateNodes() {
 
 
 	//pellets
-	mPellets.push_back(new Pellet({mCols[0], mRows[0] }));
+	mPellets.push_back(new PowerPellet({ mCols[0], mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[0] }));

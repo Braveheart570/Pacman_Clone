@@ -18,7 +18,9 @@ public:
 	void Hit(PhysEntity* entity) override;
 	bool IgnoreCollisions() override;
 
-private:
+protected:
+
+	int mScoreVal;
 
 	Texture* mTexture;
 

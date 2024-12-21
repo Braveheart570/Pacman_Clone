@@ -9,6 +9,7 @@
 #include "PinkGhost.h"
 #include "BlueGhost.h"
 #include "OrangeGhost.h"
+#include "PowerPellet.h"
 
 using namespace SDLFramework;
 

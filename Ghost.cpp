@@ -181,12 +181,13 @@ void Ghost::Hit(PhysEntity* entity) {
 		return;
 	}
 
-	if ((!Player::Instance()->IsDying() && !Player::Instance()->isDead()) && dynamic_cast<Player*>(entity)) {//todo
+	if ((!Player::Instance()->IsDying() && !Player::Instance()->isDead()) && dynamic_cast<Player*>(entity)) {
 		if (mState != Frightened) {
 			Player::Instance()->Die();
 		}
 		else {
 			mState = Dead;
+			Player::Instance()->AddScore(200);
 		}
 		
 	}
