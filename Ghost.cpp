@@ -15,7 +15,22 @@ Ghost::Ghost(PathNode* start) {
 	mFrightened2->Position(Vect2_Zero);
 	mFrightened2->Scale(Vect2_One * 3);
 
-	
+	mGhostUpDead = new Texture("PacmanAtlas.png", 616, 79, 16, 14);
+	mGhostUpDead->Parent(this);
+	mGhostUpDead->Position(Vect2_Zero);
+	mGhostUpDead->Scale(Vect2_One * 3);
+	mGhostDownDead = new Texture("PacmanAtlas.png", 632, 79, 16, 14);
+	mGhostDownDead->Parent(this);
+	mGhostDownDead->Position(Vect2_Zero);
+	mGhostDownDead->Scale(Vect2_One * 3);
+	mGhostRightDead = new Texture("PacmanAtlas.png", 600, 79, 16, 14);
+	mGhostRightDead->Parent(this);
+	mGhostRightDead->Position(Vect2_Zero);
+	mGhostRightDead->Scale(Vect2_One * 3);
+	mGhostLeftDead = new Texture("PacmanAtlas.png", 584, 79, 16, 14);
+	mGhostLeftDead->Parent(this);
+	mGhostLeftDead->Position(Vect2_Zero);
+	mGhostLeftDead->Scale(Vect2_One * 3);
 
 	AddCollider(new CircleCollider(20,true));
 	AddCollider(new CircleCollider(20));
@@ -114,6 +129,15 @@ void Ghost::Update() {
 		}
 	}
 
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_Z)) {
+		if (mState == Dead) {
+			State(Hunt);
+		}
+		else {
+			State(Dead);
+		}
+	}
+
 	if (targetNode != nullptr) {
 
 		
@@ -136,7 +160,7 @@ void Ghost::Update() {
 				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
 				break;
 			case Ghost::Dead:
-				//todo
+				targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
 				break;
 			default:
 				break;
@@ -181,20 +205,23 @@ void Ghost::HandleTexture() {
 
 	}
 
+
+
 	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
 
 
 	if (dir == Vect2_Up) {
-		mGhostTex = mGhostUp;
+
+		mGhostTex = mState == Dead ? mGhostUpDead : mGhostUp;
 	}
 	else if (dir == Vect2_Right) {
-		mGhostTex = mGhostRight;
+		mGhostTex = mState == Dead ? mGhostRightDead : mGhostRight;
 	}
 	else if (dir == -Vect2_Up) {
-		mGhostTex = mGhostDown;
+		mGhostTex = mState == Dead ? mGhostDownDead : mGhostDown;
 	}
 	else if (dir == -Vect2_Right) {
-		mGhostTex = mGhostLeft;
+		mGhostTex = mState == Dead ? mGhostLeftDead : mGhostLeft;
 	}
 	else {
 		std::cout << "ghost has no texture" << std::endl;

@@ -162,9 +162,7 @@ void Player::Update() {
 
 	//todo debug
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
-		//pause game update
 		Die();
-		//reset level
 	}
 
 

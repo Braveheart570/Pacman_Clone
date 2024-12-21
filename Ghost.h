@@ -57,7 +57,7 @@ protected:
 	PathNode* targetNode;
 	PathNode* CurrentNode;
 
-	AnimatedTexture* mGhostTex;
+	Texture* mGhostTex;
 
 	AnimatedTexture* mGhostUp;
 	AnimatedTexture* mGhostRight;
@@ -65,7 +65,10 @@ protected:
 	AnimatedTexture* mGhostLeft;
 	AnimatedTexture* mFrightened1;
 	AnimatedTexture* mFrightened2;
-	Texture* mEyes;
+	Texture* mGhostUpDead;
+	Texture* mGhostRightDead;
+	Texture* mGhostDownDead;
+	Texture* mGhostLeftDead;
 
 	float mSpeed;
 
