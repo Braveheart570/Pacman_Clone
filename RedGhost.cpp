@@ -5,7 +5,7 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 	setTextures();
 	mScatterTarget = {0,0};
 	mGhostTex = mGhostUp; // temp? TODO
-
+	Reset();
 }
 
 
@@ -37,4 +37,12 @@ void RedGhost::setNewTargetNode() {
 	target = Player::Instance()->Position();
 	targetNode = CurrentNode->ClosestConnection(target);
 
+}
+
+void RedGhost::Reset() {
+	CurrentNode = mStartNode;
+	targetNode = CurrentNode->GetConnectionByIndex(0);
+	Position(mStartNode->Position());
+	mHousedState = Unhoused;
+	mState = Scatter;
 }

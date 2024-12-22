@@ -33,7 +33,7 @@ public:
 	void State(GhostState state);
 	GhostState State();
 
-	void Reset();
+	virtual void Reset();
 
 	HousedState HouseState();
 	void Unhouse();

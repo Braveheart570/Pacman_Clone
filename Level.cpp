@@ -123,7 +123,7 @@ void Level::Update() {
 	}
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
-		//mRedGhost->Update();
+		mRedGhost->Update();
 		mPinkGhost->Update();
 		mBlueGhost->Update();
 		mOrangeGhost->Update();

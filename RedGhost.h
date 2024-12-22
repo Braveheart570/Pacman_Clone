@@ -11,6 +11,8 @@ public:
 	void setNewTargetNode() override;
 	void setTextures() override;
 
+	void Reset() override;
+
 private:
 
 
