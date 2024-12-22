@@ -44,6 +44,13 @@ Ghost::Ghost(PathNode* start) {
 	mFlashTime = 0.0f;
 
 	mStartNode = start;
+	
+
+	mHouseNodes.push_back(new PathNode(mStartNode->Position() - Vector2{ 0,30 }, 0));
+	mHouseNodes.push_back(new PathNode(mStartNode->Position() + Vector2{ 0,30 }, 1));
+	mHouseNodes[0]->AddConnection(mHouseNodes[1]);
+	mHouseNodes[1]->AddConnection(mHouseNodes[0]);
+
 	Reset();
 
 }
@@ -88,6 +95,8 @@ void Ghost::Update() {
 
 	Vector2 dir = (targetNode->Position()-Position()).Normalized();
 	Vector2 pos;
+
+
 	//speed modifiers
 	if (mState == Frightened) {
 		pos = Position() + dir * (mSpeed / 2) * mTimer->DeltaTime();
@@ -137,25 +146,30 @@ void Ghost::Update() {
 		CurrentNode = targetNode;
 			
 		int randomIndex;
-
-		switch (mState)
-		{
-		case Ghost::Scatter:
-			targetNode = CurrentNode->ClosestConnection(mScatterTarget);
-			break;
-		case Ghost::Hunt:
-			setNewTargetNode();
-			break;
-		case Ghost::Frightened:
-			randomIndex = Random::Instance()->RandomRange(0,CurrentNode->ConnectionsSize()-1);
-			targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
-			break;
-		case Ghost::Dead:
-			targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
-			break;
-		default:
-			break;
+		if (mHousedState == Unhoused) {
+			switch (mState)
+			{
+			case Ghost::Scatter:
+				targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+				break;
+			case Ghost::Hunt:
+				setNewTargetNode();
+				break;
+			case Ghost::Frightened:
+				randomIndex = Random::Instance()->RandomRange(0, CurrentNode->ConnectionsSize() - 1);
+				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
+				break;
+			case Ghost::Dead:
+				targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
+				break;
+			default:
+				break;
+			}
 		}
+		else{
+			HandleHoused();
+		}
+		
 			
 
 	}
@@ -166,6 +180,19 @@ void Ghost::Update() {
 	mGhostTex->Update();
 
 }
+
+void Ghost::HandleHoused() {
+
+	if (mHousedState == Housed) {
+		targetNode = CurrentNode->GetConnectionByIndex(0);
+	}
+	else if(mHousedState == Exiting) {
+		targetNode = mStartNode;
+		mHousedState = Unhoused;
+	}
+	
+}
+
 
 void Ghost::Hit(PhysEntity* entity) {
 
@@ -252,8 +279,17 @@ void Ghost::State( GhostState state) {
 void Ghost::Reset() {
 
 	CurrentNode = mStartNode;
-	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
-	Position(CurrentNode->Position());
-	mState = Scatter;
+	targetNode = mHouseNodes[0];
+	Position(mStartNode->Position());
+	mHousedState = Housed;
+}
 
+void Ghost::Unhouse() {
+	if (mHousedState == Housed) {
+		mHousedState = Exiting;
+	}
+}
+
+Ghost::HousedState Ghost::HouseState() {
+	return mHousedState;
 }

@@ -15,6 +15,7 @@ class Ghost : public PhysEntity {
 public:
 
 	enum GhostState {Scatter,Hunt,Frightened,Dead};
+	enum HousedState {Housed,Exiting,Unhoused};
 
 
 	Ghost(PathNode* start);
@@ -34,9 +35,14 @@ public:
 
 	void Reset();
 
+	HousedState HouseState();
+	void Unhouse();
+
 protected:
 
 	void HandleTexture();
+
+	void HandleHoused();
 
 	const static int EPSILON = 1;
 
@@ -46,7 +52,7 @@ protected:
 	float mFlashSpeed;
 	float mFlashTime;
 
-	std::vector<PathNode*> mhouseNodes;
+	std::vector<PathNode*> mHouseNodes;
 
 	Vector2 target;
 	Vector2 mScatterTarget;
@@ -72,6 +78,6 @@ protected:
 	float mSpeed;
 
 	GhostState mState;
-
+	HousedState mHousedState;
 
 };

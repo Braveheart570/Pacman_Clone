@@ -19,8 +19,8 @@ Level::Level() {
 
 	mRedGhost = new RedGhost(mNodeManager->getNode(66));
 	mPinkGhost = new PinkGhost(mNodeManager->getNode(67));
-	mBlueGhost = new BlueGhost(mNodeManager->getNode(23),mRedGhost);
-	mOrangeGhost = new OrangeGhost(mNodeManager->getNode(23));
+	mBlueGhost = new BlueGhost(mNodeManager->getNode(69),mRedGhost);
+	mOrangeGhost = new OrangeGhost(mNodeManager->getNode(68));
 	
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
@@ -86,6 +86,19 @@ Level::~Level() {
 
 void Level::Update() {
 
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_H)) {
+		if (mPinkGhost->HouseState() == Ghost::Housed) {
+			mPinkGhost->Unhouse();
+		}
+		else if (mBlueGhost->HouseState() == Ghost::Housed) {
+			mBlueGhost->Unhouse();
+		}
+		else if (mOrangeGhost->HouseState() == Ghost::Housed) {
+			mOrangeGhost->Unhouse();
+		}
+	}
+
+
 	if (mPlayer->isDead()) {
 		resetLevel();
 	}
@@ -100,7 +113,7 @@ void Level::Update() {
 	}
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
-		mRedGhost->Update();
+		//mRedGhost->Update();
 		mPinkGhost->Update();
 		mBlueGhost->Update();
 		mOrangeGhost->Update();
@@ -364,10 +377,14 @@ void Level::CreateNodes() {
 	
 	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[3] });
 	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] + 5.0f });
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 48,mRows[4] + 5.0f });
+	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 48,mRows[4] + 5.0f });
 
 	mNodeManager->linkNodes(23, 66);
 	mNodeManager->linkNodes(66, 24);
 	mNodeManager->getNode(67)->AddConnection(mNodeManager->getNode(66));
+	mNodeManager->getNode(68)->AddConnection(mNodeManager->getNode(67));
+	mNodeManager->getNode(69)->AddConnection(mNodeManager->getNode(67));
 
 	//wrapnodes
 	mNodeManager->AddWrapNodes({0,mRows[4]}, { Graphics::SCREEN_WIDTH,mRows[4] },26,29);
