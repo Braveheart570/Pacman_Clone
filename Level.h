@@ -23,6 +23,8 @@ public:
 	void Update() override;
 	void Render() override;
 
+	bool GameOver();
+
 private:
 
 	Timer* mTimer;
@@ -58,7 +60,11 @@ private:
 	float mReadyDuration;
 	float mReadyTime;
 
+	bool mGameOver;
+
 	void CreateNodes();
+
+	void CreatePellets();
 
 	void resetLevel(bool newGame = false);
 

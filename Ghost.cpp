@@ -282,6 +282,7 @@ void Ghost::Reset() {
 	targetNode = mHouseNodes[0];
 	Position(mStartNode->Position());
 	mHousedState = Housed;
+	mState = Scatter;
 }
 
 void Ghost::Unhouse() {

@@ -58,7 +58,7 @@ Player::Player() {
 
 
 	mSpeed = 100;
-	mLives = 5;
+	mLives = 0;
 	mWallHit = false;
 
 	mStartNode = NodeManager::Instance()->getNode(61);//TODO this is temp
@@ -298,14 +298,17 @@ bool Player::isDead() {
 }
 
 void Player::Respawn() {
-
-	mLives -= 1;
+	if (isDead()) {
+		mLives -= 1;
+	}
+	
 	CurrentNode = mStartNode;
 	targetNode = CurrentNode->GetConnectionbyDir(-Vect2_Right);
 	Position(CurrentNode->Position());
 	mIsDead = false;
 	mIsDieing = false;
 	mNextTurn = Dir();
+	mEnergized = false;
 
 }
 

@@ -18,7 +18,7 @@ ScreenManager::ScreenManager() {
 	mInputManager = InputManager::Instance();
 	mStartScreen = new StartScreen();
 	mLevel = new Level();
-	mCurrentScreen = Play;//todo change this back to start
+	mCurrentScreen = Start;
 }
 
 ScreenManager::~ScreenManager() {
@@ -47,6 +47,12 @@ void ScreenManager::Update() {
 		break;
 	case Play:
 		mLevel->Update();
+
+		if (mLevel->GameOver() && mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
+			delete mLevel;
+			mLevel = new Level();
+			mCurrentScreen = Start;
+		}
 
 		break;
 	default:

@@ -277,7 +277,7 @@ void StartScreen::Render() {
 }
 
 void StartScreen::ResetAnimation() {
-
+	//todo
 }
 
 void StartScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {

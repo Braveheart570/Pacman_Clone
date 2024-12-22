@@ -4,6 +4,7 @@ Level::Level() {
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
 	CreateNodes();
+	CreatePellets();
 	mPlayer = Player::Instance();
 
 	mStageStarted = false;
@@ -11,6 +12,7 @@ Level::Level() {
 	mReadyTime = 0;
 
 	mScore = 0;
+	mGameOver = false;
 
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
 	mLevelBackground->Parent(this);
@@ -34,6 +36,10 @@ Level::Level() {
 	mReadyLabel = new Texture("Ready!", "emulogic.ttf", 20, {255,255,0});
 	mReadyLabel->Parent(this);
 	mReadyLabel->Position(Vect2_Zero);
+
+	mGameOverLabel = new Texture("Game Over", "emulogic.ttf", 20, { 255,0,0 });
+	mGameOverLabel->Parent(this);
+	mGameOverLabel->Position(Vect2_Zero);
 
 	setLifeIcons();
 
@@ -85,7 +91,7 @@ Level::~Level() {
 }
 
 void Level::Update() {
-
+	// debug keys
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_H)) {
 		if (mPinkGhost->HouseState() == Ghost::Housed) {
 			mPinkGhost->Unhouse();
@@ -96,6 +102,10 @@ void Level::Update() {
 		else if (mOrangeGhost->HouseState() == Ghost::Housed) {
 			mOrangeGhost->Unhouse();
 		}
+	}
+
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
+		resetLevel(true);
 	}
 
 
@@ -127,11 +137,15 @@ void Level::Render() {
 
 	mLevelBackground->Render();
 	mNodeManager->Render();
-	for (auto p : mPellets) {
-		p->Render();
+
+	if (!mGameOver) {
+		for (auto p : mPellets) {
+			p->Render();
+		}
 	}
+	
 	mPlayer->Render();
-	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
+	if (!mPlayer->IsDying() && !mPlayer->isDead() && !mGameOver) {
 		mRedGhost->Render();
 		mPinkGhost->Render();
 		mBlueGhost->Render();
@@ -147,10 +161,13 @@ void Level::Render() {
 	mHighScoreboard->Render();
 	mScoreboard->Render();
 
-	if (!mStageStarted) {
+	if (!mStageStarted && !mGameOver) {
 		mReadyLabel->Render();
 	}
 	
+	if (mGameOver) {
+		mGameOverLabel->Render();
+	}
 
 }
 
@@ -388,8 +405,9 @@ void Level::CreateNodes() {
 
 	//wrapnodes
 	mNodeManager->AddWrapNodes({0,mRows[4]}, { Graphics::SCREEN_WIDTH,mRows[4] },26,29);
-	
+}
 
+void Level::CreatePellets() {
 
 	//pellets
 	mPellets.push_back(new PowerPellet({ mCols[0], mRows[0] }));
@@ -400,12 +418,13 @@ void Level::CreateNodes() {
 	mPellets.push_back(new Pellet({ mCols[1], mRows[0] }));
 
 	mPellets.push_back(new Pellet({ mCols[1], mRows[0] }));
-	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[0]}));
-	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[0]}));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[3], mRows[0] }));
+
 }
 
 void Level::setLifeIcons() {
@@ -422,22 +441,40 @@ void Level::setLifeIcons() {
 void Level::resetLevel(bool newGame) {
 
 	if (newGame) {
-
+		for (auto p : mPellets) {
+			p->Active(true);
+		}
 	}
 	else {
-		
+		if (mPlayer->Lives() == 0) {
+			mGameOver = true;
+		}
 	}
-	mPlayer->Position({ 0,-400.0f });
+	
+
 	mRedGhost->Position(mNodeManager->getNode(66)->Position());
 	mRedGhost->Reset();
 	mPinkGhost->Reset();
 	mBlueGhost->Reset();
 	mOrangeGhost->Reset();
-	mPlayer->Respawn();
+
+	if (!mGameOver) {
+		mPlayer->Position({ 0,-400.0f });
+		mPlayer->Respawn();
+	}
+	
 	for (auto l : mPlayerLives) {
 		delete l;
 		l = nullptr;
 	}
 	mPlayerLives.clear();
 	setLifeIcons();
+
+	mStageStarted = false;
+	mReadyTime = 0;
+}
+
+
+bool Level::GameOver() {
+	return mGameOver;
 }
