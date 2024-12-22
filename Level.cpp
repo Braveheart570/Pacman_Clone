@@ -363,34 +363,11 @@ void Level::CreateNodes() {
 	//ghost house
 	
 	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[3] });
+	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] + 5.0f });
 
-	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4]+5.0f });
-	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] + 30.0f });
-	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] - 25.0f });
-
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] + 5.0f });
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] + 30.0f});
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 45.0f,mRows[4] - 25.0f });
-
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] + 5.0f });
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] + 30.0f });
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 45.0f,mRows[4] - 25.0f });
-
-	mNodeManager->linkNodes(72,70);
-	mNodeManager->linkNodes(70, 71);
-
-	mNodeManager->linkNodes(69, 67);
-	mNodeManager->linkNodes(67, 68);
-
-	mNodeManager->linkNodes(75, 73);
-	mNodeManager->linkNodes(73, 74);
-
-	mNodeManager->getNode(70)->AddConnection(mNodeManager->getNode(67));
-	mNodeManager->getNode(73)->AddConnection(mNodeManager->getNode(67));
-	mNodeManager->getNode(69)->AddConnection(mNodeManager->getNode(66));
-
-	mNodeManager->linkNodes(23,66);
+	mNodeManager->linkNodes(23, 66);
 	mNodeManager->linkNodes(66, 24);
+	mNodeManager->getNode(67)->AddConnection(mNodeManager->getNode(66));
 
 	//wrapnodes
 	mNodeManager->AddWrapNodes({0,mRows[4]}, { Graphics::SCREEN_WIDTH,mRows[4] },26,29);

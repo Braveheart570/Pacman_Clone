@@ -49,7 +49,7 @@ Ghost::Ghost(PathNode* start) {
 }
 
 void Ghost::Render() {
-
+	HandleTexture();
 	mGhostTex->Render();
 	//PhysEntity::Render();
 	//Graphics::Instance()->DrawLine(Position().x,Position().y, target.x,target.y);
@@ -86,82 +86,19 @@ Ghost::~Ghost() {
 
 void Ghost::Update() {
 
-
-	HandleTexture();
-	mGhostTex->Update();
-
 	Vector2 dir = (targetNode->Position()-Position()).Normalized();
 	Vector2 pos;
-
-	if (mState != Frightened) {
-		pos = Position() + dir * mSpeed * mTimer->DeltaTime();
-	}
-	else {
+	//speed modifiers
+	if (mState == Frightened) {
 		pos = Position() + dir * (mSpeed / 2) * mTimer->DeltaTime();
 	}
+	else if (mState == Dead) {
+		pos = Position() + dir * (mSpeed *1.5f) * mTimer->DeltaTime();
+	}
+	else {
+		pos = Position() + dir * mSpeed * mTimer->DeltaTime();
+	}
 	
-
-	Vector2 dist = targetNode->Position() - pos;
-
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
-		if (mState == Scatter) {
-			State(Hunt);
-		}
-		else if (mState == Hunt) {
-			State(Scatter);
-		}
-	}
-
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
-		if (mState != Frightened) {
-			Player::Instance()->Energize();
-		}
-	}
-
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_Z)) {
-		if (mState == Dead) {
-			State(Hunt);
-		}
-		else {
-			State(Dead);
-		}
-	}
-
-	if (targetNode != nullptr) {
-
-		
-		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
-			Position(targetNode->Position());
-			CurrentNode = targetNode;
-			
-			int randomIndex;
-
-			switch (mState)
-			{
-			case Ghost::Scatter:
-				targetNode = CurrentNode->ClosestConnection(mScatterTarget);
-				break;
-			case Ghost::Hunt:
-				setNewTargetNode();
-				break;
-			case Ghost::Frightened:
-				randomIndex = Random::Instance()->RandomRange(0,CurrentNode->ConnectionsSize()-1);
-				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
-				break;
-			case Ghost::Dead:
-				targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
-				break;
-			default:
-				break;
-			}
-			
-
-		}
-		else {
-			Position(pos);
-		}
-	}
-
 	if (mState != Dead) {
 		if (mState == Frightened && !Player::Instance()->Energized()) {
 			State(Scatter);
@@ -171,7 +108,62 @@ void Ghost::Update() {
 		}
 	}
 
-	
+	//debug keys
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
+		if (mState == Scatter) {
+			State(Hunt);
+		}
+		else if (mState == Hunt) {
+			State(Scatter);
+		}
+	}
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
+		if (mState != Frightened) {
+			Player::Instance()->Energize();
+		}
+	}
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_Z)) {
+		if (mState == Dead) {
+			State(Hunt);
+		}
+		else {
+			State(Dead);
+		}
+	}
+
+	Vector2 dist = targetNode->Position() - pos;
+	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+		Position(targetNode->Position());
+		CurrentNode = targetNode;
+			
+		int randomIndex;
+
+		switch (mState)
+		{
+		case Ghost::Scatter:
+			targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+			break;
+		case Ghost::Hunt:
+			setNewTargetNode();
+			break;
+		case Ghost::Frightened:
+			randomIndex = Random::Instance()->RandomRange(0,CurrentNode->ConnectionsSize()-1);
+			targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
+			break;
+		case Ghost::Dead:
+			targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
+			break;
+		default:
+			break;
+		}
+			
+
+	}
+	else {
+		Position(pos);
+	}
+
+	mGhostTex->Update();
 
 }
 

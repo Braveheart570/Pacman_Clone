@@ -46,7 +46,7 @@ protected:
 	float mFlashSpeed;
 	float mFlashTime;
 
-	
+	std::vector<PathNode*> mhouseNodes;
 
 	Vector2 target;
 	Vector2 mScatterTarget;
