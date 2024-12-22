@@ -103,6 +103,10 @@ void Level::Update() {
 			mOrangeGhost->Unhouse();
 		}
 	}
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
+		std::cout << "enraged" << std::endl;
+		mRedGhost->Enrage();
+	}
 
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
 		resetLevel(true);
@@ -124,9 +128,9 @@ void Level::Update() {
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
 		mRedGhost->Update();
-		mPinkGhost->Update();
-		mBlueGhost->Update();
-		mOrangeGhost->Update();
+		//mPinkGhost->Update();
+		//mBlueGhost->Update();
+		//mOrangeGhost->Update();
 	}
 	
 	mScoreboard->Score(mPlayer->Score());

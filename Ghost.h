@@ -44,6 +44,8 @@ protected:
 
 	void HandleHoused();
 
+	virtual void handleScatter();
+
 	const static int EPSILON = 1;
 
 	NodeManager* mNodeManager;

@@ -88,7 +88,6 @@ Ghost::~Ghost() {
 	CurrentNode = nullptr;
 	targetNode = nullptr;
 
-
 }
 
 void Ghost::Update() {
@@ -150,7 +149,7 @@ void Ghost::Update() {
 			switch (mState)
 			{
 			case Ghost::Scatter:
-				targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+				handleScatter();
 				break;
 			case Ghost::Hunt:
 				setNewTargetNode();
@@ -179,6 +178,10 @@ void Ghost::Update() {
 
 	mGhostTex->Update();
 
+}
+
+void Ghost::handleScatter() {
+	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
 }
 
 void Ghost::HandleHoused() {

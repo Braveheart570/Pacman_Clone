@@ -12,8 +12,17 @@ public:
 	void setTextures() override;
 
 	void Reset() override;
+	void handleScatter() override;
 
-private:
+	//cruise elroy
+	void Enrage();
 
+protected:
+
+	float mDefaultSpeed;
+	float CruiseElroySpeedMultiplier1;
+	float CruiseElroySpeedMultiplier2;
+
+	bool mScatterOverride;
 
 };
