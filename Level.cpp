@@ -128,9 +128,9 @@ void Level::Update() {
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
 		mRedGhost->Update();
-		//mPinkGhost->Update();
-		//mBlueGhost->Update();
-		//mOrangeGhost->Update();
+		mPinkGhost->Update();
+		mBlueGhost->Update();
+		mOrangeGhost->Update();
 	}
 	
 	mScoreboard->Score(mPlayer->Score());

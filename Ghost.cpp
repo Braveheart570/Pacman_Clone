@@ -111,9 +111,13 @@ void Ghost::Update() {
 		if (mState == Frightened && !Player::Instance()->Energized()) {
 			State(Scatter);
 		}
-		else if (mState != Frightened && Player::Instance()->Energized()) {
+		else if (mState != Frightened && Player::Instance()->Energized() && mCanFrighten) {
 			State(Frightened);
 		}
+	}
+
+	if (!Player::Instance()->Energized() && !mCanFrighten) {
+		mCanFrighten = true;
 	}
 
 	//debug keys
@@ -159,7 +163,7 @@ void Ghost::Update() {
 				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
 				break;
 			case Ghost::Dead:
-				targetNode = CurrentNode->ClosestConnection(mStartNode->Position());
+				HandleDead();
 				break;
 			default:
 				break;
@@ -196,6 +200,21 @@ void Ghost::HandleHoused() {
 	
 }
 
+void Ghost::HandleDead() {
+	if (CurrentNode == mNodeManager->getNode(66)) {
+		targetNode = mNodeManager->getNode(67);
+	}
+	else if (CurrentNode == mNodeManager->getNode(67)) {
+		targetNode = CurrentNode->GetConnectionByIndex(0);
+		State(Scatter, false);
+		mCanFrighten = false;
+	}
+	else {
+		targetNode = CurrentNode->ClosestConnection(mNodeManager->getNode(66)->Position());
+	}
+	
+
+}
 
 void Ghost::Hit(PhysEntity* entity) {
 
@@ -265,15 +284,18 @@ void Ghost::HandleTexture() {
 
 }
 
-void Ghost::State( GhostState state) {
+void Ghost::State( GhostState state, bool flip) {
 
 	if (state == mState) {
 		return;
 	}
 
-	PathNode* temp = CurrentNode;
-	CurrentNode = targetNode;
-	targetNode = temp;
+	if (flip) {
+		PathNode* temp = CurrentNode;
+		CurrentNode = targetNode;
+		targetNode = temp;
+	}
+	
 
 	mState = state;
 
@@ -286,6 +308,7 @@ void Ghost::Reset() {
 	Position(mStartNode->Position());
 	mHousedState = Housed;
 	mState = Scatter;
+	mCanFrighten = true;
 }
 
 void Ghost::Unhouse() {

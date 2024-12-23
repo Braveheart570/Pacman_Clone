@@ -30,7 +30,7 @@ public:
 
 	void Hit(PhysEntity* entity) override;
 
-	void State(GhostState state);
+	void State(GhostState state, bool flip = true);
 	GhostState State();
 
 	virtual void Reset();
@@ -46,11 +46,14 @@ protected:
 
 	virtual void handleScatter();
 
+	void HandleDead();
+
 	const static int EPSILON = 1;
 
 	NodeManager* mNodeManager;
 	Timer* mTimer;
 
+	bool mCanFrighten;
 	float mFlashSpeed;
 	float mFlashTime;
 
