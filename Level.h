@@ -10,6 +10,7 @@
 #include "BlueGhost.h"
 #include "OrangeGhost.h"
 #include "PowerPellet.h"
+#include "AudioManager.h"
 
 using namespace SDLFramework;
 
@@ -30,6 +31,7 @@ private:
 	Timer* mTimer;
 	Player* mPlayer;
 	NodeManager* mNodeManager;
+	AudioManager* mAudioManager;
 
 	Texture* mLevelBackground;
 

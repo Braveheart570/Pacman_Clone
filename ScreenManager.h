@@ -21,6 +21,7 @@ private:
 	static ScreenManager* sInstance;
 
 	InputManager* mInputManager;
+	AudioManager* mAudioManager;
 
 	//screens
 	StartScreen* mStartScreen;

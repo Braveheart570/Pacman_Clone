@@ -6,6 +6,7 @@ Level::Level() {
 	CreateNodes();
 	CreatePellets();
 	mPlayer = Player::Instance();
+	mAudioManager = AudioManager::Instance();
 
 	mStageStarted = false;
 	mReadyDuration = 3.0f;
@@ -53,6 +54,8 @@ Level::~Level() {
 	mPlayer = nullptr;
 	NodeManager::Release();
 	mNodeManager = nullptr;
+	mAudioManager = nullptr;
+
 
 	delete mLevelBackground;
 	mLevelBackground = nullptr;
