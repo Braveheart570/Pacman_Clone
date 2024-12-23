@@ -29,6 +29,10 @@ private:
 	float mPowerPelletFlashInterval;
 	float mRenderPowerPellet;
 
+	float mPauseTime;
+	float mPauseDurration;
+	bool mPause;
+
 	Texture* mOneUplabel;
 	Texture* mHighScoreLabel;
 	Texture* mTwoUpLabel;
@@ -71,6 +75,7 @@ private:
 	Texture* mPelletPTS;
 
 	Texture* mNamcoLabel;
+
 
 	int mSpeed;
 

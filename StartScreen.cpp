@@ -23,10 +23,15 @@ StartScreen::StartScreen() {
 	mOrangeGhostEaten = false;
 
 	mPowerPelletFlashTime = 0;
-	mPowerPelletFlashInterval = 0.5f;
+	mPowerPelletFlashInterval = 0.3f;
 	mRenderPowerPellet = true;
 
 	scrawlTime = 0;
+
+	mPauseTime = 0;
+	mPauseDurration = 0.5f;
+	mPause = false;
+
 
 	mOneUplabel = new Texture("1UP", "emulogic.ttf", 20, {255,255,255});
 	HandleEntityInit(mOneUplabel, {100,25});
@@ -190,14 +195,24 @@ void StartScreen::Update() {
 	scrawlTime += mTimer->DeltaTime();
 	mPowerPelletFlashTime += mTimer->DeltaTime();
 
-	if (scrawlTime < 6.0f) {
-		return;
+	if (mPause) {
+		mPauseTime += mTimer->DeltaTime();
+		if (mPauseTime >= mPauseDurration) {
+			mPause = false;
+			mPauseTime = 0;
+		}
 	}
 
 	if (mPowerPelletFlashTime >= mPowerPelletFlashInterval) {
 		mRenderPowerPellet = !mRenderPowerPellet;
 		mPowerPelletFlashTime = 0;
 	}
+
+	if (scrawlTime < 6.0f) {
+		return;
+	}
+
+	if (mPause) return;
 
 	if (mPowerPelletEaten) {
 
@@ -215,16 +230,28 @@ void StartScreen::Update() {
 		mFrightenedGhost4->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
 
 		if (mPacmanLeft->Position().x >= mFrightenedGhost1->Position().x - 35.0f) {
-			mRedGhostEaten = true;
+			if (!mRedGhostEaten) {
+				mRedGhostEaten = true;
+				mPause = true;
+			}
 		}
 		if (mPacmanLeft->Position().x >= mFrightenedGhost2->Position().x - 35.0f) {
-			mPinkGhostEaten = true;
+			if (!mPinkGhostEaten) {
+				mPinkGhostEaten = true;
+				mPause = true;
+			}
 		}
 		if (mPacmanLeft->Position().x >= mFrightenedGhost3->Position().x - 35.0f) {
-			mBlueGhostEaten = true;
+			if (!mBlueGhostEaten) {
+				mBlueGhostEaten = true;
+				mPause = true;
+			}
 		}
 		if (mPacmanLeft->Position().x >= mFrightenedGhost4->Position().x - 35.0f) {
-			mOrangeGhostEaten = true;
+			if (!mOrangeGhostEaten) {
+				mOrangeGhostEaten = true;
+				mPause = true;
+			}
 		}
 
 	}
