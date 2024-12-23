@@ -76,6 +76,11 @@ private:
 
 	Texture* mNamcoLabel;
 
+	Texture* m200pts;
+	Texture* m400pts;
+	Texture* m800pts;
+	Texture* m1600pts;
+
 
 	int mSpeed;
 

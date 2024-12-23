@@ -106,6 +106,16 @@ StartScreen::StartScreen() {
 
 	mNamcoLabel = new Texture("NAMCO", "emulogic.ttf", 40, {255,0,0});
 	HandleEntityInit(mNamcoLabel, {Graphics::SCREEN_WIDTH/2,900});
+
+	m200pts = new Texture("pacmanAtlas.png",456,133,15,7);
+	HandleEntityInit(m200pts, Vect2_Zero,Vect2_One*3);
+	m400pts = new Texture("pacmanAtlas.png", 472, 133, 15, 7);
+	HandleEntityInit(m400pts, Vect2_Zero, Vect2_One * 3);
+	m800pts = new Texture("pacmanAtlas.png", 488, 133, 15, 7);
+	HandleEntityInit(m800pts, Vect2_Zero, Vect2_One * 3);
+	m1600pts = new Texture("pacmanAtlas.png", 504, 133, 16, 7);
+	HandleEntityInit(m1600pts, Vect2_Zero, Vect2_One * 3);
+
 }
 
 StartScreen::~StartScreen() {
@@ -186,6 +196,15 @@ StartScreen::~StartScreen() {
 
 	delete mNamcoLabel;
 	mNamcoLabel = nullptr;
+
+	delete m200pts;
+	m200pts = nullptr;
+	delete m400pts;
+	m400pts = nullptr;
+	delete m800pts;
+	m800pts = nullptr;
+	delete m1600pts;
+	m1600pts = nullptr;
 
 }
 
@@ -349,6 +368,24 @@ void StartScreen::Render() {
 		mNamcoLabel->Render();
 	}
 	
+	if (mPause) {
+		if (mOrangeGhostEaten) {
+			m1600pts->Position(mFrightenedGhost4->Position());
+			m1600pts->Render();
+		}
+		else if (mBlueGhostEaten) {
+			m800pts->Position(mFrightenedGhost3->Position());
+			m800pts->Render();
+		}
+		else if (mPinkGhostEaten) {
+			m400pts->Position(mFrightenedGhost2->Position());
+			m400pts->Render();
+		}
+		else if (mRedGhostEaten) {
+			m200pts->Position(mFrightenedGhost1->Position());
+			m200pts->Render();
+		}
+	}
 
 }
 
