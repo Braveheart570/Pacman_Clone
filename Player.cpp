@@ -58,7 +58,7 @@ Player::Player() {
 
 
 	mSpeed = 100;
-	mLives = 1;
+	mLives = 0;
 	mWallHit = false;
 
 	mStartNode = NodeManager::Instance()->getNode(61);//TODO this is temp

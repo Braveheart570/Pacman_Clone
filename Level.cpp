@@ -48,7 +48,6 @@ Level::Level() {
 
 Level::~Level() {
 
-	Timer::Release();
 	mTimer = nullptr;
 	Player::Release();
 	mPlayer = nullptr;

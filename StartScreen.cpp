@@ -15,23 +15,19 @@ StartScreen::StartScreen() {
 	orangeName = orangeName + std::string(11 - orangeName.length(),'-') + "\"CLYDE\"";
 
 	mSpeed = 100;
+	mPowerPelletFlashInterval = 0.3f;
+	mPauseDurration = 0.5f;
+	
 	mPowerPelletEaten = false;
-
 	mRedGhostEaten = false;
 	mPinkGhostEaten = false;
 	mBlueGhostEaten = false;
 	mOrangeGhostEaten = false;
-
 	mPowerPelletFlashTime = 0;
-	mPowerPelletFlashInterval = 0.3f;
 	mRenderPowerPellet = true;
-
 	scrawlTime = 0;
-
 	mPauseTime = 0;
-	mPauseDurration = 0.5f;
 	mPause = false;
-
 
 	mOneUplabel = new Texture("1UP", "emulogic.ttf", 20, {255,255,255});
 	HandleEntityInit(mOneUplabel, {100,25});
@@ -210,7 +206,7 @@ StartScreen::~StartScreen() {
 
 
 void StartScreen::Update() {
-
+	
 	scrawlTime += mTimer->DeltaTime();
 	mPowerPelletFlashTime += mTimer->DeltaTime();
 
@@ -390,7 +386,25 @@ void StartScreen::Render() {
 }
 
 void StartScreen::ResetAnimation() {
-	//todo
+	mPowerPelletEaten = false;
+	mRedGhostEaten = false;
+	mPinkGhostEaten = false;
+	mBlueGhostEaten = false;
+	mOrangeGhostEaten = false;
+	mPowerPelletFlashTime = 0;
+	mRenderPowerPellet = true;
+	scrawlTime = 0;
+	mPauseTime = 0;
+	mPause = false;
+
+	mRedGhostAnim->Position({ Graphics::SCREEN_WIDTH + 200,600 });
+	mPinkGhostAnim->Position({ Graphics::SCREEN_WIDTH + 250,600 });
+	mBlueGhostAnim->Position({ Graphics::SCREEN_WIDTH + 300,600 });
+	mOrangeGhostAnim->Position({ Graphics::SCREEN_WIDTH + 350,600 });
+
+	mPacmanRight->Position({ Graphics::SCREEN_WIDTH + 100,600 });
+
+
 }
 
 void StartScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {

@@ -41,7 +41,6 @@ void ScreenManager::Update() {
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
-			mStartScreen->ResetAnimation();
 		}
 
 		break;
@@ -52,6 +51,7 @@ void ScreenManager::Update() {
 			delete mLevel;
 			mLevel = new Level();
 			mCurrentScreen = Start;
+			mStartScreen->ResetAnimation();
 		}
 
 		break;
