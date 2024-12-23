@@ -17,6 +17,17 @@ StartScreen::StartScreen() {
 	mSpeed = 100;
 	mPowerPelletEaten = false;
 
+	mRedGhostEaten = false;
+	mPinkGhostEaten = false;
+	mBlueGhostEaten = false;
+	mOrangeGhostEaten = false;
+
+	mPowerPelletFlashTime = 0;
+	mPowerPelletFlashInterval = 0.5f;
+	mRenderPowerPellet = true;
+
+	scrawlTime = 0;
+
 	mOneUplabel = new Texture("1UP", "emulogic.ttf", 20, {255,255,255});
 	HandleEntityInit(mOneUplabel, {100,25});
 	mHighScoreLabel = new Texture("HIGH SCORE", "emulogic.ttf", 20, { 255,255,255 });
@@ -176,6 +187,18 @@ StartScreen::~StartScreen() {
 
 void StartScreen::Update() {
 
+	scrawlTime += mTimer->DeltaTime();
+	mPowerPelletFlashTime += mTimer->DeltaTime();
+
+	if (scrawlTime < 6.0f) {
+		return;
+	}
+
+	if (mPowerPelletFlashTime >= mPowerPelletFlashInterval) {
+		mRenderPowerPellet = !mRenderPowerPellet;
+		mPowerPelletFlashTime = 0;
+	}
+
 	if (mPowerPelletEaten) {
 
 		mFrightenedGhost1->Update();
@@ -190,6 +213,19 @@ void StartScreen::Update() {
 		mFrightenedGhost2->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
 		mFrightenedGhost3->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
 		mFrightenedGhost4->Translate(Vect2_Right * mSpeed * 0.5f * mTimer->DeltaTime());
+
+		if (mPacmanLeft->Position().x >= mFrightenedGhost1->Position().x - 35.0f) {
+			mRedGhostEaten = true;
+		}
+		if (mPacmanLeft->Position().x >= mFrightenedGhost2->Position().x - 35.0f) {
+			mPinkGhostEaten = true;
+		}
+		if (mPacmanLeft->Position().x >= mFrightenedGhost3->Position().x - 35.0f) {
+			mBlueGhostEaten = true;
+		}
+		if (mPacmanLeft->Position().x >= mFrightenedGhost4->Position().x - 35.0f) {
+			mOrangeGhostEaten = true;
+		}
 
 	}
 	else {
@@ -227,22 +263,32 @@ void StartScreen::Update() {
 }
 
 void StartScreen::Render() {
-
-	if (mPowerPelletEaten) {
-		mFrightenedGhost1->Render();
-		mFrightenedGhost2->Render();
-		mFrightenedGhost3->Render();
-		mFrightenedGhost4->Render();
-		mPacmanLeft->Render();
+	if (scrawlTime >= 6.0f) {
+		if (mPowerPelletEaten) {
+			if (!mRedGhostEaten) {
+				mFrightenedGhost1->Render();
+			}
+			if (!mPinkGhostEaten) {
+				mFrightenedGhost2->Render();
+			}
+			if (!mBlueGhostEaten) {
+				mFrightenedGhost3->Render();
+			}
+			if (!mOrangeGhostEaten) {
+				mFrightenedGhost4->Render();
+			}
+			mPacmanLeft->Render();
+		}
+		else {
+			mRedGhostAnim->Render();
+			mPinkGhostAnim->Render();
+			mBlueGhostAnim->Render();
+			mOrangeGhostAnim->Render();
+			mPacmanRight->Render();
+			if(mRenderPowerPellet) mPowerPellet2->Render();
+		}
 	}
-	else {
-		mRedGhostAnim->Render();
-		mPinkGhostAnim->Render();
-		mBlueGhostAnim->Render();
-		mOrangeGhostAnim->Render();
-		mPacmanRight->Render();
-		mPowerPellet2->Render();
-	}
+	
 
 	mOneUplabel->Render();
 	mHighScoreLabel->Render();
@@ -254,25 +300,28 @@ void StartScreen::Render() {
 
 	GhostTableLabel->Render();
 
-	mRedGhost->Render();
-	mRedGhostLabel->Render();
+	if (scrawlTime >= 1.0f) mRedGhost->Render();
+	if (scrawlTime >= 1.5f) mRedGhostLabel->Render();
 
-	mPinkGhost->Render();
-	mPinkGhostLabel->Render();
+	if (scrawlTime >= 2.0f) mPinkGhost->Render();
+	if (scrawlTime >= 2.5f) mPinkGhostLabel->Render();
 
-	mBlueGhost->Render();
-	mBlueGhostLabel->Render();
+	if (scrawlTime >= 3.0f) mBlueGhost->Render();
+	if (scrawlTime >= 3.5f) mBlueGhostLabel->Render();
 
-	mOrangeGhost->Render();
-	mOrangeGhostLabel->Render();
+	if (scrawlTime >= 4.0f) mOrangeGhost->Render();
+	if (scrawlTime >= 4.5f) mOrangeGhostLabel->Render();
 	
-	mPowerPellet->Render();
-	mPellet->Render();
+	if (scrawlTime >= 5.0f) {
+		if (mRenderPowerPellet) mPowerPellet->Render();
+		mPellet->Render();
 
-	mPowerPelletPTS->Render();
-	mPelletPTS->Render();
+		mPowerPelletPTS->Render();
+		mPelletPTS->Render();
 
-	mNamcoLabel->Render();
+		mNamcoLabel->Render();
+	}
+	
 
 }
 

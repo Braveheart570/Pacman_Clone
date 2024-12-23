@@ -24,6 +24,11 @@ private:
 	Timer* mTimer;
 	InputManager* mInputManager;
 
+	float scrawlTime;
+	float mPowerPelletFlashTime;
+	float mPowerPelletFlashInterval;
+	float mRenderPowerPellet;
+
 	Texture* mOneUplabel;
 	Texture* mHighScoreLabel;
 	Texture* mTwoUpLabel;
@@ -70,6 +75,11 @@ private:
 	int mSpeed;
 
 	bool mPowerPelletEaten;
+
+	bool mRedGhostEaten;
+	bool mPinkGhostEaten;
+	bool mBlueGhostEaten;
+	bool mOrangeGhostEaten;
 
 	void HandleEntityInit(GameEntity* tex, Vector2 pos = Vect2_Zero, Vector2 scale = Vect2_One);
 
