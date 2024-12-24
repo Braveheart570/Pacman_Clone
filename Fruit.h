@@ -1,17 +1,18 @@
 #pragma once
+#include "PhysicsManager.h"
 #include "PhysEntity.h"
 #include "CircleCollider.h"
-#include "PhysicsManager.h"
+#include "AudioManager.h"
 #include "Player.h"
 
 using namespace SDLFramework;
 
-class Pellet : public PhysEntity {
+class Fruit : public PhysEntity {
 
 public:
 
-	Pellet(Vector2 pos);
-	~Pellet();
+	Fruit();
+	~Fruit();
 
 	void Render() override;
 
@@ -25,4 +26,5 @@ protected:
 	Texture* mTexture;
 
 	virtual void PlaySound();
+
 };

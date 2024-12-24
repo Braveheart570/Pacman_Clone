@@ -13,7 +13,7 @@ namespace SDLFramework {
 			Friendly,
 			FriendlyProjectile,
 			Hostile,
-			HostileProjectile,
+			Consumable,
 			MaxLayers // this acts as a stop of sorts
 		};
 

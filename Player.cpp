@@ -49,6 +49,9 @@ int Player::Lives() {
 	return mLives;
 }
 
+void Player::addLife() {
+	mLives++;
+}
 
 Player::Player() {
 
@@ -58,10 +61,10 @@ Player::Player() {
 
 
 	mSpeed = 100;
-	mLives = 0;
+	mLives = 1;
 	mWallHit = false;
 
-	mStartNode = NodeManager::Instance()->getNode(61);//TODO this is temp
+	mStartNode = NodeManager::Instance()->getNode(47);
 	
 	Respawn();
 
@@ -90,7 +93,7 @@ Player::Player() {
 	mPacmanStopped->Position(Vect2_Zero);
 	mPacmanStopped->Scale(Vect2_One * 3);
 
-	mPacmanDeath = new AnimatedTexture("PacmanAtlas.png",503,0,16,16,12,0.5f,AnimatedTexture::Horizontal);
+	mPacmanDeath = new AnimatedTexture("PacmanAtlas.png",503,0,16,16,12,1.0f,AnimatedTexture::Horizontal);
 	mPacmanDeath->Parent(this);
 	mPacmanDeath->Position(Vect2_Zero);
 	mPacmanDeath->Scale(Vect2_One * 3);
@@ -253,6 +256,8 @@ void Player::Die() {
 
 	mIsDieing = true;
 	mPacmanDeath->ResetAnimation();
+	AudioManager::Instance()->PauseMusic();
+	AudioManager::Instance()->PlaySFX("playerDeath.wav",0,0);
 
 }
 
@@ -316,6 +321,7 @@ void Player::Energize() {
 
 	mEnergized = true;
 	mFrightenedTime = 0;
+	AudioManager::Instance()->PlayMusic("energized.wav",0);
 
 }
 

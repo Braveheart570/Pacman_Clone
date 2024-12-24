@@ -11,6 +11,7 @@
 #include "OrangeGhost.h"
 #include "PowerPellet.h"
 #include "AudioManager.h"
+#include "Fruit.h"
 
 using namespace SDLFramework;
 
@@ -41,6 +42,7 @@ private:
 	OrangeGhost* mOrangeGhost;
 
 	std::vector<Pellet*> mPellets;
+	Fruit* mFruit;
 
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mScoreboard;

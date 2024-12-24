@@ -11,7 +11,7 @@ Pellet::Pellet(Vector2 pos) {
 
 	mScoreVal = 10;
 
-	mId = PhysicsManager::Instance()->RegisterEntity(this,PhysicsManager::CollisionLayers::HostileProjectile);
+	mId = PhysicsManager::Instance()->RegisterEntity(this,PhysicsManager::CollisionLayers::Consumable);
 
 	Position(pos);
 
@@ -26,18 +26,25 @@ Pellet::~Pellet() {
 void Pellet::Render() {
 	if (Active()) {
 		mTexture->Render();
-		PhysEntity::Render();
+		//PhysEntity::Render();
 	}
 }
 
 void Pellet::Hit(PhysEntity* entity) {
 	Player::Instance()->AddScore(mScoreVal);
 	Active(false);
+	PlaySound();
 }
 	
 bool Pellet::IgnoreCollisions() {
 
 	return !Active();
+
+}
+
+void Pellet::PlaySound() {
+
+	AudioManager::Instance()->PlaySFX("waka.wav",0,1);
 
 }
 

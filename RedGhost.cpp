@@ -62,7 +62,15 @@ void RedGhost::Enrage() {
 		mSpeed = mDefaultSpeed * CruiseElroySpeedMultiplier2;
 		mScatterOverride = true;
 	}
+}
 
+bool RedGhost::Enraged() {
+	if (mSpeed != mDefaultSpeed) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 

@@ -227,8 +227,9 @@ void Ghost::Hit(PhysEntity* entity) {
 			Player::Instance()->Die();
 		}
 		else {
-			mState = Dead;
+			State(Dead, false);
 			Player::Instance()->AddScore(200);
+			AudioManager::Instance()->PlaySFX("ghostEaten.wav",0);
 		}
 		
 	}
@@ -295,10 +296,13 @@ void Ghost::State( GhostState state, bool flip) {
 		CurrentNode = targetNode;
 		targetNode = temp;
 	}
-	
 
 	mState = state;
 
+}
+
+Ghost::GhostState Ghost::State() {
+	return mState;
 }
 
 void Ghost::Reset() {

@@ -16,6 +16,7 @@ public:
 
 	//cruise elroy
 	void Enrage();
+	bool Enraged();
 
 protected:
 

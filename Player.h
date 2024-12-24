@@ -30,6 +30,7 @@ public:
 	void AddScore(int change);
 
 	int Lives();
+	void addLife();
 
 	bool Energized();
 	void Energize();

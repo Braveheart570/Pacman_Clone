@@ -114,6 +114,9 @@
     <ClCompile Include="PowerPellet.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fruit.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -210,6 +213,9 @@
       <Filter>Game Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PowerPellet.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fruit.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>

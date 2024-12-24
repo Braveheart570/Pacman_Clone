@@ -112,7 +112,7 @@ namespace SDLFramework {
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile
 		);
-		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::HostileProjectile,
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Consumable,
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile
 		);

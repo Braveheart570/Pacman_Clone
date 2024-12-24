@@ -5,11 +5,14 @@ Level::Level() {
 	mNodeManager = NodeManager::Instance();
 	CreateNodes();
 	CreatePellets();
+
+	mFruit = new Fruit();
+
 	mPlayer = Player::Instance();
 	mAudioManager = AudioManager::Instance();
 
 	mStageStarted = false;
-	mReadyDuration = 3.0f;
+	mReadyDuration = 5.0f;
 	mReadyTime = 0;
 
 	mScore = 0;
@@ -89,6 +92,9 @@ Level::~Level() {
 		delete p;
 		p = nullptr;
 	}
+
+	delete mFruit;
+	mFruit = nullptr;
 	
 }
 
@@ -109,9 +115,13 @@ void Level::Update() {
 		std::cout << "enraged" << std::endl;
 		mRedGhost->Enrage();
 	}
-
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
 		resetLevel(true);
+	}
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_L)) {
+		mPlayer->addLife();
+		AudioManager::Instance()->PlaySFX("extraLife.wav");
+		setLifeIcons();
 	}
 
 
@@ -148,6 +158,9 @@ void Level::Render() {
 		for (auto p : mPellets) {
 			p->Render();
 		}
+
+		mFruit->Render();
+
 	}
 	
 	mPlayer->Render();
@@ -434,7 +447,11 @@ void Level::CreatePellets() {
 }
 
 void Level::setLifeIcons() {
-
+	for (auto l : mPlayerLives) {
+		delete l;
+		l = nullptr;
+	}
+	mPlayerLives.clear();
 	for (int i = 1; i <= mPlayer->Lives(); i++) {
 		mPlayerLives.push_back(new Texture("PacmanAtlas.png", 472, 0, 14, 14));
 		mPlayerLives[mPlayerLives.size() - 1]->Parent(this);
@@ -469,11 +486,6 @@ void Level::resetLevel(bool newGame) {
 		mPlayer->Respawn();
 	}
 	
-	for (auto l : mPlayerLives) {
-		delete l;
-		l = nullptr;
-	}
-	mPlayerLives.clear();
 	setLifeIcons();
 
 	mStageStarted = false;
