@@ -67,8 +67,8 @@ private:
 	float mFrightenedTime;
 	float mFrightenedDuration;
 
-	PathNode* targetNode;
-	PathNode* CurrentNode;
+	PathNode* mTargetNode;
+	PathNode* mCurrentNode;
 	PathNode* mStartNode;
 
 

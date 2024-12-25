@@ -34,8 +34,8 @@ void PinkGhost::setNewTargetNode() {
 
 	Vector2 aheadOfPlayer = Player::Instance()->nextTurn() * 50 * 4;
 
-	target = Player::Instance()->Position() + aheadOfPlayer;
+	mTarget = Player::Instance()->Position() + aheadOfPlayer;
 
-	targetNode = CurrentNode->ClosestConnection(target);
+	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 
 }

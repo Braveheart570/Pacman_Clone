@@ -59,13 +59,13 @@ protected:
 
 	std::vector<PathNode*> mHouseNodes;
 
-	Vector2 target;
+	Vector2 mTarget;
 	Vector2 mScatterTarget;
 
 	PathNode* mStartNode;
 
-	PathNode* targetNode;
-	PathNode* CurrentNode;
+	PathNode* mTargetNode;
+	PathNode* mCurrentNode;
 
 	Texture* mGhostTex;
 

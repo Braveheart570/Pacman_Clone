@@ -85,14 +85,14 @@ Ghost::~Ghost() {
 	mFrightened2 = nullptr;
 
 	mStartNode = nullptr;
-	CurrentNode = nullptr;
-	targetNode = nullptr;
+	mCurrentNode = nullptr;
+	mTargetNode = nullptr;
 
 }
 
 void Ghost::Update() {
 
-	Vector2 dir = (targetNode->Position()-Position()).Normalized();
+	Vector2 dir = (mTargetNode->Position()-Position()).Normalized();
 	Vector2 pos;
 
 
@@ -135,10 +135,10 @@ void Ghost::Update() {
 		}
 	}
 
-	Vector2 dist = targetNode->Position() - pos;
+	Vector2 dist = mTargetNode->Position() - pos;
 	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
-		Position(targetNode->Position());
-		CurrentNode = targetNode;
+		Position(mTargetNode->Position());
+		mCurrentNode = mTargetNode;
 			
 		int randomIndex;
 		if (mHousedState == Unhoused) {
@@ -151,8 +151,8 @@ void Ghost::Update() {
 				setNewTargetNode();
 				break;
 			case Ghost::Frightened:
-				randomIndex = Random::Instance()->RandomRange(0, CurrentNode->ConnectionsSize() - 1);
-				targetNode = CurrentNode->GetConnectionByIndex(randomIndex);
+				randomIndex = Random::Instance()->RandomRange(0, mCurrentNode->ConnectionsSize() - 1);
+				mTargetNode = mCurrentNode->GetConnectionByIndex(randomIndex);
 				break;
 			case Ghost::Dead:
 				HandleDead();
@@ -177,32 +177,32 @@ void Ghost::Update() {
 }
 
 void Ghost::handleScatter() {
-	targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+	mTargetNode = mCurrentNode->ClosestConnection(mScatterTarget);
 }
 
 void Ghost::HandleHoused() {
 
 	if (mHousedState == Housed) {
-		targetNode = CurrentNode->GetConnectionByIndex(0);
+		mTargetNode = mCurrentNode->GetConnectionByIndex(0);
 	}
 	else if(mHousedState == Exiting) {
-		targetNode = mStartNode;
+		mTargetNode = mStartNode;
 		mHousedState = Unhoused;
 	}
 	
 }
 
 void Ghost::HandleDead() {
-	if (CurrentNode == mNodeManager->getNode(66)) {
-		targetNode = mNodeManager->getNode(67);
+	if (mCurrentNode == mNodeManager->getNode(66)) {
+		mTargetNode = mNodeManager->getNode(67);
 	}
-	else if (CurrentNode == mNodeManager->getNode(67)) {
-		targetNode = CurrentNode->GetConnectionByIndex(0);
+	else if (mCurrentNode == mNodeManager->getNode(67)) {
+		mTargetNode = mCurrentNode->GetConnectionByIndex(0);
 		State(Scatter, false);
 		mCanFrighten = false;
 	}
 	else {
-		targetNode = CurrentNode->ClosestConnection(mNodeManager->getNode(66)->Position());
+		mTargetNode = mCurrentNode->ClosestConnection(mNodeManager->getNode(66)->Position());
 	}
 	
 
@@ -255,7 +255,7 @@ void Ghost::HandleTexture() {
 
 
 
-	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
+	Vector2 dir = (mCurrentNode->Position() - mTargetNode->Position()).Normalized();
 
 
 	if (dir == Vect2_Up) {
@@ -284,9 +284,9 @@ void Ghost::State( GhostState state, bool flip) {
 	}
 
 	if (flip) {
-		PathNode* temp = CurrentNode;
-		CurrentNode = targetNode;
-		targetNode = temp;
+		PathNode* temp = mCurrentNode;
+		mCurrentNode = mTargetNode;
+		mTargetNode = temp;
 	}
 
 	mState = state;
@@ -299,8 +299,8 @@ Ghost::GhostState Ghost::State() {
 
 void Ghost::Reset() {
 
-	CurrentNode = mStartNode;
-	targetNode = mHouseNodes[0];
+	mCurrentNode = mStartNode;
+	mTargetNode = mHouseNodes[0];
 	Position(mStartNode->Position());
 	mHousedState = Housed;
 	mState = Scatter;

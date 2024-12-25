@@ -37,9 +37,9 @@ void BlueGhost::setNewTargetNode() {
 
 	Vector2 redToAheadOfPlayer = posAheadOfPlayer - mRedGhost->Position();
 
-	target = posAheadOfPlayer + redToAheadOfPlayer;
+	mTarget = posAheadOfPlayer + redToAheadOfPlayer;
 
-	targetNode = CurrentNode->ClosestConnection(target);
+	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 
 
 }

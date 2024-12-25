@@ -41,7 +41,7 @@ private:
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mPlayerTwoScoreBoard;
 
-	Texture* GhostTableLabel;
+	Texture* mGhostTableLabel;
 
 	Texture* mRedGhost;
 	AnimatedTexture* mRedGhostAnim;

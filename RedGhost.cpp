@@ -4,8 +4,8 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
 	mScatterTarget = {0,0};
-	CruiseElroySpeedMultiplier1 = 1.5f;
-	CruiseElroySpeedMultiplier2 = 2.0f;
+	mCruiseElroySpeedMultiplier1 = 1.5f;
+	mCruiseElroySpeedMultiplier2 = 2.0f;
 	mGhostTex = mGhostUp; // temp? TODO
 	mDefaultSpeed = mSpeed;
 	Reset();
@@ -37,14 +37,14 @@ void RedGhost::setTextures() {
 
 void RedGhost::setNewTargetNode() {
 
-	target = Player::Instance()->Position();
-	targetNode = CurrentNode->ClosestConnection(target);
+	mTarget = Player::Instance()->Position();
+	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 
 }
 
 void RedGhost::Reset() {
-	CurrentNode = mStartNode;
-	targetNode = CurrentNode->GetConnectionByIndex(0);
+	mCurrentNode = mStartNode;
+	mTargetNode = mCurrentNode->GetConnectionByIndex(0);
 	Position(mStartNode->Position());
 	mHousedState = Unhoused;
 	mState = Scatter;
@@ -56,10 +56,10 @@ void RedGhost::Reset() {
 void RedGhost::Enrage() {
 
 	if (mSpeed == mDefaultSpeed) {
-		mSpeed *= CruiseElroySpeedMultiplier1;
+		mSpeed *= mCruiseElroySpeedMultiplier1;
 	}
 	else {
-		mSpeed = mDefaultSpeed * CruiseElroySpeedMultiplier2;
+		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
 		mScatterOverride = true;
 	}
 }
@@ -77,10 +77,10 @@ bool RedGhost::Enraged() {
 void RedGhost::handleScatter() {
 
 	if (mScatterOverride) {
-		targetNode = CurrentNode->ClosestConnection(Player::Instance()->Position());
+		mTargetNode = mCurrentNode->ClosestConnection(Player::Instance()->Position());
 	}
 	else {
-		targetNode = CurrentNode->ClosestConnection(mScatterTarget);
+		mTargetNode = mCurrentNode->ClosestConnection(mScatterTarget);
 	}
 	
 

@@ -20,7 +20,7 @@ void Player::Release() {
 
 Vector2 Player::Dir() {
 
-	Vector2 retVal = (targetNode->Position() - Position()).Normalized();
+	Vector2 retVal = (mTargetNode->Position() - Position()).Normalized();
 
 	if (retVal.x == retVal.x && retVal.y == retVal.y) { //nan check. comparing a nan to itself will return false.
 		return retVal;
@@ -131,8 +131,8 @@ Player::~Player() {
 	mPacmanStopped = nullptr;
 
 	mStartNode = nullptr;
-	CurrentNode = nullptr;
-	targetNode = nullptr;
+	mCurrentNode = nullptr;
+	mTargetNode = nullptr;
 
 }
 
@@ -183,40 +183,40 @@ void Player::Update() {
 	Vector2 dir = Dir();
 
 	if (-mNextTurn == dir) {
-		PathNode* temp = targetNode;
-		targetNode = CurrentNode;
-		CurrentNode = temp;
+		PathNode* temp = mTargetNode;
+		mTargetNode = mCurrentNode;
+		mCurrentNode = temp;
 		dir = -dir;
 	}
 
 
 	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime(); // new position
-	Vector2 dist = targetNode->Position() - pos;
+	Vector2 dist = mTargetNode->Position() - pos;
 	
 	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //check if reached target
 
 		WrapNode* wrapNode;
-		if (wrapNode = dynamic_cast<WrapNode*>(targetNode)) { //handling wrap nodes
-			CurrentNode = wrapNode->WrapTo();
-			targetNode = CurrentNode->GetConnectionByIndex(0);
-			pos = CurrentNode->Position();
+		if (wrapNode = dynamic_cast<WrapNode*>(mTargetNode)) { //handling wrap nodes
+			mCurrentNode = wrapNode->WrapTo();
+			mTargetNode = mCurrentNode->GetConnectionByIndex(0);
+			pos = mCurrentNode->Position();
 		}
 		else {
-			pos = targetNode->Position(); // set position to target
+			pos = mTargetNode->Position(); // set position to target
 
-			CurrentNode = targetNode;
+			mCurrentNode = mTargetNode;
 
-			targetNode = CurrentNode->GetConnectionbyDir(mNextTurn); //attempt to find new target
+			mTargetNode = mCurrentNode->GetConnectionbyDir(mNextTurn); //attempt to find new target
 
 
-			if (targetNode == nullptr && (dir == mNextTurn || dir == Vect2_Zero)) { //if there is no node in this direction and we are going straight then the player should stop
-				targetNode = CurrentNode;
+			if (mTargetNode == nullptr && (dir == mNextTurn || dir == Vect2_Zero)) { //if there is no node in this direction and we are going straight then the player should stop
+				mTargetNode = mCurrentNode;
 			}
-			else if (targetNode == nullptr) { // if we cannot go the chosen direction and we are not going straight then continue straight.
-				targetNode = CurrentNode->GetConnectionbyDir(dir);
+			else if (mTargetNode == nullptr) { // if we cannot go the chosen direction and we are not going straight then continue straight.
+				mTargetNode = mCurrentNode->GetConnectionbyDir(dir);
 
-				if (targetNode == nullptr) {// if we cannot go straight then stop
-					targetNode = CurrentNode;
+				if (mTargetNode == nullptr) {// if we cannot go straight then stop
+					mTargetNode = mCurrentNode;
 				}
 			}
 		}
@@ -270,7 +270,7 @@ void Player::HandleTexture() {
 		return;
 	}
 
-	Vector2 dir = (CurrentNode->Position() - targetNode->Position()).Normalized();
+	Vector2 dir = (mCurrentNode->Position() - mTargetNode->Position()).Normalized();
 
 	if (dir == Vect2_Up) {
 		mPacmanTex = mPacmanUp;
@@ -307,9 +307,9 @@ void Player::Respawn() {
 		mLives -= 1;
 	}
 	
-	CurrentNode = mStartNode;
-	targetNode = CurrentNode->GetConnectionbyDir(-Vect2_Right);
-	Position(CurrentNode->Position());
+	mCurrentNode = mStartNode;
+	mTargetNode = mCurrentNode->GetConnectionbyDir(-Vect2_Right);
+	Position(mCurrentNode->Position());
 	mIsDead = false;
 	mIsDieing = false;
 	mNextTurn = Dir();

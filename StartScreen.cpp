@@ -43,8 +43,8 @@ StartScreen::StartScreen() {
 	mPlayerTwoScoreBoard = new Scoreboard();
 	HandleEntityInit(mPlayerTwoScoreBoard, mTwoUpLabel->Position() + Vector2(0, 30));
 
-	GhostTableLabel = new Texture("CHARACTER / NICKNAME", "emulogic.ttf", 20, {255,255,255});
-	HandleEntityInit(GhostTableLabel, { (Graphics::SCREEN_WIDTH / 2)+50, 220 });
+	mGhostTableLabel = new Texture("CHARACTER / NICKNAME", "emulogic.ttf", 20, {255,255,255});
+	HandleEntityInit(mGhostTableLabel, { (Graphics::SCREEN_WIDTH / 2)+50, 220 });
 
 	mRedGhost = new Texture("PacmanAtlas.png", 457, 65, 14, 14);
 	HandleEntityInit(mRedGhost, {100,300},Vect2_One*3);
@@ -133,8 +133,8 @@ StartScreen::~StartScreen() {
 	delete mPlayerTwoScoreBoard;
 	mPlayerTwoScoreBoard = nullptr;
 
-	delete GhostTableLabel;
-	GhostTableLabel = nullptr;
+	delete mGhostTableLabel;
+	mGhostTableLabel = nullptr;
 
 	delete mRedGhost;
 	mRedGhost = nullptr;
@@ -340,7 +340,7 @@ void StartScreen::Render() {
 	mHighScoreboard->Render();
 	mPlayerTwoScoreBoard->Render();
 
-	GhostTableLabel->Render();
+	mGhostTableLabel->Render();
 
 	if (scrawlTime >= 1.0f) mRedGhost->Render();
 	if (scrawlTime >= 1.5f) mRedGhostLabel->Render();

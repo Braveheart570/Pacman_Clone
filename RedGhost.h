@@ -21,8 +21,9 @@ public:
 protected:
 
 	float mDefaultSpeed;
-	float CruiseElroySpeedMultiplier1;
-	float CruiseElroySpeedMultiplier2;
+	// Cruise Elroy is the name for enraged mode in the original game.
+	float mCruiseElroySpeedMultiplier1;
+	float mCruiseElroySpeedMultiplier2;
 
 	bool mScatterOverride;
 

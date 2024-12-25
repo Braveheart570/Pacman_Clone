@@ -37,12 +37,12 @@ void OrangeGhost::setNewTargetNode() {
 	float distToPlayer = (Player::Instance()->Position() - Position()).Magnitude();
 
 	if (distToPlayer > 8*50) {
-		target = Player::Instance()->Position();
+		mTarget = Player::Instance()->Position();
 	}
 	else {
-		target = mScatterTarget;
+		mTarget = mScatterTarget;
 	}
 
-	targetNode = CurrentNode->ClosestConnection(target);
+	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 
 }
