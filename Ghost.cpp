@@ -220,7 +220,7 @@ void Ghost::Hit(PhysEntity* entity) {
 		}
 		else {
 			State(Dead, false);
-			Player::Instance()->AddScore(200);
+			Player::Instance()->GhostEaten();
 			AudioManager::Instance()->PlaySFX("ghostEaten.wav",0);
 		}
 		

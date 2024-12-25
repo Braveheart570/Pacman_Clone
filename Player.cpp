@@ -53,6 +53,27 @@ void Player::addLife() {
 	mLives++;
 }
 
+void Player::GhostEaten() {
+	switch (mGhostsEaten) {
+	case 0:
+		AddScore(200);
+		break;
+	case 1:
+		AddScore(400);
+		break;
+	case 2:
+		AddScore(800);
+		break;
+	case 3:
+		AddScore(1600);
+		break;
+	default:
+		AddScore(1600);
+		break;
+	}
+	mGhostsEaten++;
+}
+
 Player::Player() {
 
 	mTimer = Timer::Instance();
@@ -156,6 +177,7 @@ void Player::Update() {
 		mFrightenedTime += mTimer->DeltaTime();
 		if (mFrightenedTime >= mFrightenedDuration) {
 			mEnergized = false;
+			mGhostsEaten = 0;
 		}
 	}
 

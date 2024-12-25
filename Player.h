@@ -28,6 +28,7 @@ public:
 
 	int Score();
 	void AddScore(int change);
+	void GhostEaten();
 
 	int Lives();
 	void addLife();
@@ -66,6 +67,7 @@ private:
 	bool mEnergized;
 	float mFrightenedTime;
 	float mFrightenedDuration;
+	int mGhostsEaten;
 
 	PathNode* mTargetNode;
 	PathNode* mCurrentNode;
