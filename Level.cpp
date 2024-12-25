@@ -37,6 +37,14 @@ Level::Level() {
 	mHighScoreboard->Parent(this);
 	mHighScoreboard->Position(0,-400.0f);
 
+	mHighScoreLabel = new Texture("High Score", "emulogic.ttf", 25, {255,255,255});
+	mHighScoreLabel->Parent(this);
+	mHighScoreLabel->Position(0,-435.0f);
+
+	mScoreLabel = new Texture("1UP", "emulogic.ttf", 25, {255,255,255});
+	mScoreLabel->Parent(this);
+	mScoreLabel->Position(-250.0f, -435.0f);
+
 	mReadyLabel = new Texture("Ready!", "emulogic.ttf", 20, {255,255,0});
 	mReadyLabel->Parent(this);
 	mReadyLabel->Position(Vect2_Zero);
@@ -76,6 +84,11 @@ Level::~Level() {
 	mHighScoreboard = nullptr;
 	delete mScoreboard;
 	mScoreboard = nullptr;
+
+	delete mHighScoreLabel;
+	mHighScoreLabel = nullptr;
+	delete mScoreLabel;
+	mScoreLabel = nullptr;
 
 	delete mReadyLabel;
 	mReadyLabel = nullptr;
@@ -178,6 +191,10 @@ void Level::Render() {
 
 	mHighScoreboard->Render();
 	mScoreboard->Render();
+
+	mHighScoreLabel->Render();
+	mScoreLabel->Render();
+
 
 	if (!mStageStarted && !mGameOver) {
 		mReadyLabel->Render();

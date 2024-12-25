@@ -44,6 +44,9 @@ private:
 	std::vector<Pellet*> mPellets;
 	Fruit* mFruit;
 
+	Texture* mHighScoreLabel;
+	Texture* mScoreLabel;
+
 	Scoreboard* mHighScoreboard;
 	Scoreboard* mScoreboard;
 
