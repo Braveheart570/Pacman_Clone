@@ -11,7 +11,7 @@ class Fruit : public PhysEntity {
 
 public:
 
-	Fruit();
+	Fruit(int fruitIndex);
 	~Fruit();
 
 	void Render() override;

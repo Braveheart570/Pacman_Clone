@@ -7,18 +7,20 @@ ENTER to start game or to return to start screen after death.
 
 Debug keys:
 
-H - spawn ghosts.
+H - Spawn ghosts.
 
-E - enrage red ghost (two levels).
+E - Enrage red ghost (two levels).
 
-M - new level.
+M - New level.
 
-L - give player extra life.
+L - Give player extra life.
 
-X - kill player.
+X - Kill player.
 
-T - toggle scatter and hunt modes for ghosts.
+T - Toggle scatter and hunt modes for ghosts.
 
-F - energize player.
+F - Energize player.
 
-N - toggle node map view.
+N - Toggle node map view.
+
+R - Spawn Fruit.

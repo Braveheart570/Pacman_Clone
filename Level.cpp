@@ -6,7 +6,8 @@ Level::Level() {
 	CreateNodes();
 	CreatePellets();
 
-	mFruit = new Fruit();
+	mFruitIndex = 0;
+	mFruit = new Fruit(mFruitIndex);
 
 	mPlayer = Player::Instance();
 	mAudioManager = AudioManager::Instance();
@@ -134,6 +135,9 @@ void Level::Update() {
 		mPlayer->addLife();
 		mAudioManager->PlaySFX("extraLife.wav");
 		setLifeIcons();
+	}
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_R)) {
+		mFruit->Active(true);
 	}
 
 
@@ -490,13 +494,15 @@ void Level::resetLevel(bool newGame) {
 		}
 	}
 	
+	mFruitIndex++;
+	delete mFruit;
+	mFruit = new Fruit(mFruitIndex);
 
 	mRedGhost->Position(mNodeManager->getNode(66)->Position());
 	mRedGhost->Reset();
 	mPinkGhost->Reset();
 	mBlueGhost->Reset();
 	mOrangeGhost->Reset();
-	mFruit->Active(true);
 
 	if (!mGameOver) {
 		mPlayer->Position({ 0,-400.0f });

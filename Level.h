@@ -62,6 +62,7 @@ private:
 	float mCols[COLS];
 
 	int mScore;
+	int mFruitIndex;
 
 	bool mStageStarted;
 	float mReadyDuration;
