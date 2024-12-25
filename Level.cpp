@@ -493,8 +493,8 @@ void Level::resetLevel(bool newGame) {
 			mGameOver = true;
 		}
 	}
-	
-	mFruitIndex++;
+
+	if (!mPlayer->isDead()) mFruitIndex++;
 	delete mFruit;
 	mFruit = new Fruit(mFruitIndex);
 
