@@ -31,7 +31,7 @@ Level::Level() {
 	
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
-	mScoreboard->Position(-250.0f, -400.0f);
+	mScoreboard->Position(-200.0f, -400.0f);
 	mScoreboard->Score(mScore);
 
 	mHighScoreboard = new Scoreboard();
@@ -48,11 +48,11 @@ Level::Level() {
 
 	mReadyLabel = new Texture("Ready!", "emulogic.ttf", 20, {255,255,0});
 	mReadyLabel->Parent(this);
-	mReadyLabel->Position(Vect2_Zero);
+	mReadyLabel->Position(Vect2_Zero + Vector2{ 0,50 });
 
 	mGameOverLabel = new Texture("Game Over", "emulogic.ttf", 20, { 255,0,0 });
 	mGameOverLabel->Parent(this);
-	mGameOverLabel->Position(Vect2_Zero);
+	mGameOverLabel->Position(Vect2_Zero + Vector2{ 0,50 });
 
 	setLifeIcons();
 
