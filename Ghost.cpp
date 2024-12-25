@@ -46,8 +46,8 @@ Ghost::Ghost(PathNode* start) {
 	mStartNode = start;
 	
 
-	mHouseNodes.push_back(new PathNode(mStartNode->Position() - Vector2{ 0,30 }, 0));
-	mHouseNodes.push_back(new PathNode(mStartNode->Position() + Vector2{ 0,30 }, 1));
+	mHouseNodes.push_back(new PathNode(mStartNode->Position() - Vector2{ 0,25 }, 0));
+	mHouseNodes.push_back(new PathNode(mStartNode->Position() + Vector2{ 0,25 }, 1));
 	mHouseNodes[0]->AddConnection(mHouseNodes[1]);
 	mHouseNodes[1]->AddConnection(mHouseNodes[0]);
 
@@ -121,7 +121,7 @@ void Ghost::Update() {
 	}
 
 	//debug keys
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_T)) {
 		if (mState == Scatter) {
 			State(Hunt);
 		}
@@ -132,14 +132,6 @@ void Ghost::Update() {
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
 		if (mState != Frightened) {
 			Player::Instance()->Energize();
-		}
-	}
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_Z)) {
-		if (mState == Dead) {
-			State(Hunt);
-		}
-		else {
-			State(Dead);
 		}
 	}
 

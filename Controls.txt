@@ -1,0 +1,24 @@
+
+regular controls:
+wasd to move.
+ENTER to start game or to return to start screen after death.
+
+
+
+Debug keys:
+
+H - spawn ghosts.
+
+E - enrage red ghost (two levels).
+
+M - new level.
+
+L - give player extra life.
+
+X - kill player.
+
+T - toggle scatter and hunt modes for ghosts.
+
+F - energize player.
+
+N - toggle node map view.

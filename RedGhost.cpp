@@ -7,6 +7,7 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 	CruiseElroySpeedMultiplier1 = 1.5f;
 	CruiseElroySpeedMultiplier2 = 2.0f;
 	mGhostTex = mGhostUp; // temp? TODO
+	mDefaultSpeed = mSpeed;
 	Reset();
 }
 
@@ -47,7 +48,6 @@ void RedGhost::Reset() {
 	Position(mStartNode->Position());
 	mHousedState = Unhoused;
 	mState = Scatter;
-	mDefaultSpeed = mSpeed;
 	mSpeed = mDefaultSpeed;
 	mScatterOverride = false;
 	

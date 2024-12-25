@@ -30,7 +30,7 @@ Level::Level() {
 	
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
-	mScoreboard->Position(-300.0f, -400.0f);
+	mScoreboard->Position(-250.0f, -400.0f);
 	mScoreboard->Score(mScore);
 
 	mHighScoreboard = new Scoreboard();
@@ -112,7 +112,6 @@ void Level::Update() {
 		}
 	}
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
-		std::cout << "enraged" << std::endl;
 		mRedGhost->Enrage();
 	}
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
@@ -120,7 +119,7 @@ void Level::Update() {
 	}
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_L)) {
 		mPlayer->addLife();
-		AudioManager::Instance()->PlaySFX("extraLife.wav");
+		mAudioManager->PlaySFX("extraLife.wav");
 		setLifeIcons();
 	}
 
@@ -480,6 +479,7 @@ void Level::resetLevel(bool newGame) {
 	mPinkGhost->Reset();
 	mBlueGhost->Reset();
 	mOrangeGhost->Reset();
+	mFruit->Active(true);
 
 	if (!mGameOver) {
 		mPlayer->Position({ 0,-400.0f });

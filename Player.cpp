@@ -61,7 +61,7 @@ Player::Player() {
 
 
 	mSpeed = 100;
-	mLives = 1;
+	mLives = 2;
 	mWallHit = false;
 
 	mStartNode = NodeManager::Instance()->getNode(47);
@@ -105,7 +105,7 @@ Player::Player() {
 
 	
 	mEnergized = false;
-	mFrightenedDuration = 5.0f;
+	mFrightenedDuration = 6.0f;
 	mFrightenedTime = 0.0f;
 	
 
