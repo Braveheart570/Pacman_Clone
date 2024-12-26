@@ -120,8 +120,8 @@ Player::Player() {
 	mPacmanDeath->Scale(Vect2_One * 3);
 	mPacmanDeath->SetWrapMode(AnimatedTexture::Once);
 
-	AddCollider(new CircleCollider(20,true));
-	AddCollider(new CircleCollider(20));
+	AddCollider(new CircleCollider(10,true));
+	AddCollider(new CircleCollider(10));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
 	
