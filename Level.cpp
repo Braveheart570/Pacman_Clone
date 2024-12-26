@@ -448,8 +448,8 @@ void Level::CreateNodes() {
 
 void Level::CreatePellets() {
 
-	//pellets
-	mPellets.push_back(new PowerPellet({ mCols[0], mRows[0] }));
+	//rows
+	mPellets.push_back(new Pellet({ mCols[0], mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[0] }));
@@ -463,6 +463,350 @@ void Level::CreatePellets() {
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[0] }));
 	mPellets.push_back(new Pellet({ mCols[3], mRows[0] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[0] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[0] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[0] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[1] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[1] }));
+
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3), mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3)*2, mRows[1] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[1] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[1] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[1] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[2] }));
+
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[2] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[2] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[2] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[2] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[3] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[3] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[4] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[4] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[5] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[5] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[6] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[6] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[6] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[6] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[6] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3), mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3) * 2, mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[7] }));
+
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[7] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[7] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[8] }));
+
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[8] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[8] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[8] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[8] }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 3, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 4, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[9] }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6), mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 2, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 4, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 5, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[9] }));
+
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3), mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3) * 2, mRows[9] }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[9] }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5), mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 2, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[9] }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[9] }));
+
+
+
+	//cols
+	mPellets.push_back(new Pellet({ mCols[0], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[0], mRows[0] + ((mRows[1] - mRows[0]) / 3)*2 }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[3], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[4], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[7], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[0], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+	//the bellow 4 are being weird, has to do with how we are defining the rows
+	mPellets.push_back(new Pellet({ mCols[2], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[2], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[5], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[5], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[7], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[2] + ((mRows[3] - mRows[2]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[2] + ((mRows[3] - mRows[2]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[2] + ((mRows[3] - mRows[2]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[2] + ((mRows[3] - mRows[2]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[3] + ((mRows[4] - mRows[3]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[3] + ((mRows[4] - mRows[3]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[3] + ((mRows[4] - mRows[3]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[3] + ((mRows[4] - mRows[3]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[4] + ((mRows[5] - mRows[4]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[4] + ((mRows[5] - mRows[4]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[4] + ((mRows[5] - mRows[4]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[4] + ((mRows[5] - mRows[4]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[5] + ((mRows[6] - mRows[5]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[5] + ((mRows[6] - mRows[5]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[5] + ((mRows[6] - mRows[5]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[5] + ((mRows[6] - mRows[5]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[0], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+	
+	mPellets.push_back(new Pellet({ mCols[1], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[3], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[4], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[7], mRows[6] + ((mRows[7] - mRows[6]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[6] + ((mRows[7] - mRows[6]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0])/5)*2, mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0])/5)*2, mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[1], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[2], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[2], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[5], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[5], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+
+
+
+	mPellets.push_back(new Pellet({ mCols[0], mRows[8] + ((mRows[9] - mRows[8]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[0], mRows[8] + ((mRows[9] - mRows[8]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[3], mRows[8] + ((mRows[9] - mRows[8]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[3], mRows[8] + ((mRows[9] - mRows[8]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[4], mRows[8] + ((mRows[9] - mRows[8]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[4], mRows[8] + ((mRows[9] - mRows[8]) / 3) * 2 }));
+
+	mPellets.push_back(new Pellet({ mCols[7], mRows[8] + ((mRows[9] - mRows[8]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[7], mRows[8] + ((mRows[9] - mRows[8]) / 3) * 2 }));
 
 }
 
