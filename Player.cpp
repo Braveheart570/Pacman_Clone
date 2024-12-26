@@ -89,27 +89,27 @@ Player::Player() {
 	
 	Respawn();
 
-	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 454,32,16,15,2,0.5f,AnimatedTexture::Horizontal);
+	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 456,32,15,15,2,0.5f,AnimatedTexture::Horizontal);
 	mPacmanUp->Parent(this);
 	mPacmanUp->Position(Vect2_Zero);
 	mPacmanUp->Scale(Vect2_One*3);
 
-	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 454, 16, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 456, 16, 15, 15, 2, 0.5f, AnimatedTexture::Horizontal);
 	mPacmanRight->Parent(this);
 	mPacmanRight->Position(Vect2_Zero);
 	mPacmanRight->Scale(Vect2_One * 3);
 
-	mPacmanDown = new AnimatedTexture("PacmanAtlas.png", 454, 48, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanDown = new AnimatedTexture("PacmanAtlas.png", 456, 48, 15, 15, 2, 0.5f, AnimatedTexture::Horizontal);
 	mPacmanDown->Parent(this);
 	mPacmanDown->Position(Vect2_Zero);
 	mPacmanDown->Scale(Vect2_One * 3);
 
-	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 454, 0, 16, 15, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 456, 0, 15, 15, 2, 0.5f, AnimatedTexture::Horizontal);
 	mPacmanLeft->Parent(this);
 	mPacmanLeft->Position(Vect2_Zero);
 	mPacmanLeft->Scale(Vect2_One * 3);
 
-	mPacmanStopped = new Texture("PacmanAtlas.png", 486, 0, 16, 15);
+	mPacmanStopped = new Texture("PacmanAtlas.png", 488, 0, 15, 15);
 	mPacmanStopped->Parent(this);
 	mPacmanStopped->Position(Vect2_Zero);
 	mPacmanStopped->Scale(Vect2_One * 3);
