@@ -7,7 +7,6 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 	mCruiseElroySpeedMultiplier1 = 1.5f;
 	mCruiseElroySpeedMultiplier2 = 2.0f;
 	mGhostTex = mGhostUp; // temp? TODO
-	mDefaultSpeed = mSpeed;
 	Reset();
 }
 
