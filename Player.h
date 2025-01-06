@@ -46,6 +46,9 @@ public:
 
 	void Respawn();
 
+	void ResetPelletsEaten();
+	int PelletsEaten();
+
 
 private:
 
@@ -56,6 +59,7 @@ private:
 	float mSpeed;
 
 	int mScore;
+	int mPelletsEaten;
 
 	bool mIsDieing;
 	bool mIsDead;

@@ -151,8 +151,15 @@ void Level::Update() {
 	}
 	if(allPelletsEaten) resetLevel(true);
 
+	//check release blue ghost
+	if (mBlueGhost->HouseState() == Ghost::Housed && mPlayer->PelletsEaten() >= 30) {
+		mBlueGhost->Unhouse();
+	}
 
-
+	//check release orange ghost
+	if (mOrangeGhost->HouseState() == Ghost::Housed && mPlayer->PelletsEaten() >= mPellets.size()/3) {
+		mOrangeGhost->Unhouse();
+	}
 
 	if (mPlayer->isDead()) {
 		resetLevel();
@@ -845,6 +852,7 @@ void Level::resetLevel(bool newGame) {
 			p->Active(true);
 		}
 		mLevelNum++;
+		mPlayer->ResetPelletsEaten();
 	}
 	else {
 		if (mPlayer->Lives() == 0) {

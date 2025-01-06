@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ghost.h"
+#include "Pellet.h"
 
 Player* Player::sInstance = nullptr;
 
@@ -84,6 +85,7 @@ Player::Player() {
 	mSpeed = 100;
 	mLives = 2;
 	mWallHit = false;
+	ResetPelletsEaten();
 
 	mStartNode = NodeManager::Instance()->getNode(47);
 	
@@ -270,8 +272,19 @@ void Player::Render() {
 
 void Player::Hit(PhysEntity* other) {
 
-	
+	if (dynamic_cast<Pellet*>(other)) {
+		mPelletsEaten++;
+	}
 
+}
+
+void Player::ResetPelletsEaten() {
+	mPelletsEaten = 0;
+}
+
+int Player::PelletsEaten() {
+
+	return mPelletsEaten;
 }
 
 void Player::Die() {
