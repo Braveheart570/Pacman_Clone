@@ -343,7 +343,7 @@ void Player::Energize() {
 
 	mEnergized = true;
 	mFrightenedTime = 0;
-	AudioManager::Instance()->PlayMusic("energized.wav",0);
+	AudioManager::Instance()->PlaySFX("energized.wav",0,0);
 
 }
 
