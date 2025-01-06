@@ -42,6 +42,7 @@ private:
 	OrangeGhost* mOrangeGhost;
 
 	std::vector<Pellet*> mPellets;
+
 	Fruit* mFruit;
 
 	Texture* mHighScoreLabel;
@@ -62,6 +63,7 @@ private:
 	float mCols[COLS];
 
 	int mScore;
+	int mLevelNum;
 	int mFruitIndex;
 
 	bool mStageStarted;

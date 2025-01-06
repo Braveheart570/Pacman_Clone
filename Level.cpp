@@ -17,6 +17,7 @@ Level::Level() {
 	mReadyTime = 0;
 
 	mScore = 0;
+	mLevelNum = 1;
 	mGameOver = false;
 
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
@@ -139,6 +140,18 @@ void Level::Update() {
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_R)) {
 		mFruit->Active(true);
 	}
+
+	//check beat level
+	bool allPelletsEaten = true;
+	for (auto pellet : mPellets) {
+		if (pellet->Active()) {
+			allPelletsEaten = false;
+			break;
+		}
+	}
+	if(allPelletsEaten) resetLevel(true);
+
+
 
 
 	if (mPlayer->isDead()) {
@@ -831,6 +844,7 @@ void Level::resetLevel(bool newGame) {
 		for (auto p : mPellets) {
 			p->Active(true);
 		}
+		mLevelNum++;
 	}
 	else {
 		if (mPlayer->Lives() == 0) {
