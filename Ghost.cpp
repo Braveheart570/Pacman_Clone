@@ -39,6 +39,7 @@ Ghost::Ghost(PathNode* start) {
 	
 
 	mSpeed = 100;
+	mDefaultSpeed = mSpeed;
 
 	mFlashSpeed = 0.5f;
 	mFlashTime = 0.0f;
@@ -98,10 +99,10 @@ void Ghost::Update() {
 
 	//speed modifiers
 	if (mState == Frightened) {
-		pos = Position() + dir * (mSpeed / 2) * mTimer->DeltaTime();
+		pos = Position() + dir * (mDefaultSpeed / 2) * mTimer->DeltaTime();
 	}
 	else if (mState == Dead) {
-		pos = Position() + dir * (mSpeed *1.5f) * mTimer->DeltaTime();
+		pos = Position() + dir * (mDefaultSpeed *1.5f) * mTimer->DeltaTime();
 	}
 	else {
 		pos = Position() + dir * mSpeed * mTimer->DeltaTime();

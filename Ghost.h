@@ -81,6 +81,7 @@ protected:
 	Texture* mGhostLeftDead;
 
 	float mSpeed;
+	float mDefaultSpeed;
 
 	GhostState mState;
 	HousedState mHousedState;
