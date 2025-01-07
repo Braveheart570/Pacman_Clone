@@ -28,6 +28,10 @@ public:
 
 	int Score();
 	void AddScore(int change);
+
+	int HighScore();
+	void HighScore(int highscore);
+
 	void GhostEaten();
 	int GhostsEaten();
 
@@ -60,6 +64,7 @@ private:
 	float mSpeed;
 
 	int mScore;
+	int mHighScore;
 	int mPelletsEaten;
 
 	bool mIsDieing;

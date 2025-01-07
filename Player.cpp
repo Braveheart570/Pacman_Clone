@@ -81,7 +81,7 @@ Player::Player() {
 	mInputManager = InputManager::Instance();
 	mAudioManager = AudioManager::Instance();
 
-
+	mHighScore = 1600;
 	mSpeed = 100;
 	mLives = 2;
 	mWallHit = false;
@@ -372,4 +372,14 @@ int Player::GhostsEaten() {
 
 	return mGhostsEaten;
 
+}
+
+int Player::HighScore() {
+
+	return mHighScore;
+
+}
+
+void Player::HighScore(int highscore) {
+	mHighScore = highscore;
 }

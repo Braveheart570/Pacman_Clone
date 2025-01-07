@@ -16,7 +16,6 @@ Level::Level() {
 	mReadyDuration = 5.0f;
 	mReadyTime = 0;
 
-	mScore = 0;
 	mLevelNum = 1;
 	mGameOver = false;
 
@@ -35,7 +34,7 @@ Level::Level() {
 	mScoreboard = new Scoreboard();
 	mScoreboard->Parent(this);
 	mScoreboard->Position(-200.0f, -400.0f);
-	mScoreboard->Score(mScore);
+	mScoreboard->Score(mPlayer->Score());
 
 	mHighScoreboard = new Scoreboard();
 	mHighScoreboard->Parent(this);

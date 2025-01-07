@@ -4,6 +4,7 @@
 #include "Scoreboard.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "Player.h"
 
 using namespace SDLFramework;
 
