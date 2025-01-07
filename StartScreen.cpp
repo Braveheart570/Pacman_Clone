@@ -40,6 +40,7 @@ StartScreen::StartScreen() {
 	HandleEntityInit(mPlayerOneScoreboard, mOneUplabel->Position() + Vector2(0,30));
 	mHighScoreboard = new Scoreboard();
 	HandleEntityInit(mHighScoreboard, mHighScoreLabel->Position() + Vector2(0, 30));
+	mHighScoreboard->Score(Player::Instance()->HighScore());
 	mPlayerTwoScoreBoard = new Scoreboard();
 	HandleEntityInit(mPlayerTwoScoreBoard, mTwoUpLabel->Position() + Vector2(0, 30));
 
@@ -404,7 +405,7 @@ void StartScreen::ResetAnimation() {
 
 	mPacmanRight->Position({ Graphics::SCREEN_WIDTH + 100,600 });
 
-
+	mHighScoreboard->Score(Player::Instance()->HighScore());
 }
 
 void StartScreen::HandleEntityInit(GameEntity* tex, Vector2 pos, Vector2 scale) {

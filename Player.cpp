@@ -383,3 +383,7 @@ int Player::HighScore() {
 void Player::HighScore(int highscore) {
 	mHighScore = highscore;
 }
+
+void Player::ResetScore() {
+	mScore = 0;
+}

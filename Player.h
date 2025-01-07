@@ -28,6 +28,7 @@ public:
 
 	int Score();
 	void AddScore(int change);
+	void ResetScore();
 
 	int HighScore();
 	void HighScore(int highscore);

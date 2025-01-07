@@ -101,6 +101,8 @@ namespace SDLFramework {
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
 		mScreenManager = ScreenManager::Instance();
+		mNodeManager = NodeManager::Instance();
+		mPlayer = Player::Instance();
 
 
 		//Create Physics Layers
@@ -149,6 +151,11 @@ namespace SDLFramework {
 		ScreenManager::Release();
 		mScreenManager = nullptr;
 
+		NodeManager::Release();
+		mNodeManager = nullptr;
+
+		Player::Release();
+		mPlayer = nullptr;
 
 		//quit sdl subsystems
 		SDL_Quit();

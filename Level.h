@@ -57,12 +57,6 @@ private:
 
 	std::vector<Texture*> mPlayerLives;
 
-	static const int ROWS = 10;
-	float mRows[ROWS];
-
-	static const int COLS = 8;
-	float mCols[COLS];
-
 	int mLevelNum;
 	int mFruitIndex;
 
@@ -75,7 +69,11 @@ private:
 	float mPinkGhostReleaseDelay;
 	float mPinkGhostReleaseTime;
 
-	void CreateNodes();
+	static const int ROWS = 10;
+	float mRows[ROWS];
+
+	static const int COLS = 8;
+	float mCols[COLS];
 
 	void CreatePellets();
 

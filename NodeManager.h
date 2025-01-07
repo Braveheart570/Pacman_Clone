@@ -30,11 +30,19 @@ private:
 
 	bool mRenderNodes;
 
+	static const int ROWS = 10;
+	float mRows[ROWS];
+
+	static const int COLS = 8;
+	float mCols[COLS];
+
 	static NodeManager* sInstance;
 
 	std::vector<PathNode*> mNodes;
 
 	NodeManager();
 	~NodeManager();
+
+	void CreateNodes();
 
 };

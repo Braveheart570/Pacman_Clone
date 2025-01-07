@@ -3,7 +3,6 @@
 Level::Level() {
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
-	CreateNodes();
 	CreatePellets();
 
 	mFruitIndex = 0;
@@ -39,6 +38,7 @@ Level::Level() {
 	mHighScoreboard = new Scoreboard();
 	mHighScoreboard->Parent(this);
 	mHighScoreboard->Position(0,-400.0f);
+	mHighScoreboard->Score(mPlayer->HighScore());
 
 	mHighScoreLabel = new Texture("High Score", "emulogic.ttf", 25, {255,255,255});
 	mHighScoreLabel->Parent(this);
@@ -64,9 +64,7 @@ Level::Level() {
 Level::~Level() {
 
 	mTimer = nullptr;
-	Player::Release();
 	mPlayer = nullptr;
-	NodeManager::Release();
 	mNodeManager = nullptr;
 	mAudioManager = nullptr;
 
@@ -250,7 +248,7 @@ void Level::Render() {
 
 }
 
-void Level::CreateNodes() {
+void Level::CreatePellets() {
 
 	mRows[0] = Graphics::SCREEN_HEIGHT * 0.16f;
 	mRows[1] = Graphics::SCREEN_HEIGHT * 0.26f;
@@ -271,222 +269,6 @@ void Level::CreateNodes() {
 	mCols[5] = Graphics::SCREEN_WIDTH * 0.65f;
 	mCols[6] = Graphics::SCREEN_WIDTH * 0.75f;
 	mCols[7] = Graphics::SCREEN_WIDTH * 0.915f;
-	
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[0]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[0]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[0]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[0]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[0]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[0]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[1]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[1]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[2]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[2]));
-
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[3]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[3]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[3]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[3]));
-
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[4]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[4]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[4]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[4]));
-
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[5]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[5]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[5]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[5]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[6]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[6]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[0] + Graphics::SCREEN_WIDTH * 0.05f, mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[7] - Graphics::SCREEN_WIDTH * 0.05f, mRows[7]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[7]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[0] + Graphics::SCREEN_WIDTH * 0.05f, mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[1], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[2], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[5], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[6], mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[7] - Graphics::SCREEN_WIDTH * 0.05f, mRows[8]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[8]));
-
-	mNodeManager->AddNode(Vector2(mCols[0], mRows[9]));
-	mNodeManager->AddNode(Vector2(mCols[3], mRows[9]));
-	mNodeManager->AddNode(Vector2(mCols[4], mRows[9]));
-	mNodeManager->AddNode(Vector2(mCols[7], mRows[9]));
-
-
-
-	//horizontal links
-	mNodeManager->linkNodes(0,1);
-	mNodeManager->linkNodes(1,2);
-
-	mNodeManager->linkNodes(3,4);
-	mNodeManager->linkNodes(4,5);
-
-	mNodeManager->linkNodes(6,7);
-	mNodeManager->linkNodes(7,8);
-	mNodeManager->linkNodes(8,9);
-	mNodeManager->linkNodes(9,10);
-	mNodeManager->linkNodes(10,11);
-	mNodeManager->linkNodes(11,12);
-	mNodeManager->linkNodes(12,13);
-
-	mNodeManager->linkNodes(14,15);
-
-	mNodeManager->linkNodes(16,17);
-
-	mNodeManager->linkNodes(18,19);
-
-	mNodeManager->linkNodes(20,21);
-
-	mNodeManager->linkNodes(22,23);
-	//intentional gap here
-	mNodeManager->linkNodes(24,25);
-
-	mNodeManager->linkNodes(26,27);
-
-	mNodeManager->linkNodes(28,29);
-
-	mNodeManager->linkNodes(30,31);
-	mNodeManager->linkNodes(31,32);
-	mNodeManager->linkNodes(32,33);
-
-	mNodeManager->linkNodes(34,35);
-	mNodeManager->linkNodes(35,36);
-	mNodeManager->linkNodes(36,37);
-	
-	mNodeManager->linkNodes(38,39);
-	mNodeManager->linkNodes(39,40);
-	mNodeManager->linkNodes(40, 41);
-
-	mNodeManager->linkNodes(42, 43);
-
-	mNodeManager->linkNodes(44,45);
-	mNodeManager->linkNodes(45,46);
-	mNodeManager->linkNodes(46,47);
-	mNodeManager->linkNodes(47,48);
-	mNodeManager->linkNodes(48,49);
-
-	mNodeManager->linkNodes(50,51);
-
-	mNodeManager->linkNodes(52,53);
-	mNodeManager->linkNodes(53,54);
-
-	mNodeManager->linkNodes(55,56);
-
-	mNodeManager->linkNodes(57,58);
-
-	mNodeManager->linkNodes(59,60);
-	mNodeManager->linkNodes(60,61);
-
-	mNodeManager->linkNodes(62,63);
-	mNodeManager->linkNodes(63,64);
-	mNodeManager->linkNodes(64,65);
-
-	//vertical links
-
-	mNodeManager->linkNodes(0,6);
-	mNodeManager->linkNodes(1,7);
-	mNodeManager->linkNodes(2,9);
-	mNodeManager->linkNodes(3,10);
-	mNodeManager->linkNodes(4,12);
-	mNodeManager->linkNodes(5,13);
-
-	mNodeManager->linkNodes(14,6);
-	mNodeManager->linkNodes(15, 7);
-	mNodeManager->linkNodes(16, 8);
-	mNodeManager->linkNodes(19, 11);
-	mNodeManager->linkNodes(20, 12);
-	mNodeManager->linkNodes(21, 13);
-
-	mNodeManager->linkNodes(23, 17);
-	mNodeManager->linkNodes(24, 18);
-
-	mNodeManager->linkNodes(26, 15);
-	mNodeManager->linkNodes(27, 22);
-	mNodeManager->linkNodes(28, 25);
-	mNodeManager->linkNodes(29, 20);
-
-	mNodeManager->linkNodes(30, 27);
-	mNodeManager->linkNodes(33, 28);
-
-	mNodeManager->linkNodes(35,26);
-	mNodeManager->linkNodes(36,30);
-	mNodeManager->linkNodes(39,33);
-	mNodeManager->linkNodes(40,29);
-
-	mNodeManager->linkNodes(42,34);
-	mNodeManager->linkNodes(44,35);
-	mNodeManager->linkNodes(46,37);
-	mNodeManager->linkNodes(47,38);
-	mNodeManager->linkNodes(49,40);
-	mNodeManager->linkNodes(51,41);
-
-	mNodeManager->linkNodes(53,43);
-	mNodeManager->linkNodes(54,44);
-	mNodeManager->linkNodes(55,45);
-	mNodeManager->linkNodes(58,48);
-	mNodeManager->linkNodes(59,49);
-	mNodeManager->linkNodes(60,50);
-
-	mNodeManager->linkNodes(62,52);
-	mNodeManager->linkNodes(63,56);
-	mNodeManager->linkNodes(64,57);
-	mNodeManager->linkNodes(65,61);
-
-	//ghost house
-	
-	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[3] });
-	mNodeManager->AddNode({ Graphics::SCREEN_WIDTH / 2,mRows[4] + 5.0f });
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) - 48,mRows[4] + 5.0f });
-	mNodeManager->AddNode({ (Graphics::SCREEN_WIDTH / 2) + 48,mRows[4] + 5.0f });
-
-	mNodeManager->linkNodes(23, 66);
-	mNodeManager->linkNodes(66, 24);
-	mNodeManager->getNode(67)->AddConnection(mNodeManager->getNode(66));
-	mNodeManager->getNode(68)->AddConnection(mNodeManager->getNode(67));
-	mNodeManager->getNode(69)->AddConnection(mNodeManager->getNode(67));
-
-	//wrapnodes
-	mNodeManager->AddWrapNodes({0,mRows[4]}, { Graphics::SCREEN_WIDTH,mRows[4] },26,29);
-}
-
-void Level::CreatePellets() {
 
 	//rows
 	mPellets.push_back(new Pellet({ mCols[0], mRows[0] }));
@@ -877,6 +659,10 @@ void Level::resetLevel(bool newGame) {
 	else {
 		if (mPlayer->Lives() == 0) {
 			mGameOver = true;
+			if (mPlayer->Score() > mPlayer->HighScore()) {
+				mPlayer->HighScore(mPlayer->Score());
+			}
+			mPlayer->ResetScore();
 		}
 	}
 

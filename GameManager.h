@@ -46,6 +46,8 @@ namespace SDLFramework {
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
 		ScreenManager* mScreenManager;
+		NodeManager* mNodeManager;
+		Player* mPlayer;
 
 		SDL_Event mEvents;
 	};
