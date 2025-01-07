@@ -411,7 +411,7 @@ void Level::CreatePellets() {
 
 
 
-	mPellets.push_back(new Pellet({ mCols[0], mRows[7] }));
+	mPellets.push_back(new PowerPellet({ mCols[0], mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5), mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[7] }));
 
@@ -440,7 +440,7 @@ void Level::CreatePellets() {
 
 	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[6] + ((mCols[7] - mCols[6]) / 5) * 4, mRows[7] }));
-	mPellets.push_back(new Pellet({ mCols[7], mRows[7] }));
+	mPellets.push_back(new PowerPellet({ mCols[7], mRows[7] }));
 
 
 
@@ -507,7 +507,7 @@ void Level::CreatePellets() {
 
 	//cols
 	mPellets.push_back(new Pellet({ mCols[0], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[0], mRows[0] + ((mRows[1] - mRows[0]) / 3)*2 }));
+	mPellets.push_back(new PowerPellet({ mCols[0], mRows[0] + ((mRows[1] - mRows[0]) / 3)*2 }));
 
 	mPellets.push_back(new Pellet({ mCols[1], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
 	mPellets.push_back(new Pellet({ mCols[1], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
@@ -522,7 +522,7 @@ void Level::CreatePellets() {
 	mPellets.push_back(new Pellet({ mCols[6], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
 
 	mPellets.push_back(new Pellet({ mCols[7], mRows[0] + ((mRows[1] - mRows[0]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[7], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
+	mPellets.push_back(new PowerPellet({ mCols[7], mRows[0] + ((mRows[1] - mRows[0]) / 3) * 2 }));
 
 
 
