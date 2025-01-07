@@ -72,6 +72,9 @@ private:
 
 	bool mGameOver;
 
+	float mPinkGhostReleaseDelay;
+	float mPinkGhostReleaseTime;
+
 	void CreateNodes();
 
 	void CreatePellets();

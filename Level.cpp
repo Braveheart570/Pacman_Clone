@@ -20,6 +20,8 @@ Level::Level() {
 	mLevelNum = 1;
 	mGameOver = false;
 
+	mPinkGhostReleaseDelay = 5.0f;
+
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
 	mLevelBackground->Parent(this);
 	mLevelBackground->Scale(Vect2_One * ((Graphics::SCREEN_WIDTH / 225.0f)-0.2f));
@@ -141,6 +143,16 @@ void Level::Update() {
 		mFruit->Active(true);
 	}
 
+	if (!mStageStarted) {
+		mReadyTime += mTimer->DeltaTime();
+		if (mReadyTime >= mReadyDuration) {
+			mStageStarted = true;
+		}
+		return; 
+	}
+	//--- nothing beyond this line will run untill the game has started! ---//
+
+
 	//check beat level
 	bool allPelletsEaten = true;
 	for (auto pellet : mPellets) {
@@ -150,6 +162,17 @@ void Level::Update() {
 		}
 	}
 	if(allPelletsEaten) resetLevel(true);
+
+
+
+
+	//check release pink ghost
+	if (mPinkGhost->HouseState() == Ghost::Housed) {
+		mPinkGhostReleaseTime += mTimer->DeltaTime();
+		if (mPinkGhostReleaseTime >= mPinkGhostReleaseDelay) {
+			mPinkGhost->Unhouse();
+		}
+	}
 
 	//check release blue ghost
 	if (mBlueGhost->HouseState() == Ghost::Housed && mPlayer->PelletsEaten() >= 30) {
@@ -166,13 +189,7 @@ void Level::Update() {
 	}
 
 
-	if (!mStageStarted) {
-		mReadyTime += mTimer->DeltaTime();
-		if (mReadyTime >= mReadyDuration) {
-			mStageStarted = true;
-		}
-		return;
-	}
+	
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
 		mRedGhost->Update();
@@ -879,6 +896,7 @@ void Level::resetLevel(bool newGame) {
 
 	mStageStarted = false;
 	mReadyTime = 0;
+	mPinkGhostReleaseTime = 0.0f;
 }
 
 
