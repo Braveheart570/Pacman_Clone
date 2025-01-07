@@ -200,6 +200,8 @@ void Level::Update() {
 	
 	mScoreboard->Score(mPlayer->Score());
 
+	ScoreBubble::Instance()->Update();
+
 }
 
 void Level::Render() {
@@ -244,6 +246,8 @@ void Level::Render() {
 	if (mGameOver) {
 		mGameOverLabel->Render();
 	}
+
+	ScoreBubble::Instance()->Render();
 
 }
 

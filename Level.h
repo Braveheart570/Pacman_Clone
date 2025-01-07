@@ -12,6 +12,7 @@
 #include "PowerPellet.h"
 #include "AudioManager.h"
 #include "Fruit.h"
+#include "ScoreBubbleSingleton.h"
 
 using namespace SDLFramework;
 

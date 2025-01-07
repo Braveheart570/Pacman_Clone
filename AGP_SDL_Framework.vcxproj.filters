@@ -117,6 +117,9 @@
     <ClCompile Include="Fruit.cpp">
       <Filter>Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreBubbleSingleton.cpp">
+      <Filter>Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -216,6 +219,9 @@
       <Filter>Game Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fruit.h">
+      <Filter>Game Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBubbleSingleton.h">
       <Filter>Game Header Files</Filter>
     </ClInclude>
   </ItemGroup>

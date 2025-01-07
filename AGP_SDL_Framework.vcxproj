@@ -169,6 +169,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RedGhost.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
+    <ClCompile Include="ScoreBubbleSingleton.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -204,6 +205,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="Random.h" />
     <ClInclude Include="RedGhost.h" />
     <ClInclude Include="Scoreboard.h" />
+    <ClInclude Include="ScoreBubbleSingleton.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />

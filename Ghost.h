@@ -7,6 +7,7 @@
 #include "PhysicsManager.h"
 #include "Random.h"
 #include "Timer.h"
+#include "ScoreBubbleSingleton.h"
 
 using namespace SDLFramework;
 

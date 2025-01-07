@@ -29,6 +29,7 @@ public:
 	int Score();
 	void AddScore(int change);
 	void GhostEaten();
+	int GhostsEaten();
 
 	int Lives();
 	void addLife();

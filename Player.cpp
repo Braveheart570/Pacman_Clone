@@ -367,3 +367,9 @@ bool Player::Energized() {
 float Player::EnergizedTimeLeftPercent() {
 	return mFrightenedTime / mFrightenedDuration;
 }
+
+int Player::GhostsEaten() {
+
+	return mGhostsEaten;
+
+}
