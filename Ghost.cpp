@@ -117,6 +117,22 @@ void Ghost::Update() {
 		}
 	}
 
+	//state switching
+	if ((mState == Scatter || mState == Hunt) && mHousedState == Unhoused) {
+		mStateSwitchTime += mTimer->DeltaTime();
+		if (mStateSwitchTime >= mStateSwitchDelay) {
+			if (mState == Scatter) {
+				State(Hunt);
+				mStateSwitchDelay = 7.0f;
+			}
+			else if (mState == Hunt) {
+				State(Scatter);
+				mStateSwitchDelay = 4.0f;
+			}
+			mStateSwitchTime = 0.0f;
+		}
+	}
+
 	if (!Player::Instance()->Energized() && !mCanFrighten) {
 		mCanFrighten = true;
 	}
@@ -308,6 +324,9 @@ void Ghost::Reset() {
 	mHousedState = Housed;
 	mState = Scatter;
 	mCanFrighten = true;
+	mStateSwitchTime = 0.0f;
+	// this value changes durring play, that is why it is defined in reset.
+	mStateSwitchDelay = 5.0f;
 }
 
 void Ghost::Unhouse() {

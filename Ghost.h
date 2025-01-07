@@ -84,6 +84,9 @@ protected:
 	float mSpeed;
 	float mDefaultSpeed;
 
+	float mStateSwitchDelay;
+	float mStateSwitchTime;
+
 	GhostState mState;
 	HousedState mHousedState;
 
