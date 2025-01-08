@@ -28,6 +28,8 @@ public:
 
 	bool GameOver();
 
+	void setLifeIcons();
+
 private:
 
 	Timer* mTimer;
@@ -80,5 +82,5 @@ private:
 
 	void resetLevel(bool newGame = false);
 
-	void setLifeIcons();
+	
 };

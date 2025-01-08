@@ -22,6 +22,7 @@ private:
 
 	InputManager* mInputManager;
 	AudioManager* mAudioManager;
+	Player* mPlayer;
 
 	//screens
 	StartScreen* mStartScreen;

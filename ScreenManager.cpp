@@ -17,16 +17,18 @@ void ScreenManager::Release() {
 ScreenManager::ScreenManager() {
 	mInputManager = InputManager::Instance();
 	mAudioManager = AudioManager::Instance();
+	mPlayer = Player::Instance();
 	mStartScreen = new StartScreen();
 	mLevel = new Level();
+	mLevel->setLifeIcons();
 	mCurrentScreen = Start;
 }
 
 ScreenManager::~ScreenManager() {
 
 	mInputManager = nullptr;
-	AudioManager::Release();
 	mAudioManager = nullptr;
+	mPlayer = nullptr;
 
 	delete mStartScreen;
 	mStartScreen = nullptr;
@@ -44,7 +46,7 @@ void ScreenManager::Update() {
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
-			mAudioManager->PlayMusic("pacman_beginning.wav",0);
+			//mAudioManager->PlayMusic("pacman_beginning.wav",0);
 		}
 
 		break;
@@ -56,6 +58,11 @@ void ScreenManager::Update() {
 			mLevel = new Level();
 			mCurrentScreen = Start;
 			mStartScreen->ResetAnimation();
+			mPlayer->addLife();
+			mPlayer->addLife();
+			mPlayer->addLife();
+			mPlayer->Respawn();
+			mLevel->setLifeIcons();
 		}
 
 		break;

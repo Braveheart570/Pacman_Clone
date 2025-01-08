@@ -57,8 +57,6 @@ Level::Level() {
 	mGameOverLabel->Parent(this);
 	mGameOverLabel->Position(Vect2_Zero + Vector2{ 0,50 });
 
-	setLifeIcons();
-
 	Position(Graphics::SCREEN_WIDTH/2,Graphics::SCREEN_HEIGHT/2);//call this last
 }
 
