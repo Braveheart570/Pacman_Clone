@@ -46,7 +46,7 @@ void ScreenManager::Update() {
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
-			//mAudioManager->PlayMusic("pacman_beginning.wav",0);
+			mAudioManager->PlayMusic("pacman_beginning.wav",0);
 		}
 
 		break;
@@ -62,6 +62,7 @@ void ScreenManager::Update() {
 			mPlayer->addLife();
 			mPlayer->addLife();
 			mPlayer->Respawn();
+			mPlayer->ResetPelletsEaten();
 			mLevel->setLifeIcons();
 		}
 
