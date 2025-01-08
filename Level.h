@@ -78,6 +78,8 @@ private:
 	static const int COLS = 8;
 	float mCols[COLS];
 
+	int mLivesGiven;
+
 	void CreatePellets();
 
 	void resetLevel(bool newGame = false);

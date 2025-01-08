@@ -19,6 +19,8 @@ Level::Level() {
 	mLevelNum = 1;
 	mGameOver = false;
 
+	mLivesGiven = 0;
+
 	mPinkGhostReleaseDelay = 5.0f;
 
 	mLevelBackground = new Texture("PacmanAtlas.png",227,0,225,248);
@@ -185,7 +187,12 @@ void Level::Update() {
 		resetLevel();
 	}
 
-
+	if (mPlayer->Score() >= 10000 + (10000 * mLivesGiven)) {
+		mPlayer->addLife();
+		mAudioManager->PlaySFX("extraLife.wav");
+		setLifeIcons();
+		mLivesGiven++;
+	}
 	
 	mPlayer->Update();
 	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
@@ -679,6 +686,7 @@ void Level::resetLevel(bool newGame) {
 			}
 			mPlayer->ResetScore();
 			mNumOfFruitSpawned = 0;
+			mLivesGiven = 0;
 		}
 	}
 
