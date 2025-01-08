@@ -675,6 +675,7 @@ void Level::resetLevel(bool newGame) {
 		mLevelNum++;
 		mPlayer->ResetPelletsEaten();
 		mNumOfFruitSpawned = 0;
+		mFruitIndex++;
 		delete mFruit;
 		mFruit = new Fruit(mFruitIndex);
 	}
@@ -689,8 +690,6 @@ void Level::resetLevel(bool newGame) {
 			mLivesGiven = 0;
 		}
 	}
-
-	if (!mPlayer->isDead()) mFruitIndex++;
 	
 
 	mRedGhost->Position(mNodeManager->getNode(66)->Position());
