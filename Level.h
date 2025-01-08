@@ -59,6 +59,7 @@ private:
 
 	int mLevelNum;
 	int mFruitIndex;
+	int mNumOfFruitSpawned;
 
 	bool mStageStarted;
 	float mReadyDuration;

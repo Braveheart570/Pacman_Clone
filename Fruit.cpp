@@ -2,6 +2,8 @@
 
 Fruit::Fruit(int fruitIndex) {
 
+	mTimer = Timer::Instance();
+
 	if (fruitIndex == 0) {
 		mTexture = new Texture("PacmanAtlas.png", 490, 50, 12, 12);
 		mScoreVal = 100;
@@ -45,13 +47,27 @@ Fruit::Fruit(int fruitIndex) {
 
 	Position({ Graphics::SCREEN_WIDTH / 2,(Graphics::SCREEN_HEIGHT / 2) + 50.0f});
 
+	mActiveDurration = 10.0f;
+	mActiveTime = 0.0f;
+
 	Active(false);
 
 }
 
 Fruit::~Fruit() {
+	mTimer = nullptr;
 	delete mTexture;
 	mTexture = nullptr;
+}
+
+void Fruit::Update() {
+	if (Active()) {
+		mActiveTime += mTimer->DeltaTime();
+		if (mActiveTime >= mActiveDurration) {
+			mActiveTime = 0.0f;
+			Active(false);
+		}
+	}
 }
 
 void Fruit::Render() {

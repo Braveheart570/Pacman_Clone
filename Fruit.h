@@ -15,11 +15,17 @@ public:
 	~Fruit();
 
 	void Render() override;
+	void Update() override;
 
 	void Hit(PhysEntity* entity) override;
 	bool IgnoreCollisions() override;
 
 protected:
+
+	Timer* mTimer;
+
+	float mActiveTime;
+	float mActiveDurration;
 
 	int mScoreVal;
 

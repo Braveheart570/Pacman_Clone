@@ -6,6 +6,7 @@ Level::Level() {
 	CreatePellets();
 
 	mFruitIndex = 0;
+	mNumOfFruitSpawned = 0;
 	mFruit = new Fruit(mFruitIndex);
 
 	mPlayer = Player::Instance();
@@ -181,6 +182,7 @@ void Level::Update() {
 		mOrangeGhost->Unhouse();
 	}
 
+	// death check
 	if (mPlayer->isDead()) {
 		resetLevel();
 	}
@@ -198,6 +200,17 @@ void Level::Update() {
 	mScoreboard->Score(mPlayer->Score());
 
 	ScoreBubble::Instance()->Update();
+
+	if (mPlayer->PelletsEaten() >= 70 && mNumOfFruitSpawned == 0 && mFruit->Active() == false) {
+		mFruit->Active(true);
+		mNumOfFruitSpawned++;
+	}
+	else if (mPlayer->PelletsEaten() >= 170 && mNumOfFruitSpawned == 1 && mFruit->Active() == false) {
+		mFruit->Active(true);
+		mNumOfFruitSpawned++;
+	}
+
+	mFruit->Update();
 
 }
 
@@ -647,6 +660,7 @@ void Level::setLifeIcons() {
 	}
 }
 
+// this function is not called in the constructor
 void Level::resetLevel(bool newGame) {
 
 	if (newGame) {
@@ -655,6 +669,9 @@ void Level::resetLevel(bool newGame) {
 		}
 		mLevelNum++;
 		mPlayer->ResetPelletsEaten();
+		mNumOfFruitSpawned = 0;
+		delete mFruit;
+		mFruit = new Fruit(mFruitIndex);
 	}
 	else {
 		if (mPlayer->Lives() == 0) {
@@ -663,12 +680,12 @@ void Level::resetLevel(bool newGame) {
 				mPlayer->HighScore(mPlayer->Score());
 			}
 			mPlayer->ResetScore();
+			mNumOfFruitSpawned = 0;
 		}
 	}
 
 	if (!mPlayer->isDead()) mFruitIndex++;
-	delete mFruit;
-	mFruit = new Fruit(mFruitIndex);
+	
 
 	mRedGhost->Position(mNodeManager->getNode(66)->Position());
 	mRedGhost->Reset();
