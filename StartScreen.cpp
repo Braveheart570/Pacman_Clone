@@ -84,9 +84,9 @@ StartScreen::StartScreen() {
 	mFrightenedGhost4 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
 	HandleEntityInit(mFrightenedGhost4, Vect2_Zero, Vect2_One * 3);
 
-	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 455, 0, 16, 16,2,0.5f, AnimatedTexture::Horizontal);
+	mPacmanLeft = new AnimatedTexture("PacmanAtlas.png", 456, 0, 15, 15, 2, 0.5f, AnimatedTexture::Horizontal);
 	HandleEntityInit(mPacmanLeft, { 0,0 }, Vect2_One * 3);
-	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 455, 16, 16, 16, 2, 0.5f, AnimatedTexture::Horizontal);
+	mPacmanRight = new AnimatedTexture("PacmanAtlas.png", 456, 16, 15, 15, 2, 0.5f, AnimatedTexture::Horizontal);
 	HandleEntityInit(mPacmanRight, { Graphics::SCREEN_WIDTH + 100,600 }, Vect2_One * 3);
 
 	mPowerPellet = new Texture("PacmanAtlas.png", 8, 24, 8, 8);
