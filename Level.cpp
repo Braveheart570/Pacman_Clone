@@ -549,12 +549,12 @@ void Level::CreatePellets() {
 
 	mPellets.push_back(new Pellet({ mCols[1], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
 	mPellets.push_back(new Pellet({ mCols[1], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
-	//the bellow 4 are being weird, has to do with how we are defining the rows
-	mPellets.push_back(new Pellet({ mCols[2], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[2], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+	//the bellow 4 are being weird, has to do with how we are defining the rows (corrected)
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
 
-	mPellets.push_back(new Pellet({ mCols[5], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[5], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[1] + ((mRows[2] - mRows[1]) / 3)}));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
 
 	mPellets.push_back(new Pellet({ mCols[6], mRows[1] + ((mRows[2] - mRows[1]) / 3) }));
 	mPellets.push_back(new Pellet({ mCols[6], mRows[1] + ((mRows[2] - mRows[1]) / 3) * 2 }));
@@ -621,12 +621,12 @@ void Level::CreatePellets() {
 
 	mPellets.push_back(new Pellet({ mCols[1], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
 	mPellets.push_back(new Pellet({ mCols[1], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+	//the below 4 are misaligned as well (corrected)
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3)}));
+	mPellets.push_back(new Pellet({ mCols[1] + ((mCols[3] - mCols[1]) / 6) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
 
-	mPellets.push_back(new Pellet({ mCols[2], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[2], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
-
-	mPellets.push_back(new Pellet({ mCols[5], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
-	mPellets.push_back(new Pellet({ mCols[5], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6 ) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3)}));
+	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6 ) * 3, mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
 
 	mPellets.push_back(new Pellet({ mCols[6], mRows[7] + ((mRows[8] - mRows[7]) / 3) }));
 	mPellets.push_back(new Pellet({ mCols[6], mRows[7] + ((mRows[8] - mRows[7]) / 3) * 2 }));
