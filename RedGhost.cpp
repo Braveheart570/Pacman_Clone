@@ -60,6 +60,7 @@ void RedGhost::Enrage() {
 	else {
 		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
 		mScatterOverride = true;
+		mAudioManager->PlayMusic("siren2.wav");
 	}
 }
 

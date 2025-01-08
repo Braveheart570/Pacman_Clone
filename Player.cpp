@@ -136,8 +136,11 @@ Player::Player() {
 
 Player::~Player() {
 
-	mPacmanTex = nullptr;
+	
+	mAudioManager = nullptr;
+	mInputManager = nullptr;
 
+	mPacmanTex = nullptr; // this points to one of the below textures, that is why we do not delete what it points to.
 	delete mPacmanUp;
 	mPacmanUp = nullptr;
 	delete mPacmanRight;
@@ -180,6 +183,7 @@ void Player::Update() {
 		if (mFrightenedTime >= mFrightenedDuration) {
 			mEnergized = false;
 			mGhostsEaten = 0;
+			mAudioManager->ResumeMusic();
 		}
 	}
 
@@ -291,8 +295,8 @@ void Player::Die() {
 
 	mIsDieing = true;
 	mPacmanDeath->ResetAnimation();
-	AudioManager::Instance()->PauseMusic();
-	AudioManager::Instance()->PlaySFX("playerDeath.wav",0,0);
+	mAudioManager->PauseMusic();
+	mAudioManager->PlaySFX("playerDeath.wav",0,0);
 
 }
 
@@ -356,7 +360,8 @@ void Player::Energize() {
 
 	mEnergized = true;
 	mFrightenedTime = 0;
-	AudioManager::Instance()->PlaySFX("energized.wav",0,0);
+	mAudioManager->PlaySFX("energized.wav",0,0);
+	AudioManager::Instance()->PauseMusic();
 
 }
 

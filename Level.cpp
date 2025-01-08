@@ -145,6 +145,12 @@ void Level::Update() {
 		mReadyTime += mTimer->DeltaTime();
 		if (mReadyTime >= mReadyDuration) {
 			mStageStarted = true;
+			if (mRedGhost->Enraged()) {
+				mAudioManager->PlayMusic("siren2.wav");
+			}
+			else {
+				mAudioManager->PlayMusic("siren1.wav");
+			}
 		}
 		return; 
 	}

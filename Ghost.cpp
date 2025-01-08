@@ -4,6 +4,7 @@ Ghost::Ghost(PathNode* start) {
 
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
+	mAudioManager = AudioManager::Instance();
 
 	mFrightened1 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
 	mFrightened1->Parent(this);
@@ -70,6 +71,7 @@ Ghost::~Ghost() {
 	mNodeManager = nullptr;
 	mGhostTex = nullptr;
 	mTimer = nullptr;
+	mAudioManager = nullptr;
 
 	delete mGhostUp;
 	mGhostUp = nullptr;
@@ -238,7 +240,7 @@ void Ghost::Hit(PhysEntity* entity) {
 		else {
 			State(Dead, false);
 			Player::Instance()->GhostEaten();
-			AudioManager::Instance()->PlaySFX("ghostEaten.wav",0);
+			mAudioManager->PlaySFX("ghostEaten.wav",0);
 			ScoreBubble::Instance()->DisplayScore(Position());
 		}
 		

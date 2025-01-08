@@ -53,6 +53,7 @@ protected:
 
 	NodeManager* mNodeManager;
 	Timer* mTimer;
+	AudioManager* mAudioManager;
 
 	bool mCanFrighten;
 	float mFlashSpeed;
