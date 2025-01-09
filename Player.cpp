@@ -349,6 +349,8 @@ void Player::Respawn() {
 	mNextTurn = Dir();
 	mEnergized = false;
 
+	mPacmanTex = mPacmanRight;
+
 }
 
 void Player::Energize() {
