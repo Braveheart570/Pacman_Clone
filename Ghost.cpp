@@ -5,6 +5,7 @@ Ghost::Ghost(PathNode* start) {
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
 	mAudioManager = AudioManager::Instance();
+	mPlayer = Player::Instance();
 
 	mFrightened1 = new AnimatedTexture("PacmanAtlas.png", 584, 65, 16, 14, 2, 0.5f, AnimatedTexture::Horizontal);
 	mFrightened1->Parent(this);
@@ -72,6 +73,7 @@ Ghost::~Ghost() {
 	mGhostTex = nullptr;
 	mTimer = nullptr;
 	mAudioManager = nullptr;
+	mPlayer = nullptr;
 
 	delete mGhostUp;
 	mGhostUp = nullptr;
@@ -110,13 +112,17 @@ void Ghost::Update() {
 		pos = Position() + dir * mSpeed * mTimer->DeltaTime();
 	}
 	
+	// become frightened logic
 	if (mState != Dead) {
-		if (mState == Frightened && !Player::Instance()->Energized()) {
+		if (mState == Frightened && !mPlayer->Energized()) {
 			State(Scatter);
 		}
-		else if (mState != Frightened && Player::Instance()->Energized() && mCanFrighten) {
+		else if (mState != Frightened && mPlayer->Energized() && mCanFrighten) {
 			State(Frightened);
 		}
+	}
+	if (!mPlayer->Energized() && !mCanFrighten) {
+		mCanFrighten = true;
 	}
 
 	//state switching
@@ -135,26 +141,11 @@ void Ghost::Update() {
 		}
 	}
 
-	if (!Player::Instance()->Energized() && !mCanFrighten) {
-		mCanFrighten = true;
-	}
 
-	//debug keys
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_T)) {
-		if (mState == Scatter) {
-			State(Hunt);
-		}
-		else if (mState == Hunt) {
-			State(Scatter);
-		}
-	}
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F)) {
-		if (mState != Frightened) {
-			Player::Instance()->Energize();
-		}
-	}
 
 	Vector2 dist = mTargetNode->Position() - pos;
+
+	// checking if reached next node
 	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 		Position(mTargetNode->Position());
 		mCurrentNode = mTargetNode;
@@ -183,14 +174,12 @@ void Ghost::Update() {
 		else{
 			HandleHoused();
 		}
-		
-			
-
 	}
 	else {
 		Position(pos);
 	}
 
+	//animation
 	mGhostTex->Update();
 
 }
@@ -233,13 +222,13 @@ void Ghost::Hit(PhysEntity* entity) {
 		return;
 	}
 
-	if ((!Player::Instance()->IsDying() && !Player::Instance()->isDead()) && dynamic_cast<Player*>(entity)) {
+	if ((!mPlayer->IsDying() && !mPlayer->isDead()) && dynamic_cast<Player*>(entity)) {
 		if (mState != Frightened) {
-			Player::Instance()->Die();
+			mPlayer->Die();
 		}
 		else {
 			State(Dead, false);
-			Player::Instance()->GhostEaten();
+			mPlayer->GhostEaten();
 			mAudioManager->PlaySFX("ghostEaten.wav",0);
 			ScoreBubble::Instance()->DisplayGhostScore(Position());
 		}
@@ -253,7 +242,7 @@ void Ghost::HandleTexture() {
 	if (mState == Frightened) {
 
 		
-		if (Player::Instance()->EnergizedTimeLeftPercent() >= 0.3f) {
+		if (mPlayer->EnergizedTimeLeftPercent() >= 0.3f) {
 			mFlashTime += mTimer->DeltaTime();
 
 			if (mFlashTime >= mFlashSpeed) {

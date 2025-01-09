@@ -25,7 +25,6 @@ public:
 	Vector2 Dir();
 	Vector2 nextTurn();
 
-
 	int Score();
 	void AddScore(int change);
 	void ResetScore();
@@ -91,13 +90,6 @@ private:
 
 	Vector2 mNextTurn;
 
-
-	Player();
-	~Player();
-
-	void HandleTexture();
-
-	//temp
 	AnimatedTexture* mPacmanTex;
 
 	AnimatedTexture* mPacmanUp;
@@ -108,5 +100,10 @@ private:
 	AnimatedTexture* mPacmanDeath;
 
 	Texture* mPacmanStopped;
+
+	Player();
+	~Player();
+
+	void HandleTexture();
 
 };

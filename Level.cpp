@@ -2,8 +2,8 @@
 
 Level::Level() {
 	mTimer = Timer::Instance();
-	mNodeManager = NodeManager::Instance();
 	mAudioManager = AudioManager::Instance();
+	mNodeManager = NodeManager::Instance();
 	CreatePellets();
 	mPlayer = Player::Instance();
 
@@ -116,22 +116,6 @@ Level::~Level() {
 void Level::Update() {
 
 	if (mGameOver) return;
-
-	//debug keys
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
-		if (mRedGhost->RageState() == mRedGhost->Unenraged) {
-			mRedGhost->RageState(mRedGhost->Enraged1);
-		}
-		else if (mRedGhost->RageState() == mRedGhost->Enraged1) {
-			mRedGhost->RageState(mRedGhost->Enraged2);
-		}
-		else if (mRedGhost->RageState() == mRedGhost->Enraged2) {
-			mRedGhost->RageState(mRedGhost->Unenraged);
-		}
-	}
-	if(InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)){
-		resetLevel(true);
-	}
 
 
 	// pause before game start logic
@@ -721,6 +705,7 @@ void Level::resetLevel(bool newGame) {
 
 	mStageStarted = false;
 	mReadyTime = 0;
+	mReadyDuration = 3.0f; // redifining this here so that ready time is only 5 seconds the first time the game loads.
 	mPinkGhostReleaseTime = 0.0f;
 }
 

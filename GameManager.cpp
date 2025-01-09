@@ -60,9 +60,8 @@ namespace SDLFramework {
 
 		//update code here
 		mScreenManager->Update();
-		//mLevel->Update();
 
-		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {
+		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {//todo remove
 			NodeManager::Instance()->RenderNodes(!NodeManager::Instance()->RenderNodes());
 		}
 		
@@ -80,7 +79,6 @@ namespace SDLFramework {
 
 		//render calls here
 		mScreenManager->Render();
-		//mLevel->Render();
 
 		//draw to screem
 		mGraphics->Render();
@@ -156,6 +154,8 @@ namespace SDLFramework {
 
 		Player::Release();
 		mPlayer = nullptr;
+
+		ScoreBubble::Release();
 
 		//quit sdl subsystems
 		SDL_Quit();

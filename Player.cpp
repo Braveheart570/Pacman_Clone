@@ -202,11 +202,6 @@ void Player::Update() {
 		mNextTurn = Vect2_Right;
 	}
 
-	//todo debug
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
-		Die();
-	}
-
 
 	Vector2 dir = Dir();
 
