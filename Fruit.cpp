@@ -3,6 +3,7 @@
 Fruit::Fruit(int fruitIndex) {
 
 	mTimer = Timer::Instance();
+	mScoreBubble = ScoreBubble::Instance();
 
 	if (fruitIndex == 0) {
 		mTexture = new Texture("PacmanAtlas.png", 490, 50, 12, 12);
@@ -56,6 +57,8 @@ Fruit::Fruit(int fruitIndex) {
 
 Fruit::~Fruit() {
 	mTimer = nullptr;
+	mScoreBubble = nullptr;
+
 	delete mTexture;
 	mTexture = nullptr;
 }
@@ -81,6 +84,32 @@ void Fruit::Hit(PhysEntity* entity) {
 	Player::Instance()->AddScore(mScoreVal);
 	Active(false);
 	PlaySound();
+	switch (mScoreVal) {
+	case 100:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(),ScoreBubble::f100);
+		break;
+	case 300:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f300);
+		break;
+	case 500:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f500);
+		break;
+	case 700:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f700);
+		break;
+	case 1000:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f1000);
+		break;
+	case 2000:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f2000);
+		break;
+	case 3000:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f3000);
+		break;
+	case 5000:
+		mScoreBubble->DisplayFruitScore(mTexture->Position(), ScoreBubble::f5000);
+		break;
+	}
 }
 
 bool Fruit::IgnoreCollisions() {

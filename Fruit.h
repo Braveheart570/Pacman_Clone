@@ -4,6 +4,7 @@
 #include "CircleCollider.h"
 #include "AudioManager.h"
 #include "Player.h"
+#include "ScoreBubbleSingleton.h"
 
 using namespace SDLFramework;
 
@@ -23,6 +24,7 @@ public:
 protected:
 
 	Timer* mTimer;
+	ScoreBubble* mScoreBubble;
 
 	float mActiveTime;
 	float mActiveDurration;

@@ -241,7 +241,7 @@ void Ghost::Hit(PhysEntity* entity) {
 			State(Dead, false);
 			Player::Instance()->GhostEaten();
 			mAudioManager->PlaySFX("ghostEaten.wav",0);
-			ScoreBubble::Instance()->DisplayScore(Position());
+			ScoreBubble::Instance()->DisplayGhostScore(Position());
 		}
 		
 	}
