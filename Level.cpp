@@ -3,14 +3,14 @@
 Level::Level() {
 	mTimer = Timer::Instance();
 	mNodeManager = NodeManager::Instance();
+	mAudioManager = AudioManager::Instance();
 	CreatePellets();
+	mPlayer = Player::Instance();
 
 	mFruitIndex = 0;
 	mNumOfFruitSpawned = 0;
 	mFruit = new Fruit(mFruitIndex);
 
-	mPlayer = Player::Instance();
-	mAudioManager = AudioManager::Instance();
 
 	mStageStarted = false;
 	mReadyDuration = 5.0f;
@@ -114,33 +114,12 @@ Level::~Level() {
 }
 
 void Level::Update() {
-	// debug keys
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_H)) {
-		if (mPinkGhost->HouseState() == Ghost::Housed) {
-			mPinkGhost->Unhouse();
-		}
-		else if (mBlueGhost->HouseState() == Ghost::Housed) {
-			mBlueGhost->Unhouse();
-		}
-		else if (mOrangeGhost->HouseState() == Ghost::Housed) {
-			mOrangeGhost->Unhouse();
-		}
-	}
+
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
 		mRedGhost->Enrage();
 	}
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {
-		resetLevel(true);
-	}
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_L)) {
-		mPlayer->addLife();
-		mAudioManager->PlaySFX("extraLife.wav");
-		setLifeIcons();
-	}
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_R)) {
-		mFruit->Active(true);
-	}
 
+	// pause before game start logic
 	if (!mStageStarted) {
 		mReadyTime += mTimer->DeltaTime();
 		if (mReadyTime >= mReadyDuration) {
@@ -188,30 +167,21 @@ void Level::Update() {
 		mOrangeGhost->Unhouse();
 	}
 
+
 	// death check
 	if (mPlayer->isDead()) {
 		resetLevel();
 	}
 
+	// gaining extra lives
 	if (mPlayer->Score() >= 10000 + (10000 * mLivesGiven)) {
 		mPlayer->addLife();
 		mAudioManager->PlaySFX("extraLife.wav");
 		setLifeIcons();
 		mLivesGiven++;
 	}
-	
-	mPlayer->Update();
-	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
-		mRedGhost->Update();
-		mPinkGhost->Update();
-		mBlueGhost->Update();
-		mOrangeGhost->Update();
-	}
-	
-	mScoreboard->Score(mPlayer->Score());
 
-	ScoreBubble::Instance()->Update();
-
+	//fruit spawning
 	if (mPlayer->PelletsEaten() >= 70 && mNumOfFruitSpawned == 0 && mFruit->Active() == false) {
 		mFruit->Active(true);
 		mNumOfFruitSpawned++;
@@ -221,6 +191,24 @@ void Level::Update() {
 		mNumOfFruitSpawned++;
 	}
 
+	// Red Ghost Enrage
+	if (!mRedGhost->Enraged() && mPlayer->PelletsEaten() >= mPellets.size() / 2) {
+		mRedGhost->Enrage();
+	}
+	else if (mRedGhost->Enraged()) {
+
+	}
+	
+	// general updates
+	mPlayer->Update();
+	if (!mPlayer->IsDying() && !mPlayer->isDead()) {
+		mRedGhost->Update();
+		mPinkGhost->Update();
+		mBlueGhost->Update();
+		mOrangeGhost->Update();
+	}
+	ScoreBubble::Instance()->Update();
+	mScoreboard->Score(mPlayer->Score());
 	mFruit->Update();
 
 }
@@ -684,6 +672,7 @@ void Level::resetLevel(bool newGame) {
 		mFruitIndex++;
 		delete mFruit;
 		mFruit = new Fruit(mFruitIndex);
+		mRedGhost->ResetEnraged();
 	}
 	else {
 		if (mPlayer->Lives() == 0) {
@@ -694,6 +683,7 @@ void Level::resetLevel(bool newGame) {
 			mPlayer->ResetScore();
 			mNumOfFruitSpawned = 0;
 			mLivesGiven = 0;
+			mRedGhost->ResetEnraged();
 		}
 	}
 	

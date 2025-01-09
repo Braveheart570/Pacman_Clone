@@ -5,8 +5,9 @@ class RedGhost : public Ghost {
 
 public:
 
-	RedGhost(PathNode* start);
 
+
+	RedGhost(PathNode* start);
 
 	void setNewTargetNode() override;
 	void setTextures() override;
@@ -17,6 +18,7 @@ public:
 	//cruise elroy
 	void Enrage();
 	bool Enraged();
+	void ResetEnraged();
 
 protected:
 	// Cruise Elroy is the name for enraged mode in the original game.

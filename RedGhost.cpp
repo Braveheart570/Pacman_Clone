@@ -4,10 +4,11 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
 	mScatterTarget = {0,0};
-	mCruiseElroySpeedMultiplier1 = 1.5f;
-	mCruiseElroySpeedMultiplier2 = 2.0f;
+	mCruiseElroySpeedMultiplier1 = 1.05f;
+	mCruiseElroySpeedMultiplier2 = 1.1f;
 	mGhostTex = mGhostUp; // temp? TODO
 	Reset();
+	ResetEnraged();
 }
 
 
@@ -47,15 +48,12 @@ void RedGhost::Reset() {
 	Position(mStartNode->Position());
 	mHousedState = Unhoused;
 	mState = Scatter;
-	mSpeed = mDefaultSpeed;
-	mScatterOverride = false;
-	
 }
 
 void RedGhost::Enrage() {
 
 	if (mSpeed == mDefaultSpeed) {
-		mSpeed *= mCruiseElroySpeedMultiplier1;
+		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier1;
 	}
 	else {
 		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
@@ -71,6 +69,11 @@ bool RedGhost::Enraged() {
 	else {
 		return false;
 	}
+}
+
+void RedGhost::ResetEnraged() {
+	mSpeed = mDefaultSpeed;
+	mScatterOverride = false;
 }
 
 
