@@ -166,25 +166,25 @@ void NodeManager::CreateNodes() {
 	AddNode(Vector2(mCols[7], mRows[6]));
 
 	AddNode(Vector2(mCols[0], mRows[7]));
-	AddNode(Vector2(mCols[0] + Graphics::SCREEN_WIDTH * 0.05f, mRows[7]));
+	AddNode(Vector2(mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[7]));
 	AddNode(Vector2(mCols[1], mRows[7]));
 	AddNode(Vector2(mCols[2], mRows[7]));
 	AddNode(Vector2(mCols[3], mRows[7]));
 	AddNode(Vector2(mCols[4], mRows[7]));
 	AddNode(Vector2(mCols[5], mRows[7]));
 	AddNode(Vector2(mCols[6], mRows[7]));
-	AddNode(Vector2(mCols[7] - Graphics::SCREEN_WIDTH * 0.05f, mRows[7]));
+	AddNode(Vector2(mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[7]));
 	AddNode(Vector2(mCols[7], mRows[7]));
 
 	AddNode(Vector2(mCols[0], mRows[8]));
-	AddNode(Vector2(mCols[0] + Graphics::SCREEN_WIDTH * 0.05f, mRows[8]));
+	AddNode(Vector2(mCols[0] + ((mCols[1] - mCols[0]) / 5) * 2, mRows[8]));
 	AddNode(Vector2(mCols[1], mRows[8]));
 	AddNode(Vector2(mCols[2], mRows[8]));
 	AddNode(Vector2(mCols[3], mRows[8]));
 	AddNode(Vector2(mCols[4], mRows[8]));
 	AddNode(Vector2(mCols[5], mRows[8]));
 	AddNode(Vector2(mCols[6], mRows[8]));
-	AddNode(Vector2(mCols[7] - Graphics::SCREEN_WIDTH * 0.05f, mRows[8]));
+	AddNode(Vector2(mCols[6] + ((mCols[7] - mCols[6]) / 5) * 3, mRows[8]));
 	AddNode(Vector2(mCols[7], mRows[8]));
 
 	AddNode(Vector2(mCols[0], mRows[9]));
