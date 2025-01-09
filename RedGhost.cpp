@@ -4,9 +4,9 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
 	mScatterTarget = {0,0};
-	mCruiseElroySpeedMultiplier1 = 1.05f;
-	mCruiseElroySpeedMultiplier2 = 1.1f;
-	mGhostTex = mGhostUp; // temp? TODO
+	mRageSpeedMultiplier1 = 1.05f;
+	mRageSpeedMultiplier2 = 1.1f;
+	mGhostTex = mGhostUp;
 	Reset();
 	RageState(Unenraged);
 }
@@ -72,12 +72,12 @@ void RedGhost::RageState(rageState state) {
 		std::cout << "red ghost unenraged" << std::endl;
 		break;
 	case Enraged1:
-		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier1;
+		mSpeed = mDefaultSpeed * mRageSpeedMultiplier1;
 		mScatterOverride = false;
 		std::cout << "red ghost enraged 1" << std::endl;
 		break;
 	case Enraged2:
-		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
+		mSpeed = mDefaultSpeed * mRageSpeedMultiplier2;
 		mScatterOverride = true;
 		mAudioManager->PlayMusic("siren2.wav");
 		std::cout << "red ghost enraged 2" << std::endl;

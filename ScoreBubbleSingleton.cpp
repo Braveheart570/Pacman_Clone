@@ -45,17 +45,17 @@ ScoreBubble::ScoreBubble() {
 	mFruit100pts->Position(Vect2_Zero);
 	mFruit100pts->Scale(Vect2_One * 3);
 	mFruit100pts->Active(false);
-	mFruit300pts = new Texture("pacmanAtlas.png", 472, 148, 14, 7);
+	mFruit300pts = new Texture("pacmanAtlas.png", 472, 148, 15, 7);
 	mFruit300pts->Parent(this);
 	mFruit300pts->Position(Vect2_Zero);
 	mFruit300pts->Scale(Vect2_One * 3);
 	mFruit300pts->Active(false);
-	mFruit500pts = new Texture("pacmanAtlas.png", 488, 148, 14, 7);
+	mFruit500pts = new Texture("pacmanAtlas.png", 488, 148, 15, 7);
 	mFruit500pts->Parent(this);
 	mFruit500pts->Position(Vect2_Zero);
 	mFruit500pts->Scale(Vect2_One * 3);
 	mFruit500pts->Active(false);
-	mFruit700pts = new Texture("pacmanAtlas.png", 504, 148, 14, 7);
+	mFruit700pts = new Texture("pacmanAtlas.png", 504, 148, 15, 7);
 	mFruit700pts->Parent(this);
 	mFruit700pts->Position(Vect2_Zero);
 	mFruit700pts->Scale(Vect2_One * 3);
@@ -81,8 +81,9 @@ ScoreBubble::ScoreBubble() {
 	mFruit5000pts->Scale(Vect2_One * 3);
 	mFruit5000pts->Active(false);
 
-
+	mDisplayTime = 0.0f;
 	mDisplayDurration = 2.0f;
+	mTex = nullptr;
 
 	Active(false);
 

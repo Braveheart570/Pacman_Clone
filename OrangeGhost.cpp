@@ -4,7 +4,7 @@ OrangeGhost::OrangeGhost(PathNode* start) : Ghost(start) {
 
 	setTextures();
 	mScatterTarget = { 0,Graphics::SCREEN_HEIGHT };
-	mGhostTex = mGhostDown; // temp? TODO
+	mGhostTex = mGhostDown;
 
 }
 

@@ -15,14 +15,13 @@ public:
 	void Reset() override;
 	void handleScatter() override;
 
-	//cruise elroy
 	void RageState(rageState state);
 	rageState RageState();
 
 protected:
-	// Cruise Elroy is the name for enraged mode in the original game.
-	float mCruiseElroySpeedMultiplier1;
-	float mCruiseElroySpeedMultiplier2;
+	
+	float mRageSpeedMultiplier1;
+	float mRageSpeedMultiplier2;
 
 	bool mScatterOverride;
 
