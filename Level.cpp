@@ -115,6 +115,8 @@ Level::~Level() {
 
 void Level::Update() {
 
+	if (mGameOver) return;
+
 	//debug keys
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
 		if (mRedGhost->RageState() == mRedGhost->Unenraged) {
@@ -184,6 +186,7 @@ void Level::Update() {
 	// death check
 	if (mPlayer->isDead()) {
 		resetLevel();
+		return;
 	}
 
 	// gaining extra lives
