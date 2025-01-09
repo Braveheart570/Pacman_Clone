@@ -225,6 +225,7 @@ void Level::Update() {
 	}
 	ScoreBubble::Instance()->Update();
 	mScoreboard->Score(mPlayer->Score());
+	if (mPlayer->Score() >= mPlayer->HighScore()) mHighScoreboard->Score(mPlayer->Score());
 	mFruit->Update();
 
 }
