@@ -5,7 +5,7 @@ class RedGhost : public Ghost {
 
 public:
 
-
+	enum rageState {Unenraged,Enraged1,Enraged2};
 
 	RedGhost(PathNode* start);
 
@@ -16,9 +16,8 @@ public:
 	void handleScatter() override;
 
 	//cruise elroy
-	void Enrage();
-	bool Enraged();
-	void ResetEnraged();
+	void RageState(rageState state);
+	rageState RageState();
 
 protected:
 	// Cruise Elroy is the name for enraged mode in the original game.
@@ -26,5 +25,7 @@ protected:
 	float mCruiseElroySpeedMultiplier2;
 
 	bool mScatterOverride;
+
+	rageState mRageState;
 
 };

@@ -8,7 +8,7 @@ RedGhost::RedGhost(PathNode* start) : Ghost(start) {
 	mCruiseElroySpeedMultiplier2 = 1.1f;
 	mGhostTex = mGhostUp; // temp? TODO
 	Reset();
-	ResetEnraged();
+	RageState(Unenraged);
 }
 
 
@@ -50,32 +50,6 @@ void RedGhost::Reset() {
 	mState = Scatter;
 }
 
-void RedGhost::Enrage() {
-
-	if (mSpeed == mDefaultSpeed) {
-		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier1;
-	}
-	else {
-		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
-		mScatterOverride = true;
-		mAudioManager->PlayMusic("siren2.wav");
-	}
-}
-
-bool RedGhost::Enraged() {
-	if (mSpeed != mDefaultSpeed) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
-void RedGhost::ResetEnraged() {
-	mSpeed = mDefaultSpeed;
-	mScatterOverride = false;
-}
-
 
 void RedGhost::handleScatter() {
 
@@ -87,4 +61,30 @@ void RedGhost::handleScatter() {
 	}
 	
 
+}
+
+void RedGhost::RageState(rageState state) {
+	mRageState = state;
+	switch (mRageState) {
+	case Unenraged:
+		mSpeed = mDefaultSpeed;
+		mScatterOverride = false;
+		std::cout << "red ghost unenraged" << std::endl;
+		break;
+	case Enraged1:
+		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier1;
+		mScatterOverride = false;
+		std::cout << "red ghost enraged 1" << std::endl;
+		break;
+	case Enraged2:
+		mSpeed = mDefaultSpeed * mCruiseElroySpeedMultiplier2;
+		mScatterOverride = true;
+		mAudioManager->PlayMusic("siren2.wav");
+		std::cout << "red ghost enraged 2" << std::endl;
+		break;
+	}
+}
+
+RedGhost::rageState RedGhost::RageState() {
+	return mRageState;
 }

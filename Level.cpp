@@ -115,16 +115,29 @@ Level::~Level() {
 
 void Level::Update() {
 
+	//debug keys
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_E)) {
-		mRedGhost->Enrage();
+		if (mRedGhost->RageState() == mRedGhost->Unenraged) {
+			mRedGhost->RageState(mRedGhost->Enraged1);
+		}
+		else if (mRedGhost->RageState() == mRedGhost->Enraged1) {
+			mRedGhost->RageState(mRedGhost->Enraged2);
+		}
+		else if (mRedGhost->RageState() == mRedGhost->Enraged2) {
+			mRedGhost->RageState(mRedGhost->Unenraged);
+		}
 	}
+	if(InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)){
+		resetLevel(true);
+	}
+
 
 	// pause before game start logic
 	if (!mStageStarted) {
 		mReadyTime += mTimer->DeltaTime();
 		if (mReadyTime >= mReadyDuration) {
 			mStageStarted = true;
-			if (mRedGhost->Enraged()) {
+			if (mRedGhost->RageState() == RedGhost::Enraged2) {
 				mAudioManager->PlayMusic("siren2.wav");
 			}
 			else {
@@ -192,11 +205,11 @@ void Level::Update() {
 	}
 
 	// Red Ghost Enrage
-	if (!mRedGhost->Enraged() && mPlayer->PelletsEaten() >= mPellets.size() / 2) {
-		mRedGhost->Enrage();
+	if (mRedGhost->RageState() == RedGhost::Unenraged && mPlayer->PelletsEaten() >= mPellets.size() / 2) {
+		mRedGhost->RageState(RedGhost::Enraged1);
 	}
-	else if (mRedGhost->Enraged()) {
-
+	if (mRedGhost->RageState() != RedGhost::Enraged2 && mPlayer->PelletsEaten() >= (mPellets.size() / 4)*3) {
+		mRedGhost->RageState(RedGhost::Enraged2);
 	}
 	
 	// general updates
@@ -672,20 +685,21 @@ void Level::resetLevel(bool newGame) {
 		mFruitIndex++;
 		delete mFruit;
 		mFruit = new Fruit(mFruitIndex);
-		mRedGhost->ResetEnraged();
+		mRedGhost->RageState(RedGhost::Unenraged);
+		mAudioManager->PauseMusic();
 	}
-	else {
-		if (mPlayer->Lives() == 0) {
-			mGameOver = true;
-			if (mPlayer->Score() > mPlayer->HighScore()) {
-				mPlayer->HighScore(mPlayer->Score());
-			}
-			mPlayer->ResetScore();
-			mNumOfFruitSpawned = 0;
-			mLivesGiven = 0;
-			mRedGhost->ResetEnraged();
+	else if (mPlayer->Lives() == 0) {
+		mGameOver = true;
+		if (mPlayer->Score() > mPlayer->HighScore()) {
+			mPlayer->HighScore(mPlayer->Score());
 		}
+		mPlayer->ResetScore();
+		mNumOfFruitSpawned = 0;
+		mLivesGiven = 0;
+		mRedGhost->RageState(RedGhost::Unenraged);
+		mAudioManager->PauseMusic();
 	}
+	
 	
 
 	mRedGhost->Position(mNodeManager->getNode(66)->Position());
