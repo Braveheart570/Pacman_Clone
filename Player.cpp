@@ -162,6 +162,24 @@ Player::~Player() {
 
 }
 
+void Player::MoveKeys() {
+
+	//movement keys
+	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
+		mNextTurn = -Vect2_Up;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
+		mNextTurn = -Vect2_Right;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
+		mNextTurn = Vect2_Up;
+	}
+	else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
+		mNextTurn = Vect2_Right;
+	}
+
+}
+
 void Player::Update() {
 	HandleTexture();
 	if (mIsDieing) {
@@ -185,21 +203,6 @@ void Player::Update() {
 			mGhostsEaten = 0;
 			mAudioManager->ResumeMusic();
 		}
-	}
-
-
-	//movement keys
-	if (mInputManager->KeyPressed(SDL_SCANCODE_W)) {
-		mNextTurn = -Vect2_Up;
-	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_A)) {
-		mNextTurn = -Vect2_Right;
-	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_S)) {
-		mNextTurn = Vect2_Up;
-	}
-	else if (mInputManager->KeyPressed(SDL_SCANCODE_D)) {
-		mNextTurn = Vect2_Right;
 	}
 
 
@@ -342,14 +345,14 @@ void Player::Respawn() {
 	}
 	
 	mCurrentNode = mStartNode;
-	mTargetNode = mCurrentNode->GetConnectionbyDir(-Vect2_Right);
+	mTargetNode = mCurrentNode;
 	Position(mCurrentNode->Position());
 	mIsDead = false;
 	mIsDieing = false;
 	mNextTurn = Dir();
 	mEnergized = false;
 
-	mPacmanTex = mPacmanRight;
+	mPacmanTex = nullptr; // will display as stopped pacman
 
 }
 

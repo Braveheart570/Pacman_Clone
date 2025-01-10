@@ -121,6 +121,7 @@ void Level::Update() {
 
 	if (mGameOver) return;
 
+	mPlayer->MoveKeys();
 
 	// pause before game start logic
 	if (!mStageStarted) {

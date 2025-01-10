@@ -18,6 +18,7 @@ public:
 	static Player* Instance();
 	static void Release();
 
+	void MoveKeys();
 
 	void Update() override;
 	void Render() override;
