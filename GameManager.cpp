@@ -60,10 +60,6 @@ namespace SDLFramework {
 
 		//update code here
 		mScreenManager->Update();
-
-		if (mInputManager->KeyPressed(SDL_SCANCODE_N)) {//todo remove
-			NodeManager::Instance()->RenderNodes(!NodeManager::Instance()->RenderNodes());
-		}
 		
 	}
 
