@@ -33,7 +33,7 @@ void BlueGhost::setTextures() {
 
 void BlueGhost::setNewTargetNode() {
 
-	Vector2 posAheadOfPlayer = (Player::Instance()->nextTurn() * 50 * 2) + Player::Instance()->Position();
+	Vector2 posAheadOfPlayer = (mPlayer->nextTurn() * 50 * 2) + mPlayer->Position();
 
 	Vector2 redToAheadOfPlayer = posAheadOfPlayer - mRedGhost->Position();
 

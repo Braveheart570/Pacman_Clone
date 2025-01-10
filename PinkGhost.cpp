@@ -32,9 +32,9 @@ void PinkGhost::setTextures() {
 
 void PinkGhost::setNewTargetNode() {
 
-	Vector2 aheadOfPlayer = Player::Instance()->nextTurn() * 50 * 4;
+	Vector2 aheadOfPlayer = mPlayer->nextTurn() * 50 * 4;
 
-	mTarget = Player::Instance()->Position() + aheadOfPlayer;
+	mTarget = mPlayer->Position() + aheadOfPlayer;
 
 	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 

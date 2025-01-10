@@ -34,10 +34,10 @@ void OrangeGhost::setTextures() {
 
 void OrangeGhost::setNewTargetNode() {
 
-	float distToPlayer = (Player::Instance()->Position() - Position()).Magnitude();
+	float distToPlayer = (mPlayer->Position() - Position()).Magnitude();
 
-	if (distToPlayer > 8*50) {
-		mTarget = Player::Instance()->Position();
+	if (distToPlayer > 8*25) {
+		mTarget = mPlayer->Position();
 	}
 	else {
 		mTarget = mScatterTarget;

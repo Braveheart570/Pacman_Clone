@@ -37,7 +37,7 @@ void RedGhost::setTextures() {
 
 void RedGhost::setNewTargetNode() {
 
-	mTarget = Player::Instance()->Position();
+	mTarget = mPlayer->Position();
 	mTargetNode = mCurrentNode->ClosestConnection(mTarget);
 
 }
@@ -54,7 +54,7 @@ void RedGhost::Reset() {
 void RedGhost::handleScatter() {
 
 	if (mScatterOverride) {
-		mTargetNode = mCurrentNode->ClosestConnection(Player::Instance()->Position());
+		mTargetNode = mCurrentNode->ClosestConnection(mPlayer->Position());
 	}
 	else {
 		mTargetNode = mCurrentNode->ClosestConnection(mScatterTarget);
@@ -69,18 +69,15 @@ void RedGhost::RageState(rageState state) {
 	case Unenraged:
 		mSpeed = mDefaultSpeed;
 		mScatterOverride = false;
-		std::cout << "red ghost unenraged" << std::endl;
 		break;
 	case Enraged1:
 		mSpeed = mDefaultSpeed * mRageSpeedMultiplier1;
 		mScatterOverride = false;
-		std::cout << "red ghost enraged 1" << std::endl;
 		break;
 	case Enraged2:
 		mSpeed = mDefaultSpeed * mRageSpeedMultiplier2;
 		mScatterOverride = true;
 		mAudioManager->PlayMusic("siren2.wav");
-		std::cout << "red ghost enraged 2" << std::endl;
 		break;
 	}
 }
