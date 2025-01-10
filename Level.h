@@ -63,6 +63,10 @@ private:
 	int mFruitIndex;
 	int mNumOfFruitSpawned;
 
+	float mPowerPelletFlashTime;
+	float mPowerPelletFlashInterval;
+	bool mRenderPowerPellet;
+
 	bool mStageStarted;
 	float mReadyDuration;
 	float mReadyTime;

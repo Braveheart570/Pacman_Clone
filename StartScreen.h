@@ -28,7 +28,7 @@ private:
 	float scrawlTime;
 	float mPowerPelletFlashTime;
 	float mPowerPelletFlashInterval;
-	float mRenderPowerPellet;
+	bool mRenderPowerPellet;
 
 	float mPauseTime;
 	float mPauseDurration;

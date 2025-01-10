@@ -16,6 +16,10 @@ Level::Level() {
 	mReadyDuration = 5.0f;
 	mReadyTime = 0;
 
+	mPowerPelletFlashInterval = 0.3f;
+	mPowerPelletFlashTime = 0.0f;
+	mRenderPowerPellet = true;
+
 	mLevelNum = 1;
 	mGameOver = false;
 
@@ -135,6 +139,14 @@ void Level::Update() {
 	//--- nothing beyond this line will run untill the game has started! ---//
 
 
+	//powerpellet flashing
+	mPowerPelletFlashTime += mTimer->DeltaTime();
+	if (mPowerPelletFlashTime >= mPowerPelletFlashInterval) {
+		mRenderPowerPellet = !mRenderPowerPellet;
+		mPowerPelletFlashTime = 0;
+	}
+
+
 	//check beat level
 	bool allPelletsEaten = true;
 	for (auto pellet : mPellets) {
@@ -221,7 +233,14 @@ void Level::Render() {
 
 	if (!mGameOver) {
 		for (auto p : mPellets) {
-			p->Render();
+			if (dynamic_cast<PowerPellet*>(p)) {
+
+				if (mRenderPowerPellet) p->Render();
+			}
+			else {
+				p->Render();
+			}
+			
 		}
 
 		mFruit->Render();
@@ -707,6 +726,7 @@ void Level::resetLevel(bool newGame) {
 	mReadyTime = 0;
 	mReadyDuration = 3.0f; // redifining this here so that ready time is only 5 seconds the first time the game loads.
 	mPinkGhostReleaseTime = 0.0f;
+	mRenderPowerPellet = true;
 }
 
 
