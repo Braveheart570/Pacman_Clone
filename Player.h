@@ -55,12 +55,18 @@ public:
 	void ResetPelletsEaten();
 	int PelletsEaten();
 
+	int LevelNum();
+	void IncrementLevelNum();
+	void ResetLevelNum();
+
 
 private:
 
 	const static int EPSILON = 1;
 
 	static Player* sInstance;
+
+	int mLevelNum;
 
 	float mSpeed;
 

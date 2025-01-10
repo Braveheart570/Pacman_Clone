@@ -11,6 +11,23 @@ Level::Level() {
 	mNumOfFruitSpawned = 0;
 	mFruit = new Fruit(mFruitIndex);
 
+	mEnrage1Triggers[0] = mPellets.size() - 20;
+	mEnrage1Triggers[1] = mPellets.size() - 30;
+	mEnrage1Triggers[2] = mPellets.size() - 40;
+	mEnrage1Triggers[3] = mPellets.size() - 50;
+	mEnrage1Triggers[4] = mPellets.size() - 60;
+	mEnrage1Triggers[5] = mPellets.size() - 70;
+	mEnrage1Triggers[6] = mPellets.size() - 80;
+	mEnrage1Triggers[7] = mPellets.size() - 90;
+
+	mEnrage2Triggers[0] = mPellets.size() - 10;
+	mEnrage2Triggers[1] = mPellets.size() - 15;
+	mEnrage2Triggers[2] = mPellets.size() - 20;
+	mEnrage2Triggers[3] = mPellets.size() - 25;
+	mEnrage2Triggers[4] = mPellets.size() - 30;
+	mEnrage2Triggers[5] = mPellets.size() - 40;
+	mEnrage2Triggers[6] = mPellets.size() - 50;
+	mEnrage2Triggers[7] = mPellets.size() - 60;
 
 	mStageStarted = false;
 	mReadyDuration = 5.0f;
@@ -20,7 +37,7 @@ Level::Level() {
 	mPowerPelletFlashTime = 0.0f;
 	mRenderPowerPellet = true;
 
-	mLevelNum = 1;
+	mPlayer->ResetLevelNum();
 	mGameOver = false;
 
 	mLivesGiven = 0;
@@ -139,6 +156,9 @@ void Level::Update() {
 	}
 	//--- nothing beyond this line will run untill the game has started! ---//
 
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {//todo remove
+		resetLevel(true);
+	}
 
 	//powerpellet flashing
 	mPowerPelletFlashTime += mTimer->DeltaTime();
@@ -205,10 +225,13 @@ void Level::Update() {
 	}
 
 	// Red Ghost Enrage
-	if (mRedGhost->RageState() == RedGhost::Unenraged && mPlayer->PelletsEaten() >= mPellets.size() / 2) {
+	int cappedRageIndex = mPlayer->LevelNum() - 1;
+	if (cappedRageIndex >= mEnrageLevels) cappedRageIndex = mEnrageLevels-1;
+	
+	if (mRedGhost->RageState() == RedGhost::Unenraged && mPlayer->PelletsEaten() >= mEnrage1Triggers[cappedRageIndex]) {
 		mRedGhost->RageState(RedGhost::Enraged1);
 	}
-	if (mRedGhost->RageState() != RedGhost::Enraged2 && mPlayer->PelletsEaten() >= (mPellets.size() / 4)*3) {
+	if (mRedGhost->RageState() != RedGhost::Enraged2 && mPlayer->PelletsEaten() >= mEnrage2Triggers[cappedRageIndex]) {
 		mRedGhost->RageState(RedGhost::Enraged2);
 	}
 	
@@ -686,7 +709,7 @@ void Level::resetLevel(bool newGame) {
 		for (auto p : mPellets) {
 			p->Active(true);
 		}
-		mLevelNum++;
+		mPlayer->IncrementLevelNum();
 		mPlayer->ResetPelletsEaten();
 		mNumOfFruitSpawned = 0;
 		mFruitIndex++;

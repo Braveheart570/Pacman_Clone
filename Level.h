@@ -59,7 +59,6 @@ private:
 
 	std::vector<Texture*> mPlayerLives;
 
-	int mLevelNum;
 	int mFruitIndex;
 	int mNumOfFruitSpawned;
 
@@ -83,6 +82,10 @@ private:
 	float mCols[COLS];
 
 	int mLivesGiven;
+
+	static const int mEnrageLevels = 8;
+	int mEnrage1Triggers[mEnrageLevels];
+	int mEnrage2Triggers[mEnrageLevels];
 
 	void CreatePellets();
 

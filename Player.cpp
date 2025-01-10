@@ -392,3 +392,15 @@ void Player::HighScore(int highscore) {
 void Player::ResetScore() {
 	mScore = 0;
 }
+
+int Player::LevelNum() {
+	return mLevelNum;
+}
+
+void Player::IncrementLevelNum() {
+	mLevelNum++;
+}
+
+void Player::ResetLevelNum() {
+	mLevelNum = 1;
+}
