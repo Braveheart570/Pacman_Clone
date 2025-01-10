@@ -460,13 +460,12 @@ void Level::CreatePellets() {
 	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3), mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[3] + ((mCols[4] - mCols[3]) / 3) * 2, mRows[7] }));
 
-	mPellets.push_back(new Pellet({ mCols[4], mRows[7] }));
+	//mPellets.push_back(new Pellet({ mCols[4], mRows[7] })); // player spawn point
 	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6), mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 2, mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 3, mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 4, mRows[7] }));
 	mPellets.push_back(new Pellet({ mCols[4] + ((mCols[6] - mCols[4]) / 6) * 5, mRows[7] }));
-	mPellets.push_back(new Pellet({ mCols[6], mRows[7] }));
 
 	mPellets.push_back(new Pellet({ mCols[6], mRows[7] }));
 
