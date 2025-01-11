@@ -39,9 +39,15 @@ Ghost::Ghost(PathNode* start) {
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
 
 	
-
-	mSpeed = 100;
-	mDefaultSpeed = mSpeed;
+	mDefaultSpeeds[0] = 100;
+	mDefaultSpeeds[1] = 100;
+	mDefaultSpeeds[2] = 120;
+	mDefaultSpeeds[3] = 120;
+	mDefaultSpeeds[4] = 120;
+	mDefaultSpeeds[5] = 150;
+	mDefaultSpeeds[6] = 150;
+	mDefaultSpeeds[7] = 160;
+	mSpeed = mDefaultSpeeds[0];
 
 	mFlashSpeed = 0.5f;
 	mFlashTime = 0.0f;
@@ -100,13 +106,15 @@ void Ghost::Update() {
 	Vector2 dir = (mTargetNode->Position()-Position()).Normalized();
 	Vector2 pos;
 
+	int speedIndex = mPlayer->LevelNum() - 1;
+	if (speedIndex >= mSpeedLevels) speedIndex = mSpeedLevels - 1;
 
 	//speed modifiers
 	if (mState == Frightened) {
-		pos = Position() + dir * (mDefaultSpeed / 2) * mTimer->DeltaTime();
+		pos = Position() + dir * (mDefaultSpeeds[speedIndex] / 2) * mTimer->DeltaTime();
 	}
 	else if (mState == Dead) {
-		pos = Position() + dir * (mDefaultSpeed *1.5f) * mTimer->DeltaTime();
+		pos = Position() + dir * (mDefaultSpeeds[speedIndex] *1.5f) * mTimer->DeltaTime();
 	}
 	else {
 		pos = Position() + dir * mSpeed * mTimer->DeltaTime();

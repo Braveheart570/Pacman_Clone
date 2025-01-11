@@ -84,7 +84,8 @@ protected:
 	Texture* mGhostLeftDead;
 
 	float mSpeed;
-	float mDefaultSpeed;
+	static const int mSpeedLevels = 8;
+	float mDefaultSpeeds[mSpeedLevels];
 
 	float mStateSwitchDelay;
 	float mStateSwitchTime;

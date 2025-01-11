@@ -82,10 +82,18 @@ Player::Player() {
 	mAudioManager = AudioManager::Instance();
 
 	mHighScore = 1600;
-	mSpeed = 100;
 	mLives = 2;
 	mWallHit = false;
 	ResetPelletsEaten();
+
+	mSpeeds[0] = 100;
+	mSpeeds[1] = 100;
+	mSpeeds[2] = 120;
+	mSpeeds[3] = 120;
+	mSpeeds[4] = 120;
+	mSpeeds[5] = 150;
+	mSpeeds[6] = 150;
+	mSpeeds[7] = 160;
 
 	mStartNode = NodeManager::Instance()->getNode(47);
 	
@@ -238,11 +246,15 @@ void Player::Update() {
 		dir = -dir;
 	}
 
+	int speedIndex = mLevelNum - 1;
+	if (speedIndex >= mSpeedLevels) speedIndex = mSpeedLevels - 1;
 
-	Vector2 pos = Position() + dir * mSpeed * mTimer->DeltaTime(); // new position
+	std::cout << speedIndex << " - " << mSpeeds[speedIndex] << std::endl;
+
+	Vector2 pos = Position() + dir * mSpeeds[speedIndex] * mTimer->DeltaTime(); // new position
 	Vector2 dist = mTargetNode->Position() - pos;
 	
-	if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) { //check if reached target
+	if (dist.MagnitudeSqr() < EPSILON * mSpeeds[speedIndex] / 25.0f) { //check if reached target
 
 		WrapNode* wrapNode;
 		if (wrapNode = dynamic_cast<WrapNode*>(mTargetNode)) { //handling wrap nodes

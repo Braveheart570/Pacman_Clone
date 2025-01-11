@@ -68,7 +68,8 @@ private:
 
 	int mLevelNum;
 
-	float mSpeed;
+	static const int mSpeedLevels = 8;
+	float mSpeeds[mSpeedLevels];
 
 	int mScore;
 	int mHighScore;

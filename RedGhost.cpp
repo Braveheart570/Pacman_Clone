@@ -65,17 +65,21 @@ void RedGhost::handleScatter() {
 
 void RedGhost::RageState(rageState state) {
 	mRageState = state;
+
+	int speedIndex = mPlayer->LevelNum() - 1;
+	if (speedIndex >= mSpeedLevels) speedIndex = mSpeedLevels - 1;
+
 	switch (mRageState) {
 	case Unenraged:
-		mSpeed = mDefaultSpeed;
+		mSpeed = mDefaultSpeeds[speedIndex];
 		mScatterOverride = false;
 		break;
 	case Enraged1:
-		mSpeed = mDefaultSpeed * mRageSpeedMultiplier1;
+		mSpeed = mDefaultSpeeds[speedIndex] * mRageSpeedMultiplier1;
 		mScatterOverride = false;
 		break;
 	case Enraged2:
-		mSpeed = mDefaultSpeed * mRageSpeedMultiplier2;
+		mSpeed = mDefaultSpeeds[speedIndex] * mRageSpeedMultiplier2;
 		mScatterOverride = true;
 		mAudioManager->PlayMusic("siren2.wav");
 		break;
