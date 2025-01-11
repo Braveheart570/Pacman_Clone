@@ -83,7 +83,8 @@ private:
 
 	bool mEnergized;
 	float mFrightenedTime;
-	float mFrightenedDuration;
+	const static int mFrightenedLevels = 8;
+	float mFrightenedDurations[mFrightenedLevels];
 	int mGhostsEaten;
 
 	PathNode* mTargetNode;

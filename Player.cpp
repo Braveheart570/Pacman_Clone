@@ -89,6 +89,17 @@ Player::Player() {
 
 	mStartNode = NodeManager::Instance()->getNode(47);
 	
+	mEnergized = false;
+	mFrightenedDurations[0] = 6.0f;
+	mFrightenedDurations[1] = 6.0f;
+	mFrightenedDurations[2] = 5.0f;
+	mFrightenedDurations[3] = 5.0f;
+	mFrightenedDurations[4] = 4.0f;
+	mFrightenedDurations[5] = 4.0f;
+	mFrightenedDurations[6] = 4.0f;
+	mFrightenedDurations[7] = 3.0f;
+	mFrightenedTime = 0.0f;
+
 	Respawn();
 
 	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 456,32,15,15,2,0.5f,AnimatedTexture::Horizontal);
@@ -125,11 +136,6 @@ Player::Player() {
 	AddCollider(new CircleCollider(10,true));
 	AddCollider(new CircleCollider(10));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
-
-	
-	mEnergized = false;
-	mFrightenedDuration = 6.0f;
-	mFrightenedTime = 0.0f;
 	
 
 }
@@ -198,7 +204,9 @@ void Player::Update() {
 
 	if (mEnergized) {
 		mFrightenedTime += mTimer->DeltaTime();
-		if (mFrightenedTime >= mFrightenedDuration) {
+		int frightenedIndex = mLevelNum - 1;
+		if (frightenedIndex >= mFrightenedLevels) frightenedIndex = mFrightenedLevels - 1;
+		if (mFrightenedTime >= mFrightenedDurations[frightenedIndex]) {
 			mEnergized = false;
 			mGhostsEaten = 0;
 			mAudioManager->ResumeMusic();
@@ -370,7 +378,9 @@ bool Player::Energized() {
 }
 
 float Player::EnergizedTimeLeftPercent() {
-	return mFrightenedTime / mFrightenedDuration;
+	int frightenedIndex = mLevelNum - 1;
+	if (frightenedIndex >= mFrightenedLevels) frightenedIndex = mFrightenedLevels - 1;
+	return mFrightenedTime / mFrightenedDurations[frightenedIndex];
 }
 
 int Player::GhostsEaten() {
