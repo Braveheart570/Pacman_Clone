@@ -156,10 +156,6 @@ void Level::Update() {
 	}
 	//--- nothing beyond this line will run untill the game has started! ---//
 
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_M)) {//todo remove
-		resetLevel(true);
-	}
-
 	//powerpellet flashing
 	mPowerPelletFlashTime += mTimer->DeltaTime();
 	if (mPowerPelletFlashTime >= mPowerPelletFlashInterval) {

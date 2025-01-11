@@ -249,8 +249,6 @@ void Player::Update() {
 	int speedIndex = mLevelNum - 1;
 	if (speedIndex >= mSpeedLevels) speedIndex = mSpeedLevels - 1;
 
-	std::cout << speedIndex << " - " << mSpeeds[speedIndex] << std::endl;
-
 	Vector2 pos = Position() + dir * mSpeeds[speedIndex] * mTimer->DeltaTime(); // new position
 	Vector2 dist = mTargetNode->Position() - pos;
 	
