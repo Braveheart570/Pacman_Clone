@@ -23,6 +23,4 @@ protected:
 	int mScoreVal;
 
 	Texture* mTexture;
-
-	virtual void PlaySound();
 };

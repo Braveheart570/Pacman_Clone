@@ -87,6 +87,11 @@ private:
 	float mFrightenedDurations[mFrightenedLevels];
 	int mGhostsEaten;
 
+	bool mPlayingWaka;
+	float mWakaBufferTime;
+	float mWakaBufferDuration;
+	const static int mWakaChannel = 1;
+
 	PathNode* mTargetNode;
 	PathNode* mCurrentNode;
 	PathNode* mStartNode;

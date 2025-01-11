@@ -100,6 +100,10 @@ Player::Player() {
 	mFrightenedDurations[7] = 3.0f;
 	mFrightenedTime = 0.0f;
 
+	mPlayingWaka = false;
+	mWakaBufferTime = 0.0f;
+	mWakaBufferDuration = 0.25f;
+
 	Respawn();
 
 	mPacmanUp = new AnimatedTexture("PacmanAtlas.png", 456,32,15,15,2,0.5f,AnimatedTexture::Horizontal);
@@ -200,7 +204,18 @@ void Player::Update() {
 	if (mPacmanTex != nullptr) {
 		mPacmanTex->Update();
 	}
+
 	
+	// waka sfx audio logic
+	if (mPlayingWaka) {
+
+		mWakaBufferTime += mTimer->DeltaTime();
+		if (mWakaBufferTime >= mWakaBufferDuration) {
+			mPlayingWaka = false;
+			mAudioManager->StopSFX(mWakaChannel);
+			mWakaBufferTime = 0.0f;
+		}
+	}
 
 	if (mEnergized) {
 		mFrightenedTime += mTimer->DeltaTime();
@@ -284,6 +299,12 @@ void Player::Hit(PhysEntity* other) {
 
 	if (dynamic_cast<Pellet*>(other)) {
 		mPelletsEaten++;
+		if (!mPlayingWaka && !mIsDieing && !mIsDead) {
+			mAudioManager->PlaySFX("Waka.wav", -1, mWakaChannel);
+			mPlayingWaka = true;
+		}
+		mWakaBufferTime = 0.0f;
+		
 	}
 
 }
@@ -304,6 +325,8 @@ void Player::Die() {
 	mAudioManager->PauseMusic();
 	mAudioManager->PlaySFX("playerDeath.wav",0,0);
 
+	mPlayingWaka = false;
+	mAudioManager->StopSFX(mWakaChannel);
 }
 
 
@@ -361,6 +384,9 @@ void Player::Respawn() {
 	mEnergized = false;
 
 	mPacmanTex = nullptr; // will display as stopped pacman
+
+	mPlayingWaka = false;
+	mAudioManager->StopSFX(mWakaChannel);
 
 }
 

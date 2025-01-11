@@ -55,6 +55,10 @@ namespace SDLFramework {
 
 	}
 
+	void AudioManager::StopSFX(int channel) {
+		Mix_HaltChannel(channel);
+	}
+
 	AudioManager::AudioManager() {
 		mAssetManager = AssetManager::Instance();
 

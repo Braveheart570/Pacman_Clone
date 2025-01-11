@@ -33,18 +33,11 @@ void Pellet::Render() {
 void Pellet::Hit(PhysEntity* entity) {
 	Player::Instance()->AddScore(mScoreVal);
 	Active(false);
-	PlaySound();
 }
 	
 bool Pellet::IgnoreCollisions() {
 
 	return !Active();
-
-}
-
-void Pellet::PlaySound() {
-
-	AudioManager::Instance()->PlaySFX("waka.wav",0,1);
 
 }
 
